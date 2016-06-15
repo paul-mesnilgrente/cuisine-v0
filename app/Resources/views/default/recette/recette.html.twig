@@ -1,0 +1,34 @@
+<article>
+  <h1>{{ recette.nom }}</h1>
+  <p><small>Publié le {{ recette.date|localizeddate('medium') }}</small></p>
+  <p>
+    {# {{ recette.tags }} #}
+    Tags :
+    {% for tag in recette.tags %}
+      <a href="">#{{ tag.nom }}</a> 
+   {% endfor %}
+  </p>
+  <p>Note : {{ recette.note }}</p>
+  <p>
+    <h2>Ingrédients</h2>
+    <ul>
+      {% for ingredient in recette.ingredients %}
+        <li>
+          {{ ingredient.quantite }} {{ ingredient.unite.nom }} de 
+          {% if ingredient.quantite < 2 %}
+            {{ ingredient.ingredient.nom }}
+          {% else %}
+            {{ ingredient.ingredient.pluriel }}
+          {% endif %}
+        </li>
+      {% endfor %}
+    </ul>
+  </p>
+  <p>
+    <h2>Etapes</h2>
+    {% for etape in recette.etapes %}
+      <h3>Etape {{ loop.index }}</h3>
+      <p>{{ etape }}</p>
+    {% endfor %}
+  </p>
+</article>

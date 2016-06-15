@@ -1,0 +1,48 @@
+{% extends '::layout.html.twig' %}
+
+{% block title %}Etape {{ etape + 1 }} - {{ recette.nom }}{% endblock %}
+
+{% block b %}
+  
+  <div class="jumbotron">
+    <div class="row">
+
+      <div class="col-md-offset-3 col-md-6">
+        <h1>Etape {{ etape + 1}}</h1>
+        <p>
+          {{ recette.etapes[etape] }}
+        </p>
+      </div>
+
+    </div>
+
+    <ul class="pager">
+
+      {% if etape > 0 %}
+        <li class="previous">
+          <a class="previous" href="{{ path('executer_recette', {'slug': recette.slug, 'etape': etape - 1}) }}">
+            <span aria-hidden="true">&larr;</span> Étape précédente
+          </a>
+        </li>
+      {% endif %}
+
+      {% if etape == recette.etapes|length - 1 %}
+        <li class="next">
+          <a class="next" href="{{ path('homepage') }}">
+            Bravo ! Et bonne appétit :)
+          </a>
+        </li>
+      {% else %}
+        <li class="next">
+          <a class="next" href="{{ path('executer_recette', {'slug': recette.slug, 'etape': etape + 1}) }}">
+            Étape suivante<span aria-hidden="true">&rarr;</span>
+          </a>
+        </li>
+      {% endif %}
+
+    </ul>
+  </div>
+  <a href="{{ path('homepage') }}">Retour à l'accueil</a>
+  <hr>
+  {% include 'default/recette/recette.html.twig' %}
+{% endblock %}
