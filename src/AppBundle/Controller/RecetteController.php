@@ -6,6 +6,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
+use AppBundle\Entity\QuantiteIngredientRecette;
 use AppBundle\Entity\Recette;
 use AppBundle\Form\RecetteType;
 
@@ -39,6 +40,8 @@ class RecetteController extends Controller
     public function ajouterRecetteAction(Request $request)
     {
         $recette = new Recette();
+        $recette->addIngredient(new QuantiteIngredientRecette());
+        $recette->setEtapes(array(""));
         
         return $this->formulaireRecetteAction($request, $recette, "Ajouter");
     }

@@ -16,6 +16,7 @@ class IngredientType extends AbstractType
     {
         $builder
             ->add('nom')
+            ->add('pluriel')
             ->add('categorie', 'entity', array(
                 'class' => 'AppBundle:CategorieIngredient',
                 'property' => 'nom',

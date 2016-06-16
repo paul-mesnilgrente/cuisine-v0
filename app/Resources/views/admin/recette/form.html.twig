@@ -2,19 +2,32 @@
 
 {% block title %}{{ action }} une recette{% endblock %}
 
+{% form_theme form _self %}
+
+{% block quantite_ingredient_recette_widget %}
+  <div class="form-inline">
+    <div class="form-group">{{ form_widget(form.ingredient) }}</div>
+    <div class="form-group">{{ form_widget(form.quantite) }}</div>
+    <div class="form-group">{{ form_widget(form.unite) }}</div>
+  </div>
+{% endblock %}
+
 {% block body %}
   <h1>{{ action }} une recette</h1>
 
   {{ form_start(form) }}
-  {{ form_row(form.nom) }}
-  {{ form_row(form.note) }}
+  <div class="form-inline">
+    {{ form_row(form.nom) }}
+    {{ form_row(form.note) }}
+  </div>
+  
 
   <div class="form-group">
     {{ form_label(form.etapes) }}
     {{ form_errors(form.etapes) }}
 
-    <ul id="liste_etape" class="list-unstyled"
-      data-prototype="{{ form_widget(form.etapes.vars.prototype)|e }}">
+    <ul class="liste_etape list-unstyled"
+      data-prototype="{{ form_widget(form.etapes.vars.prototype)|e('html_attr') }}">
       {% for etape in form.etapes %}
         <li>
           {{ form_errors(etape) }}
@@ -32,15 +45,16 @@
       data-prototype="{{ form_widget(form.ingredients.vars.prototype)|e }}">
       {% for ingredient in form.ingredients %}
         <li>
-          {{ form_row(ingredient)
+          {{ form_widget(ingredient) }}
         </li>
       {% endfor %}
     </ul>
-    <a href="#" class="btn btn-info" id="lien_ajouter_ingredient">Ajouter un ingrédient</a>
   </div>
 
-  {{ form_row(form.categorieRecette) }}
-  {{ form_row(form.tags) }}
+  <div class="row">
+    <div class="col-md-6">{{ form_row(form.categorieRecette) }}</div>
+    <div class="col-md-6">{{ form_row(form.tags) }}</div>
+  </div>
   <input type="submit" value="Valider" class="btn btn-primary"/>
   {{ form_end(form) }}
 
@@ -48,47 +62,72 @@
 
 {% block javascripts %}
   {{ parent() }}
+
   <script type="text/javascript">
-    // keep track of how many email fields have been rendered
-    var nbEtape = '{{ form.etapes|length }}';
-    var nbIngredient = '{{ form.ingredients|length }}'
+    var $collectionHolder;
+
+    // setup an "add a tag" link
+    var $ajouterLienIngredient = $('<a href="#" class="lien_ajouter_ingredient btn btn-info">Ajouter un ingrédient</a>');
+    var $newLinkLi = $('<li></li>').append($ajouterLienIngredient);
 
     jQuery(document).ready(function() {
-      jQuery('#lien_ajouter_etape').click(function(e) {
-        e.preventDefault();
 
-        var listeEtape = jQuery('#liste_etape');
+      // Get the ul that holds the collection of tags
+      $collectionHolder = $('#liste_ingredient');
 
-        // grab the prototype template
-        var newWidget = listeEtape.attr('data-prototype');
-        // replace the "__name__" used in the id and name of the prototype
-        // with a number that's unique to your emails
-        // end name attribute looks like name="contact[emails][2]"
-        newWidget = newWidget.replace(/__name__/g, nbEtape);
-        nbEtape++;
-
-        // create a new list element and add it to the list
-        var newLi = jQuery('<li></li>').html(newWidget);
-        newLi.appendTo(listeEtape);
+      $collectionHolder.find('li').each(function() {
+        ajouterLienSupprimerIngredient($(this));
       });
 
-      jQuery('#lien_ajouter_ingredient').click(function(e) {
+      // add the "add a tag" anchor and li to the tags ul
+      $collectionHolder.append($newLinkLi);
+
+      // count the current form inputs we have (e.g. 2), use that as the new
+      // index when inserting a new item (e.g. 2)
+      $collectionHolder.data('index', $collectionHolder.find(':input').length);
+
+      
+      $ajouterLienIngredient.on('click', function(e) {
+        // prevent the link from creating a "#" on the URL
         e.preventDefault();
 
-        var listeIngredient = jQuery('#liste_ingredient');
-
-        // grab the prototype template
-        var newWidget = listeIngredient.attr('data-prototype');
-        // replace the "__name__" used in the id and name of the prototype
-        // with a number that's unique to your emails
-        // end name attribute looks like name="contact[emails][2]"
-        newWidget = newWidget.replace(/__name__/g, nbIngredient);
-        nbIngredient++;
-
-        // create a new list element and add it to the list
-        var newLi = jQuery('<li></li>').html(newWidget);
-        newLi.appendTo(listeIngredient);
+        // add a new tag form (see next code block)
+        ajouterFormulaireIngredient($collectionHolder, $newLinkLi);
       });
-    })
+    });
+
+    function ajouterFormulaireIngredient($collectionHolder, $newLinkLi) {
+        // Get the data-prototype explained earlier
+        var prototype = $collectionHolder.data('prototype');
+
+        // get the new index
+        var index = $collectionHolder.data('index');
+
+        // Replace '__name__' in the prototype's HTML to
+        // instead be a number based on how many items we have
+        var newForm = prototype.replace(/__name__/g, index);
+
+        // increase the index with one for the next item
+        $collectionHolder.data('index', index + 1);
+
+        // Display the form in the page in an li, before the "Add a tag" link li
+        var $newFormLi = $('<li></li>').append(newForm);
+        $newLinkLi.before($newFormLi);
+
+        ajouterLienSupprimerIngredient($newFormLi);
+      }
+
+      function ajouterLienSupprimerIngredient($tagFormLi) {
+        var $removeFormA = $('<a href="#" class="supprimer_ingredient btn btn-danger">Supprimer</a>');
+        $tagFormLi.append($removeFormA);
+
+        $removeFormA.on('click', function(e) {
+          // prevent the link from creating a "#" on the URL
+          e.preventDefault();
+
+          // remove the li for the tag form
+          $tagFormLi.remove();
+        });
+      }
   </script>
 {% endblock %}
