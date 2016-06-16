@@ -2,48 +2,47 @@
 
 {% block title %}{{ action }} une recette{% endblock %}
 
-  {% block body %}
-    <h1>{{ action }} une recette</h1>
+{% block body %}
+  <h1>{{ action }} une recette</h1>
 
-    {{ form_start(form) }}
-    {{ form_row(form.nom) }}
-    {{ form_row(form.note) }}
+  {{ form_start(form) }}
+  {{ form_row(form.nom) }}
+  {{ form_row(form.note) }}
 
-    <div class="form-group">
-      {{ form_label(form.etapes) }}
-      {{ form_errors(form.etapes) }}
+  <div class="form-group">
+    {{ form_label(form.etapes) }}
+    {{ form_errors(form.etapes) }}
 
-      <ul id="liste_etape"
-        data-prototype="{{ form_widget(form.etapes.vars.prototype)|e }}">
-        {% for etape in form.etapes %}
-          <li>
-            {{ form_errors(etape) }}
-            {{ form_widget(etape) }}
-          </li>
-        {% endfor %}
-      </ul>
-      <a href="#" id="lien_ajouter_etape">Ajouter une étape</a>
-    </div>
+    <ul id="liste_etape" class="list-unstyled"
+      data-prototype="{{ form_widget(form.etapes.vars.prototype)|e }}">
+      {% for etape in form.etapes %}
+        <li>
+          {{ form_errors(etape) }}
+          {{ form_widget(etape) }}
+        </li>
+      {% endfor %}
+    </ul>
+    <a href="#" class="btn btn-info" id="lien_ajouter_etape">Ajouter une étape</a>
+  </div>
 
-    <div class="form-group">
-      {{ form_label(form.ingredients) }}
-      {{ form_errors(form.ingredients) }}
-      <ul id="liste_ingredient"
-        data-prototype="{{ form_widget(form.ingredients.vars.prototype)|e }}">
-        {% for ingredient in form.ingredients %}
-          <li>
-            {{ form_errors(ingredient) }}
-            {{ form_widget(ingredient) }}
-          </li>
-        {% endfor %}
-      </ul>
-      <a href="#" id="lien_ajouter_ingredient">Ajouter un ingrédient</a>
-    </div>
+  <div class="form-group">
+    {{ form_label(form.ingredients) }}
+    {{ form_errors(form.ingredients) }}
+    <ul id="liste_ingredient" class="list-unstyled"
+      data-prototype="{{ form_widget(form.ingredients.vars.prototype)|e }}">
+      {% for ingredient in form.ingredients %}
+        <li>
+          {{ form_row(ingredient)
+        </li>
+      {% endfor %}
+    </ul>
+    <a href="#" class="btn btn-info" id="lien_ajouter_ingredient">Ajouter un ingrédient</a>
+  </div>
 
-    {{ form_row(form.categorieRecette) }}
-    {{ form_row(form.tags) }}
-    <input type="submit" value="Valider" class="btn btn-primary"/>
-    {{ form_end(form) }}
+  {{ form_row(form.categorieRecette) }}
+  {{ form_row(form.tags) }}
+  <input type="submit" value="Valider" class="btn btn-primary"/>
+  {{ form_end(form) }}
 
 {% endblock %}
 
