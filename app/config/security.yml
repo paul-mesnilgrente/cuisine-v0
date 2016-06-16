@@ -18,11 +18,11 @@ security:
                 csrf_provider: security.csrf.token_manager
                 login_path: fos_user_security_login
                 check_path: fos_user_security_check
-                default_target_path: accueil
+                default_target_path: homepage
 
             logout:
                 path: fos_user_security_logout
-                target: accueil
+                target: homepage
 
             anonymous:    true
 
