@@ -29,8 +29,8 @@
 
   {% block javascripts %}
     {% javascripts filter="?jsqueeze" output="js/app.js"
-    "%kernel.root_dir%/../vendor/twbs/bootstrap/dist/js/bootstrap.min.js"
-    "%kernel.root_dir%/../vendor/components/jquery/jquery.min.js" %}
+    "%kernel.root_dir%/../vendor/components/jquery/jquery.min.js" 
+    "%kernel.root_dir%/../vendor/twbs/bootstrap/dist/js/bootstrap.min.js" %}
     <script src="{{ asset_url }}"></script>
     {% endjavascripts %}
     <script src="{{ asset('js/app.js') }}"></script>
