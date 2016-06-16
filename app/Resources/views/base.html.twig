@@ -6,7 +6,7 @@
         {% include 'header.html.twig' %}
       </div>
       <div class="col-md-10">
-        {% include 'BraincraftedBootstrapBundle::flash.html.twig' %}
+        {% include 'BraincraftedBootstrapBundle::flash.html.twig' with { 'close': true } %}
         {% block body %}{% endblock %}
       </div>
     </div>
