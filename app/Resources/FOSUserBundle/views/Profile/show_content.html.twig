@@ -1,6 +1,29 @@
 {% trans_default_domain 'FOSUserBundle' %}
 
-<div class="fos_user_user_show">
-    <p>{{ 'profile.show.username'|trans }}: {{ user.username }}</p>
-    <p>{{ 'profile.show.email'|trans }}: {{ user.email }}</p>
+<div class="row">
+  <div class="col-md-6">
+    <h2 class="text-center">Vos informations</h2>
+    <div class="alert alert-info">
+      <p>
+        {{ 'profile.show.username'|trans }}: {{ user.username }}
+      </p>
+    </div>
+    <div class="alert alert-info">
+      <p>
+        {{ 'profile.show.email'|trans }}: {{ user.email }}
+      </p>
+    </div>
+    <div class="alert alert-warning">
+      <p>
+        Si vous voulez supprimer votre compte, veuillez me contacter directement par mail ou par téléphone.
+      </p>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <h2 class="text-center">Actions</h2>
+    <div class="btn-group-vertical" role="group">
+      <a href="{{ path('fos_user_profile_edit') }}" title="Modifier mes informations" class="btn btn-primary">Editer mon profil</a>
+      <a href="{{ path('fos_user_change_password') }}" title="Modifier mon mot de passe" class="btn btn-primary">Modifier mon mot de passe</a>
+    </div>
+  </div>
 </div>
