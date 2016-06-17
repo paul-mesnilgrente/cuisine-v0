@@ -4,20 +4,10 @@
 {% block textarea_widget %}
 
     <div class="row">
-        <div class="col-md-7">
-            {{ form_widget(form) }}
-        </div>
-        <div class="col-md-2">
-            <a href="#" class="collection-up btn btn-default" title="Move element up"><span class="glyphicon glyphicon-arrow-up"></span></a>
-            <a href="#" class="collection-down btn btn-default" title="Move element down"><span class="glyphicon glyphicon-arrow-down"></span></a>
-        </div>
-        <div class="col-md-2">
-            <a href="#" class="collection-delete btn btn-default" title="Delete element"><span class="glyphicon glyphicon-trash"></span></a>
-            <a href="#" class="collection-add btn btn-default" title="Add element"><span class="glyphicon glyphicon-plus-sign"></span></a>
-        </div>
-        <div class="col-md-1">
-            <a href="#" class="collection-duplicate btn btn-default" title="Duplicate element"><span class="glyphicon glyphicon-th-large"></span></a>
-        </div>
+      <div class="col-md-8">
+        {{ form_widget(form) }}
+      </div>
+      {% include '::admin/recette/boutons_de_control.html.twig' %}
     </div>
 
 {% endblock %}
@@ -27,33 +17,14 @@
 {% endblock %}
 
 {% block quantite_ingredient_recette_widget %}
-    <style>
-        .nobuttons-collection .collection-up, .nobuttons-collection .collection-down {
-            display:none;
-        }
-    </style>
     <div class="row">
-      <div class="col-md-7">
+      <div class="col-md-8">
         <div class="form-inline">
           <div class="form-group">{{ form_widget(form.ingredient) }}</div>
           <div class="form-group">{{ form_widget(form.quantite) }}</div>
           <div class="form-group">{{ form_widget(form.unite) }}</div>
         </div>
       </div>
-      <div class="col-md-2">
-        <div class="btn-group" role="group" aria-label="Ajouter ou supprimer">
-          <a href="#" class="collection-up btn btn-default" title="Move element up"><span class="glyphicon glyphicon-arrow-up"></span></a>
-          <a href="#" class="collection-down btn btn-default" title="Move element down"><span class="glyphicon glyphicon-arrow-down"></span></a>
-        </div>
-      </div>
-      <div class="col-md-2">
-        <div class="btn-group" role="group" aria-label="Ajouter ou supprimer">
-          <a href="#" type="button" class="collection-delete btn btn-danger" title="Delete element"><span class="glyphicon glyphicon-trash"></span></a>
-          <a href="#" type="button" class="collection-add btn btn-primary" title="Add element"><span class="glyphicon glyphicon-plus-sign"></span></a>
-        </div>
-      </div>
-      <div class="col-md-1">
-        <a href="#" class="collection-duplicate btn btn-info" title="Duplicate element"><span class="glyphicon glyphicon-th-large"></span></a>
-      </div>
+      {% include '::admin/recette/boutons_de_control.html.twig' %}
     </div>
 {% endblock %}

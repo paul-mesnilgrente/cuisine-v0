@@ -24,20 +24,29 @@
 
 {% endblock %}
 
+{% block stylesheets %}
+{{ parent() }}
+<link href="{{ asset('app/css/jquery-ui.min.css') }}" rel="stylesheet" media="screen">
+<style>
+    .liste_etape .collection-up, .liste_etape .collection-down {
+        display: none;
+    }
+</style>
+{% endblock %}
+
 {% block javascripts %}
   {{ parent() }}
+  <script src="{{ asset('app/js/jquery-ui.min.js') }}"></script>
   <script src="{{ asset('app/js/jquery.collection.js') }}"></script>
 
   <script type="text/javascript">
       $('.liste_etape').collection({
-            'add': '<a href="#" class="btn btn-info">Add</a>',
-            up: '<div style="display:none;"></div>',
-            down: '<div style="display:none;"></div>'
+        'add': '<a href="#" class="btn btn-info">Ajouter une étape</a>',
+        allow_duplicate: true
       });
       $('.liste_ingredient').collection({
-            'add': '<a href="#" class="btn btn-info">Add</a>',
-            up: '<div style="display:none;"></div>',
-            down: '<div style="display:none;"></div>'
+        'add': '<a href="#" class="btn btn-info">Ajouter un ingrédient</a>',
+        allow_duplicate: true
       });
   </script>
 {% endblock %}
