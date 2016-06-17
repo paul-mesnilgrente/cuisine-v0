@@ -33,12 +33,19 @@ class RecetteType extends AbstractType
                 'entry_type' => QuantiteIngredientRecetteType::class,
                 'allow_add' => true,
                 'allow_delete' => true,
-                'by_reference' => false))
+                'by_reference' => false,'prototype' => true,
+                'attr' => array(
+                    'class' => 'liste_ingredient')
+                ))
 
             ->add('etapes', CollectionType::class, array(
                 'entry_type' => TextareaType::class,
                 'allow_add' => true,
-                'allow_delete' => true))
+                'allow_delete' => true,
+                'prototype' => true,
+                'attr' => array(
+                    'class' => 'liste_etape')
+                ))
             
             ->add('categorieRecette', 'entity', array(
                 'class' => 'AppBundle:CategorieRecette',
