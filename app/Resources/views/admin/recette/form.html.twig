@@ -10,7 +10,12 @@
   {{ form_start(form) }}
 
   {{ form_row(form.nom) }}
-  {{ form_row(form.note) }}
+  <div class="row">
+    <div class="col-md-3">{{ form_row(form.note) }}</div>
+    <div class="col-md-3">{{ form_row(form.difficulte) }}</div>
+    <div class="col-md-3">{{ form_row(form.tempsDePreparation) }}</div>
+    <div class="col-md-3">{{ form_row(form.tempsDeCuisson) }}</div>
+  </div>
 
   {{ form_row(form.etapes) }}
   {{ form_row(form.ingredients) }}

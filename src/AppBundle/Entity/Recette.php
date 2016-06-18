@@ -52,6 +52,27 @@ class Recette
     private $note;
 
     /**
+     * @var int
+     *
+     * @ORM\Column(name="temps_de_preparation", type="integer")
+     */
+    private $tempsDePreparation;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="temps_de_cuisson", type="integer")
+     */
+    private $tempsDeCuisson;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="difficulte", type="integer")
+     */
+    private $difficulte;
+
+    /**
      * @var CategorieRecette
      *
      * @ORM\ManyToOne(targetEntity="CategorieRecette")
@@ -307,8 +328,81 @@ class Recette
      */
     public function __construct()
     {
+        $this->tempsDeCuisson = 0;
         $this->date = new \Datetime();
         $this->ingredients = new \Doctrine\Common\Collections\ArrayCollection();
         $this->tags = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Set tempsDePreparation
+     *
+     * @param integer $tempsDePreparation
+     *
+     * @return Recette
+     */
+    public function setTempsDePreparation($tempsDePreparation)
+    {
+        $this->tempsDePreparation = $tempsDePreparation;
+
+        return $this;
+    }
+
+    /**
+     * Get tempsDePreparation
+     *
+     * @return integer
+     */
+    public function getTempsDePreparation()
+    {
+        return $this->tempsDePreparation;
+    }
+
+    /**
+     * Set tempsDeCuisson
+     *
+     * @param integer $tempsDeCuisson
+     *
+     * @return Recette
+     */
+    public function setTempsDeCuisson($tempsDeCuisson)
+    {
+        $this->tempsDeCuisson = $tempsDeCuisson;
+
+        return $this;
+    }
+
+    /**
+     * Get tempsDeCuisson
+     *
+     * @return integer
+     */
+    public function getTempsDeCuisson()
+    {
+        return $this->tempsDeCuisson;
+    }
+
+    /**
+     * Set difficulte
+     *
+     * @param integer $difficulte
+     *
+     * @return Recette
+     */
+    public function setDifficulte($difficulte)
+    {
+        $this->difficulte = $difficulte;
+
+        return $this;
+    }
+
+    /**
+     * Get difficulte
+     *
+     * @return integer
+     */
+    public function getDifficulte()
+    {
+        return $this->difficulte;
     }
 }

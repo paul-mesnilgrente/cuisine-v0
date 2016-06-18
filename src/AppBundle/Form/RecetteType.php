@@ -28,6 +28,17 @@ class RecetteType extends AbstractType
                     5 => 'Excellent',
                 )
             ))
+            ->add('difficulte', ChoiceType::class, array(
+                'choices' => array(
+                    1 => '1',
+                    2 => '2',
+                    3 => '3',
+                    4 => '4',
+                    5 => '5',
+                )
+            ))
+            ->add('tempsDePreparation')
+            ->add('tempsDeCuisson')
 
             ->add('ingredients', CollectionType::class, array(
                 'entry_type' => QuantiteIngredientRecetteType::class,
