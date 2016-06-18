@@ -24,7 +24,6 @@ class DefaultController extends Controller
      */
     public function listeRecetteAction(Request $request)
     {
-
         $em = $this->getDoctrine()->getManager();
         $recettes = $em->getRepository('AppBundle:Recette')->findAll(
             array(),
@@ -54,5 +53,22 @@ class DefaultController extends Controller
         return $this->render('default/recette/executer.html.twig', array(
             'recette' => $recette,
             'etape' => $etape));
+    }
+
+    /**
+     * @Route("/planning/consulter/{annee}/{mois}/{jour}",
+     *         name="consulter_planning",
+     *         defaults={"annee": 2016, "mois": 06, "jour": 18},
+     *         requirements={"annee": "\d+", "mois": "\d+", "jour": "\d+"})
+     */
+    public function consulterPlanningAction()
+    {
+        $dateDebut = strtotime('Monday');
+        $dateFin = strtotime('Sunday');
+        $planning = "";
+        return $this->render('default/planning/consulter.html.twig', array(
+            'planning' => $planning,
+            'dateDebut' => $dateDebut,
+            'dateFin' => $dateFin));
     }
 }
