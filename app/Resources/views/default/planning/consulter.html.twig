@@ -18,38 +18,38 @@
     <tbody>
       <tr>
         <th scope="row">Lundi</th>
-        <td><a href="{{ path('ajouter_entree_planning') }}">Pâte/jambon, trop bon !</a></td>
-        <td><a href="{{ path('ajouter_entree_planning') }}">Pâte/jambon, trop bon !</a></td>
+        <td><a href="{{ path('ajouter_entree_planning', {'date': dateDebut|date('d-m-Y'), 'repas': 'midi'}) }}">Pâte/jambon, trop bon !</a></td>
+        <td><a href="{{ path('ajouter_entree_planning', {'date': dateDebut|date('d-m-Y'), 'repas': 'soir'}) }}">Pâte/jambon, trop bon !</a></td>
       </tr>
       <tr>
         <th scope="row">Mardi</th>
-        <td><a href="{{ path('ajouter_entree_planning') }}">Pâte/jambon, trop bon !</a></td>
-        <td><a href="{{ path('ajouter_entree_planning') }}">Pâte/jambon, trop bon !</a></td>
+        <td><a href="{{ path('ajouter_entree_planning', {'date': dateDebut|date_modify("+1 day")|date('d-m-Y'), 'repas': 'midi'}) }}">Pâte/jambon, trop bon !</a></td>
+        <td><a href="{{ path('ajouter_entree_planning', {'date': dateDebut|date_modify("+1 day")|date('d-m-Y'), 'repas': 'soir'}) }}">Pâte/jambon, trop bon !</a></td>
       </tr>
       <tr>
         <th scope="row">Mercredi</th>
-        <td><a href="{{ path('ajouter_entree_planning') }}">Pâte/jambon, trop bon !</a></td>
-        <td><a href="{{ path('ajouter_entree_planning') }}">Rien de prévu</a></td>
+        <td><a href="{{ path('ajouter_entree_planning', {'date': dateDebut|date_modify("+2 day")|date('d-m-Y'), 'repas': 'midi'}) }}">Pâte/jambon, trop bon !</a></td>
+        <td><a href="{{ path('ajouter_entree_planning', {'date': dateDebut|date_modify("+2 day")|date('d-m-Y'), 'repas': 'soir'}) }}">Rien de prévu</a></td>
       </tr>
       <tr>
         <th scope="row">Jeudi</th>
-        <td><a href="{{ path('ajouter_entree_planning') }}">Pâte/jambon, trop bon !</a></td>
-        <td><a href="{{ path('ajouter_entree_planning') }}">Pâte/jambon, trop bon !</a></td>
+        <td><a href="{{ path('ajouter_entree_planning', {'date': dateDebut|date_modify("+3 day")|date('d-m-Y'), 'repas': 'midi'}) }}">Pâte/jambon, trop bon !</a></td>
+        <td><a href="{{ path('ajouter_entree_planning', {'date': dateDebut|date_modify("+3 day")|date('d-m-Y'), 'repas': 'soir'}) }}">Pâte/jambon, trop bon !</a></td>
       </tr>
       <tr>
         <th scope="row">Vendredi</th>
-        <td><a href="{{ path('ajouter_entree_planning') }}">Pâte/jambon, trop bon !</a></td>
-        <td><a href="{{ path('ajouter_entree_planning') }}">Pâte/jambon, trop bon !</a></td>
+        <td><a href="{{ path('ajouter_entree_planning', {'date': dateDebut|date_modify("+4 day")|date('d-m-Y'), 'repas': 'midi'}) }}">Pâte/jambon, trop bon !</a></td>
+        <td><a href="{{ path('ajouter_entree_planning', {'date': dateDebut|date_modify("+4 day")|date('d-m-Y'), 'repas': 'soir'}) }}">Pâte/jambon, trop bon !</a></td>
       </tr>
       <tr>
         <th scope="row">Samedi</th>
-        <td><a href="{{ path('ajouter_entree_planning') }}">Pâte/jambon, trop bon !</a></td>
-        <td><a href="{{ path('ajouter_entree_planning') }}">Pâte/jambon, trop bon !</a></td>
+        <td><a href="{{ path('ajouter_entree_planning', {'date': dateDebut|date_modify("+5 day")|date('d-m-Y'), 'repas': 'midi'}) }}">Pâte/jambon, trop bon !</a></td>
+        <td><a href="{{ path('ajouter_entree_planning', {'date': dateDebut|date_modify("+5 day")|date('d-m-Y'), 'repas': 'soir'}) }}">Pâte/jambon, trop bon !</a></td>
       </tr>
       <tr>
         <th scope="row">Dimanche</th>
-        <td><a href="{{ path('ajouter_entree_planning') }}">Pâte/jambon, trop bon !</a></td>
-        <td><a href="{{ path('ajouter_entree_planning') }}">Pâte/jambon, trop bon !</a></td>
+        <td><a href="{{ path('ajouter_entree_planning', {'date': dateDebut|date_modify("+6 day")|date('d-m-Y'), 'repas': 'midi'}) }}">Pâte/jambon, trop bon !</a></td>
+        <td><a href="{{ path('ajouter_entree_planning', {'date': dateDebut|date_modify("+6 day")|date('d-m-Y'), 'repas': 'soir'}) }}">Pâte/jambon, trop bon !</a></td>
       </tr>
     </tbody>
   </table>
