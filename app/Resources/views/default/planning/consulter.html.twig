@@ -17,39 +17,46 @@
     </thead>
     <tbody>
       <tr>
-        <th scope="row">Lundi</th>
-        <td><a href="{{ path('ajouter_entree_planning', {'date': dateDebut|date('d-m-Y'), 'repas': 'midi'}) }}">Pâte/jambon, trop bon !</a></td>
-        <td><a href="{{ path('ajouter_entree_planning', {'date': dateDebut|date('d-m-Y'), 'repas': 'soir'}) }}">Pâte/jambon, trop bon !</a></td>
+        {% set date = dateDebut|date('d-m-Y') %}
+        <th scope="row">Lundi ({{ dateDebut|date('d/m') }})</th>
+        <td><a href="{{ path('ajouter_entree_planning', {'date': date, 'repas': 'midi'}) }}">Pâte/jambon, trop bon !</a></td>
+        <td><a href="{{ path('ajouter_entree_planning', {'date': date, 'repas': 'soir'}) }}">Pâte/jambon, trop bon !</a></td>
       </tr>
       <tr>
-        <th scope="row">Mardi</th>
-        <td><a href="{{ path('ajouter_entree_planning', {'date': dateDebut|date_modify("+1 day")|date('d-m-Y'), 'repas': 'midi'}) }}">Pâte/jambon, trop bon !</a></td>
-        <td><a href="{{ path('ajouter_entree_planning', {'date': dateDebut|date_modify("+1 day")|date('d-m-Y'), 'repas': 'soir'}) }}">Pâte/jambon, trop bon !</a></td>
+        {% set date = dateDebut|date_modify("+1 day")|date('d-m-Y') %}
+        <th scope="row">Mardi ({{ dateDebut|date_modify("+1 day")|date('d/m') }})</th>
+        <td><a href="{{ path('ajouter_entree_planning', {'date': date, 'repas': 'midi'}) }}">Pâte/jambon, trop bon !</a></td>
+        <td><a href="{{ path('ajouter_entree_planning', {'date': date, 'repas': 'soir'}) }}">Pâte/jambon, trop bon !</a></td>
       </tr>
       <tr>
-        <th scope="row">Mercredi</th>
-        <td><a href="{{ path('ajouter_entree_planning', {'date': dateDebut|date_modify("+2 day")|date('d-m-Y'), 'repas': 'midi'}) }}">Pâte/jambon, trop bon !</a></td>
-        <td><a href="{{ path('ajouter_entree_planning', {'date': dateDebut|date_modify("+2 day")|date('d-m-Y'), 'repas': 'soir'}) }}">Rien de prévu</a></td>
+        {% set date = dateDebut|date_modify("+2 day")|date('d-m-Y') %}
+        <th scope="row">Mercredi ({{ dateDebut|date_modify("+2 day")|date('d/m') }})</th>
+        <td><a href="{{ path('ajouter_entree_planning', {'date': date, 'repas': 'midi'}) }}">Pâte/jambon, trop bon !</a></td>
+        <td><a href="{{ path('ajouter_entree_planning', {'date': date, 'repas': 'soir'}) }}">Rien de prévu</a></td>
       </tr>
       <tr>
-        <th scope="row">Jeudi</th>
-        <td><a href="{{ path('ajouter_entree_planning', {'date': dateDebut|date_modify("+3 day")|date('d-m-Y'), 'repas': 'midi'}) }}">Pâte/jambon, trop bon !</a></td>
-        <td><a href="{{ path('ajouter_entree_planning', {'date': dateDebut|date_modify("+3 day")|date('d-m-Y'), 'repas': 'soir'}) }}">Pâte/jambon, trop bon !</a></td>
+        {% set date = dateDebut|date_modify("+3 day")|date('d-m-Y') %}
+        <th scope="row">Jeudi ({{ dateDebut|date_modify("+3 day")|date('d/m') }})</th>
+        <td><a href="{{ path('ajouter_entree_planning', {'date': date, 'repas': 'midi'}) }}">Pâte/jambon, trop bon !</a></td>
+        <td><a href="{{ path('ajouter_entree_planning', {'date': date, 'repas': 'soir'}) }}">Pâte/jambon, trop bon !</a></td>
       </tr>
       <tr>
-        <th scope="row">Vendredi</th>
-        <td><a href="{{ path('ajouter_entree_planning', {'date': dateDebut|date_modify("+4 day")|date('d-m-Y'), 'repas': 'midi'}) }}">Pâte/jambon, trop bon !</a></td>
-        <td><a href="{{ path('ajouter_entree_planning', {'date': dateDebut|date_modify("+4 day")|date('d-m-Y'), 'repas': 'soir'}) }}">Pâte/jambon, trop bon !</a></td>
+        {% set date = dateDebut|date_modify("+4 day")|date('d-m-Y') %}
+        <th scope="row">Vendredi ({{ dateDebut|date_modify("+4 day")|date('d/m') }})</th>
+        <td><a href="{{ path('ajouter_entree_planning', {'date': date, 'repas': 'midi'}) }}">Pâte/jambon, trop bon !</a></td>
+        <td><a href="{{ path('ajouter_entree_planning', {'date': date, 'repas': 'soir'}) }}">Pâte/jambon, trop bon !</a></td>
       </tr>
       <tr>
-        <th scope="row">Samedi</th>
-        <td><a href="{{ path('ajouter_entree_planning', {'date': dateDebut|date_modify("+5 day")|date('d-m-Y'), 'repas': 'midi'}) }}">Pâte/jambon, trop bon !</a></td>
-        <td><a href="{{ path('ajouter_entree_planning', {'date': dateDebut|date_modify("+5 day")|date('d-m-Y'), 'repas': 'soir'}) }}">Pâte/jambon, trop bon !</a></td>
+        {% set date = dateDebut|date_modify("+5 day")|date('d-m-Y') %}
+        <th scope="row">Samedi ({{ dateDebut|date_modify("+5 day")|date('d/m') }})</th>
+        <td><a href="{{ path('ajouter_entree_planning', {'date': date, 'repas': 'midi'}) }}">Pâte/jambon, trop bon !</a></td>
+        <td><a href="{{ path('ajouter_entree_planning', {'date': date, 'repas': 'soir'}) }}">Pâte/jambon, trop bon !</a></td>
       </tr>
       <tr>
-        <th scope="row">Dimanche</th>
-        <td><a href="{{ path('ajouter_entree_planning', {'date': dateDebut|date_modify("+6 day")|date('d-m-Y'), 'repas': 'midi'}) }}">Pâte/jambon, trop bon !</a></td>
-        <td><a href="{{ path('ajouter_entree_planning', {'date': dateDebut|date_modify("+6 day")|date('d-m-Y'), 'repas': 'soir'}) }}">Pâte/jambon, trop bon !</a></td>
+        {% set date = dateDebut|date_modify("+6 day")|date('d-m-Y') %}
+        <th scope="row">Dimanche ({{ dateDebut|date_modify("+6 day")|date('d/m') }})</th>
+        <td><a href="{{ path('ajouter_entree_planning', {'date': date, 'repas': 'midi'}) }}">Pâte/jambon, trop bon !</a></td>
+        <td><a href="{{ path('ajouter_entree_planning', {'date': date, 'repas': 'soir'}) }}">Pâte/jambon, trop bon !</a></td>
       </tr>
     </tbody>
   </table>
@@ -67,4 +74,9 @@
       </li>
     </ul>
   </nav>
+  <ul>
+  {% for entree in planning %}
+    <li>{{ entree.date|localizeddate('short', 'none') }} ({{ entree.midi ? "midi": "soir" }}) -> {{ entree.recette.nom }}</li>
+  {% endfor %}
+  </ul>
 {% endblock %}

@@ -61,8 +61,15 @@ class DefaultController extends Controller
     public function consulterPlanningAction(Request $request, \Datetime $date)
     {
         $date->modify("Monday");
-        $dateDebut = $date;
-        $planning = "";
+        $dateDebut = clone $date;
+        if ($date->format('l') != 'Monday') {
+            $dateDebut->modify("last Monday");
+        }
+        $dateFin = clone $dateDebut;
+        $dateFin->modify('Sunday');
+        $em = $this->getDoctrine()->getManager();
+        $planning = $em->getRepository("AppBundle:EntreePlanning")
+            ->getEntreesEntre2Dates($dateDebut, $dateFin);
         return $this->render('default/planning/consulter.html.twig', array(
             'planning' => $planning,
             'dateDebut' => $dateDebut));

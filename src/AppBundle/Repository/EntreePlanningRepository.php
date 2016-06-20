@@ -10,4 +10,16 @@ namespace AppBundle\Repository;
  */
 class EntreePlanningRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function getEntreesEntre2Dates(\Datetime $dateDebut, \Datetime $dateFin)
+    {
+        return $this->_em->createQuery('
+            SELECT ep
+            FROM AppBundle:EntreePlanning ep
+            WHERE ep.date >= :dateDebut AND
+                ep.date <= :dateFin
+            ORDER BY ep.date ASC')
+            ->setParameter('dateDebut', $dateDebut)
+            ->setParameter('dateFin', $dateFin)
+            ->getResult();
+    }
 }
