@@ -1,0 +1,4 @@
+// pour que le contenu ne soit pas sous la navbar
+body {
+    padding-top: 70px;
+}

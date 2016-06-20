@@ -56,19 +56,15 @@ class DefaultController extends Controller
     }
 
     /**
-     * @Route("/planning/consulter/{annee}/{mois}/{jour}",
-     *         name="consulter_planning",
-     *         defaults={"annee": 2016, "mois": 06, "jour": 18},
-     *         requirements={"annee": "\d+", "mois": "\d+", "jour": "\d+"})
+     * @Route("/planning/consulter/{date}", name="consulter_planning")
      */
-    public function consulterPlanningAction()
+    public function consulterPlanningAction(Request $request, \Datetime $date)
     {
-        $dateDebut = strtotime('Monday');
-        $dateFin = strtotime('Sunday');
+        $date->modify("Monday");
+        $dateDebut = $date;
         $planning = "";
         return $this->render('default/planning/consulter.html.twig', array(
             'planning' => $planning,
-            'dateDebut' => $dateDebut,
-            'dateFin' => $dateFin));
+            'dateDebut' => $dateDebut));
     }
 }

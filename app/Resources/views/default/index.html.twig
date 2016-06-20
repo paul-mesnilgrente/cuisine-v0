@@ -39,7 +39,7 @@
   <div class="col-md-6">
     <div class="media">
       <div class="media-left">
-        <a href="{{ path('consulter_planning') }}">
+        <a href="{{ path('consulter_planning', {'date': "now"|date("d-m-Y")}) }}">
           <img class="media-object" width="100" src="{{ asset('app/images/tableau_de_bord/planning.jpg') }}" alt="Planning">
         </a>
       </div>

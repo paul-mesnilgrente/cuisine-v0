@@ -2,12 +2,13 @@
 
 {% block b %}
   <div class="row">
-      <div class="col-md-2">
-        {% include 'header.html.twig' %}
-      </div>
-      <div class="col-md-10">
-        {% include 'BraincraftedBootstrapBundle::flash.html.twig' with { 'close': true } %}
-        {% block body %}{% endblock %}
-      </div>
+    {% include 'nav.html.twig' %}
+    <div class="col-md-2">
+      {% include 'header.html.twig' %}
     </div>
+    <div class="col-md-10">
+      {% include 'BraincraftedBootstrapBundle::flash.html.twig' with { 'close': true } %}
+      {% block body %}{% endblock %}
+    </div>
+  </div>
 {% endblock %}

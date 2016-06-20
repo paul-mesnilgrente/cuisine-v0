@@ -11,3 +11,19 @@ services:
         class: Twig_Extensions_Extension_Intl
         tags:
             - { name: twig.extension }
+    app.menu_builder:
+        class: AppBundle\Menu\Builder
+        arguments: ["@knp_menu.factory", "@service_container"]
+
+    app.left_menu:
+        class: Knp\Menu\MenuItem
+        factory: ["@app.menu_builder", leftMenu]
+        arguments: ["@request_stack"]
+        tags:
+            - { name: knp_menu.menu, alias: left }
+    app.right_menu:
+        class: Knp\Menu\MenuItem
+        factory: ["@app.menu_builder", rightMenu]
+        arguments: ["@request_stack"]
+        tags:
+            - { name: knp_menu.menu, alias: right }
