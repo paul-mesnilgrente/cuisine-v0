@@ -51,11 +51,13 @@ class ListeDeCourseController extends Controller
         $periode = new Periode();
         $formDate = $this->creerFormulaire($periode);
         $formDate->handleRequest($request);
-        if (!$formDate->isValid() || $periode->getDateDebut() > $periode->getDateFin()) {
-            $flash = $this->get('braincrafted_bootstrap.flash');
-            $flash->info("Les informations sur la date ne sont pas valides.");
-            $periode = new Periode();
-            $formDate = $this->creerFormulaire($periode);
+        if ($formDate->isSubmitted()) {
+            if ((!$formDate->isValid()) || $periode->getDateDebut() > $periode->getDateFin()) {
+                $flash = $this->get('braincrafted_bootstrap.flash');
+                $flash->info("Les informations sur les dates ne sont pas valides.");
+                $periode = new Periode();
+                $formDate = $this->creerFormulaire($periode);
+            }
         }
         
         $liste = new ListeDeCourse();

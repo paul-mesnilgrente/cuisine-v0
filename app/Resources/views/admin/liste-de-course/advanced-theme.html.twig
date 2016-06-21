@@ -3,10 +3,10 @@
 
 {% block quantite_produit_widget %}
     <div class="row">
-      <div class="col-md-10">
+      <div class="col-md-9">
         <div class="form-inline">
           <div class="form-group">{{ form_widget(form.produit) }}</div>
-          <div class="form-group">{{ form_widget(form.quantite, {'attr': {'style': 'quantite'}}) }}</div>
+          <div class="form-group">{{ form_widget(form.quantite, {'attr': {'class': 'quantite'}}) }}</div>
           <div class="form-group">{{ form_widget(form.unite) }}</div>
         </div>
       </div>
@@ -20,10 +20,10 @@
 
 {% block quantite_ingredient_liste_de_course_widget %}
     <div class="row">
-      <div class="col-md-10">
+      <div class="col-md-9">
         <div class="form-inline">
           <div class="form-group">{{ form_widget(form.ingredient) }}</div>
-          <div class="form-group">{{ form_widget(form.quantite, {'attr': {'class': 'quantite'}}) }}</div>
+          <div class="form-group">{{ form_widget(form.quantite, {'attr': {'style': 'width: 90px;'}}) }}</div>
           <div class="form-group">{{ form_widget(form.unite) }}</div>
         </div>
       </div>

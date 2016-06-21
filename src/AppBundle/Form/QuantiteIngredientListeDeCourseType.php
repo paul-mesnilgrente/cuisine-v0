@@ -24,7 +24,7 @@ class QuantiteIngredientListeDeCourseType extends AbstractType
 
             ->add('unite', 'entity', array(
                 'class' => 'AppBundle:Unite',
-                'property' => 'nom',
+                'property' => 'abrege',
                 'multiple' => false,
                 'expanded' => false))
         ;
