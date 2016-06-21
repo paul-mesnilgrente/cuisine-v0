@@ -38,9 +38,9 @@ class EntreePlanning
     /**
      * @var Recette
      * 
-     * @ORM\ManyToOne(targetEntity="Recette", cascade={"persist"})
+     * @ORM\ManyToMany(targetEntity="Recette", cascade={"persist"})
      */
-    private $recette;
+    private $recettes;
 
     public function __construct() {
         $this->date = new \Datetime();
@@ -105,26 +105,36 @@ class EntreePlanning
     }
 
     /**
-     * Set recette
+     * Add recette
      *
      * @param \AppBundle\Entity\Recette $recette
      *
      * @return EntreePlanning
      */
-    public function setRecette(\AppBundle\Entity\Recette $recette = null)
+    public function addRecette(\AppBundle\Entity\Recette $recette)
     {
-        $this->recette = $recette;
+        $this->recettes[] = $recette;
 
         return $this;
     }
 
     /**
-     * Get recette
+     * Remove recette
      *
-     * @return \AppBundle\Entity\Recette
+     * @param \AppBundle\Entity\Recette $recette
      */
-    public function getRecette()
+    public function removeRecette(\AppBundle\Entity\Recette $recette)
     {
-        return $this->recette;
+        $this->recettes->removeElement($recette);
+    }
+
+    /**
+     * Get recettes
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getRecettes()
+    {
+        return $this->recettes;
     }
 }

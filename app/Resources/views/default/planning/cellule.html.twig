@@ -4,8 +4,14 @@
       Ajouter le repas
     </a>
   {% else %}
-    <a href="{{ path('voir_recette', {'slug': entree.recette.slug}) }}">
-      {{ entree.recette.nom }}
-    </a>
+    <ul class="list-unstyled">
+    {% for recette in entree.recettes %}
+        <li>
+          <a href="{{ path('voir_recette', {'slug': recette.slug}) }}">
+            {{ recette.nom }}
+          </a>
+        </li>
+    {% endfor %}
+    </ul>
   {% endif %}
 </td>

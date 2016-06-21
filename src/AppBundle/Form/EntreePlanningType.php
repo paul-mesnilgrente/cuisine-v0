@@ -16,10 +16,10 @@ class EntreePlanningType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('recette', EntityType::class, array(
+        $builder->add('recettes', EntityType::class, array(
                 'class' => 'AppBundle:Recette',
                 'property' => 'nom',
-                'multiple' => false,
+                'multiple' => true,
                 'expanded' => true))
         ;
     }

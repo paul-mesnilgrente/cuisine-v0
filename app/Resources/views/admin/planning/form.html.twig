@@ -1,12 +1,12 @@
 {% extends '::base.html.twig' %}
 
-{% block title %}{{ action }} une recette au planning{% endblock %}
+{% block title %}{{ action }} un repas au planning{% endblock %}
 
 {% block body %}
 {{ entreePlanning.date|localizeddate('medium') }}
-    <h1>{{ action }} une recette au planning</h1>
+    <h1>{{ action }} un repas au planning</h1>
     {{ form_start(form, {'style': 'horizontal'}) }}
-      {{ form_row(form.recette) }}
+      {{ form_row(form.recettes) }}
       <input type="submit" value="Valider" class="btn btn-primary"/>
     {{ form_end(form) }}
 {% endblock %}
