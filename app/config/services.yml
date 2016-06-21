@@ -22,9 +22,17 @@ services:
         arguments: ["@request_stack"]
         tags:
             - { name: knp_menu.menu, alias: left }
+
     app.right_menu:
         class: Knp\Menu\MenuItem
         factory: ["@app.menu_builder", rightMenu]
         arguments: ["@request_stack"]
         tags:
             - { name: knp_menu.menu, alias: right }
+
+    app.footer:
+        class: Knp\Menu\MenuItem
+        factory: ["@app.menu_builder", footer]
+        arguments: ["@request_stack"]
+        tags:
+            - { name: knp_menu.menu, alias: footer }

@@ -27,6 +27,7 @@
   <div class="container">
     {% block b %}{% endblock %}
   </div>
+  {% include 'footer.html.twig' %}
 
   {% block javascripts %}
     {% javascripts filter="?jsqueeze" output="js/app.js"
