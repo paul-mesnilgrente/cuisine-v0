@@ -6,7 +6,7 @@
     Semaine du {{ dateDebut|localizeddate('short', 'none') }}
     au {{ dateDebut|date_modify('Sunday')|localizeddate('short', 'none') }}
   </p>
-  
+
   <table class="table table-bordered">
     <thead>
       <tr>
@@ -16,48 +16,47 @@
       </tr>
     </thead>
     <tbody>
-      <tr>
-        {% set date = dateDebut|date('d-m-Y') %}
-        <th scope="row">Lundi ({{ dateDebut|date('d/m') }})</th>
-        <td><a href="{{ path('ajouter_entree_planning', {'date': date, 'repas': 'midi'}) }}">Pâte/jambon, trop bon !</a></td>
-        <td><a href="{{ path('ajouter_entree_planning', {'date': date, 'repas': 'soir'}) }}">Pâte/jambon, trop bon !</a></td>
-      </tr>
-      <tr>
-        {% set date = dateDebut|date_modify("+1 day")|date('d-m-Y') %}
-        <th scope="row">Mardi ({{ dateDebut|date_modify("+1 day")|date('d/m') }})</th>
-        <td><a href="{{ path('ajouter_entree_planning', {'date': date, 'repas': 'midi'}) }}">Pâte/jambon, trop bon !</a></td>
-        <td><a href="{{ path('ajouter_entree_planning', {'date': date, 'repas': 'soir'}) }}">Pâte/jambon, trop bon !</a></td>
-      </tr>
-      <tr>
-        {% set date = dateDebut|date_modify("+2 day")|date('d-m-Y') %}
-        <th scope="row">Mercredi ({{ dateDebut|date_modify("+2 day")|date('d/m') }})</th>
-        <td><a href="{{ path('ajouter_entree_planning', {'date': date, 'repas': 'midi'}) }}">Pâte/jambon, trop bon !</a></td>
-        <td><a href="{{ path('ajouter_entree_planning', {'date': date, 'repas': 'soir'}) }}">Rien de prévu</a></td>
-      </tr>
-      <tr>
-        {% set date = dateDebut|date_modify("+3 day")|date('d-m-Y') %}
-        <th scope="row">Jeudi ({{ dateDebut|date_modify("+3 day")|date('d/m') }})</th>
-        <td><a href="{{ path('ajouter_entree_planning', {'date': date, 'repas': 'midi'}) }}">Pâte/jambon, trop bon !</a></td>
-        <td><a href="{{ path('ajouter_entree_planning', {'date': date, 'repas': 'soir'}) }}">Pâte/jambon, trop bon !</a></td>
-      </tr>
-      <tr>
-        {% set date = dateDebut|date_modify("+4 day")|date('d-m-Y') %}
-        <th scope="row">Vendredi ({{ dateDebut|date_modify("+4 day")|date('d/m') }})</th>
-        <td><a href="{{ path('ajouter_entree_planning', {'date': date, 'repas': 'midi'}) }}">Pâte/jambon, trop bon !</a></td>
-        <td><a href="{{ path('ajouter_entree_planning', {'date': date, 'repas': 'soir'}) }}">Pâte/jambon, trop bon !</a></td>
-      </tr>
-      <tr>
-        {% set date = dateDebut|date_modify("+5 day")|date('d-m-Y') %}
-        <th scope="row">Samedi ({{ dateDebut|date_modify("+5 day")|date('d/m') }})</th>
-        <td><a href="{{ path('ajouter_entree_planning', {'date': date, 'repas': 'midi'}) }}">Pâte/jambon, trop bon !</a></td>
-        <td><a href="{{ path('ajouter_entree_planning', {'date': date, 'repas': 'soir'}) }}">Pâte/jambon, trop bon !</a></td>
-      </tr>
-      <tr>
-        {% set date = dateDebut|date_modify("+6 day")|date('d-m-Y') %}
-        <th scope="row">Dimanche ({{ dateDebut|date_modify("+6 day")|date('d/m') }})</th>
-        <td><a href="{{ path('ajouter_entree_planning', {'date': date, 'repas': 'midi'}) }}">Pâte/jambon, trop bon !</a></td>
-        <td><a href="{{ path('ajouter_entree_planning', {'date': date, 'repas': 'soir'}) }}">Pâte/jambon, trop bon !</a></td>
-      </tr>
+      {% set jours = ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche'] %}
+      {% set repass = ['midi', 'soir'] %}
+      {% set index = 0 %}
+      {% set numJour = 0 %}
+      {% set dateDuJour = dateDebut|date_modify("-1 day")|date('d-m-Y') %}
+
+      {% for jour in jours %}
+        
+        {% set dateDuJour = dateDuJour|date_modify("+1 day")|date('d-m-Y') %}
+        {% set entreeMidi = null %}
+        {% set entreeSoir = null %}
+        
+        <tr>
+          <th scope="row">({{ dateDuJour|date('d/m') }}) {{ jour }}</th>
+
+            {% for i in [1, 2] %}
+
+              {% if (planning is not empty) and index < planning|length %}
+
+                {% if date(planning[index].date) == date(dateDuJour) %}
+                
+                  {% if planning[index].midi == true %}
+                    {% set entreeMidi = planning[index] %}
+                    {% set index = index + 1 %}
+                  {% else %}
+                    {% set entreeSoir = planning[index] %}
+                    {% set index = index + 1 %}
+                  {% endif %}
+                
+                {% endif %}
+              {% endif %}
+
+            {% endfor %}
+          
+
+          {% include 'default/planning/cellule.html.twig' with {'entree': entreeMidi, 'repas': 'midi'} %}
+          {% include 'default/planning/cellule.html.twig' with {'entree': entreeSoir, 'repas': 'soir'} %}
+
+        </tr>
+        {% set numJour = numJour + 1 %}
+      {% endfor %} {# pour chaque jour #}
     </tbody>
   </table>
   <nav>

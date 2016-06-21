@@ -60,7 +60,6 @@ class DefaultController extends Controller
      */
     public function consulterPlanningAction(Request $request, \Datetime $date)
     {
-        $date->modify("Monday");
         $dateDebut = clone $date;
         if ($date->format('l') != 'Monday') {
             $dateDebut->modify("last Monday");

@@ -26,6 +26,9 @@ class PlanningController extends Controller
             $em->flush();
             $flash = $this->get('braincrafted_bootstrap.flash');
             $flash->info("L'entrée du planning a bien été soumise.");
+
+            return $this->redirectToRoute('consulter_planning', 
+                array('date' => $entreePlanning->getDate()->format('d-m-Y')));
         }
         // replace this example code with whatever you need
         return $this->render('admin/planning/form.html.twig', array(

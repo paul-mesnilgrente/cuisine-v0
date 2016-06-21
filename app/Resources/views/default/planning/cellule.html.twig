@@ -1,0 +1,11 @@
+<td {% if entree is null %}class="danger"{% endif %}>
+  {% if entree is null %}
+    <a href="{{ path('ajouter_entree_planning', {'date': dateDuJour, 'repas': repas}) }}">
+      Ajouter le repas
+    </a>
+  {% else %}
+    <a href="{{ path('voir_recette', {'slug': entree.recette.slug}) }}">
+      {{ entree.recette.nom }}
+    </a>
+  {% endif %}
+</td>

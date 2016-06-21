@@ -11,6 +11,7 @@ services:
         class: Twig_Extensions_Extension_Intl
         tags:
             - { name: twig.extension }
+
     app.menu_builder:
         class: AppBundle\Menu\Builder
         arguments: ["@knp_menu.factory", "@service_container"]
