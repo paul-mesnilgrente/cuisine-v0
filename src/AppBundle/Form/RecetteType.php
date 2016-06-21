@@ -44,7 +44,8 @@ class RecetteType extends AbstractType
                 'entry_type' => QuantiteIngredientRecetteType::class,
                 'allow_add' => true,
                 'allow_delete' => true,
-                'by_reference' => false,'prototype' => true,
+                'by_reference' => false,
+                'prototype' => true,
                 'attr' => array(
                     'class' => 'liste_ingredient')
                 ))

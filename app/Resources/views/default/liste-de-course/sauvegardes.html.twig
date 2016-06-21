@@ -1,0 +1,27 @@
+{% extends '::base.html.twig' %}
+
+{% block title %}Listes de courses{% endblock %}
+
+
+{% block body %}
+  <h1>Listes des courses</h1>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Date</th>
+        <th>Consulter</th>
+        <th>Modifier</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for liste_de_course in liste %}
+        <tr>
+          <td>liste_de_course.date</td>
+          <td><a href="{{ path('consulter_liste_de_course', {}) }}">consulter</a></td>
+          <td><a href="{{ path('modifier_liste_de_course', {}) }}">modifier</a></td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}

@@ -4,14 +4,16 @@
       Ajouter le repas
     </a>
   {% else %}
-    <ul class="list-unstyled">
+
+    <dl class="dl-horizontal">
     {% for recette in entree.recettes %}
-        <li>
+        <dt>{{ recette.categorieRecette.nom }}</dt>
+        <dd>
           <a href="{{ path('voir_recette', {'slug': recette.slug}) }}">
             {{ recette.nom }}
           </a>
-        </li>
+        </dd>
     {% endfor %}
-    </ul>
+    </dl>
   {% endif %}
 </td>

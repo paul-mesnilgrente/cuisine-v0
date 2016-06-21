@@ -54,21 +54,6 @@
   <div class="col-md-6">
     <div class="media">
       <div class="media-left">
-        <a href="#">
-          <img class="media-object" width="100" src="{{ asset('app/images/tableau_de_bord/liste_des_courses.png') }}" alt="Liste des courses">
-        </a>
-      </div>
-      <div class="media-body">
-        <h2 class="media-heading">Recuperer la liste des courses</h2>
-        <p>
-          Vous partez faire les courses et vous chercher votre liste ? C'est ici !
-        </p>
-      </div>
-    </div>
-  </div>
-  <div class="col-md-6">
-    <div class="media">
-      <div class="media-left">
         <a href="{{ path('ajouter_ingredient') }}">
           <img class="media-object" width="100" src="{{ asset('app/images/tableau_de_bord/ingredients.jpg') }}" alt="Ingrédients">
         </a>
@@ -77,6 +62,21 @@
         <h2 class="media-heading">Ajouter un ingrédient</h2>
         <p>
           Vous avez essayer d'ajouter une recette, mais l'ingrédient n'était pas dans la liste proposée ? Alors ajoutez-le ici et ça apparaîtra !
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div class="media">
+      <div class="media-left">
+        <a href="{{ path('consulter_listes_de_course') }}">
+          <img class="media-object" width="100" src="{{ asset('app/images/tableau_de_bord/liste_des_courses.png') }}" alt="Liste des courses">
+        </a>
+      </div>
+      <div class="media-body">
+        <h2 class="media-heading">Récupérer la liste des courses</h2>
+        <p>
+          Vous partez faire les courses et vous chercher votre liste ? C'est ici !
         </p>
       </div>
     </div>

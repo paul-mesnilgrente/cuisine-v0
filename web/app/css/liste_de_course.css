@@ -1,0 +1,7 @@
+.liste_ingredient .collection-up, .liste_ingredient .collection-down {
+    display: none;
+}
+
+.liste_produit .collection-up, .liste_produit .collection-down {
+    display: none;
+}

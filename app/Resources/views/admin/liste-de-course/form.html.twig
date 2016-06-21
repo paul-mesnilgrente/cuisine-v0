@@ -1,0 +1,55 @@
+{% extends '::base.html.twig' %}
+
+{% block title %}{{ action }} une liste de course{% endblock %}
+
+{% form_theme formListeDeCourse with [_self, '::default/jquery.collection.html.twig', '::admin/liste-de-course/advanced-theme.html.twig'] %}
+
+{% block body %}
+  <h1 class="sr-only">Les recettes à prendre en compte</h1>
+  {{ form_start(formDate, {'style': 'inline'}) }}
+    Du {{ form_row(formDate.dateDebut, {'label': 'Du'}) }} au
+    {{ form_row(formDate.dateFin, {'label': 'au'}) }}
+    {{ form_rest(formDate) }}
+    <input type="submit" value="Valider" class="btn btn-primary"/>
+  {{ form_end(formDate) }}    
+  <h1>{{ action }} une liste de course</h1>
+
+  {{ form_start(formListeDeCourse) }}
+    <div class="row">
+      <div class="col-md-6">
+        {{ form_row(formListeDeCourse.ingredients) }}
+      </div>
+      <div class="col-md-6">
+        {{ form_row(formListeDeCourse.produits) }}
+      </div>
+    </div>
+    {{ form_rest(formListeDeCourse) }}
+    <input type="submit" value="Valider" class="btn btn-primary"/>
+  {{ form_end(formListeDeCourse) }}
+{% endblock %}
+
+{% block stylesheets %}
+  {{ parent() }}
+
+  {% stylesheets output="css/form_liste_de_course.css"
+    'app/css/jquery-ui.min.css'
+    'app/css/mon_style.css'
+    'app/css/liste_de_course.css' %}
+
+    <link rel="stylesheet" type="text/css" href="{{ asset_url }}" />
+
+  {% endstylesheets %}
+{% endblock %}
+
+{% block javascripts %}
+  {{ parent() }}
+
+  {% javascripts filter="?jsqueeze" output="js/form_liste_de_course.js"
+    'app/js/jquery-ui.min.js'
+    'app/js/jquery.collection.js'
+    'app/js/liste_de_course.js' %}
+
+    <script src="{{ asset_url }}"></script>
+
+  {% endjavascripts %}
+{% endblock %}

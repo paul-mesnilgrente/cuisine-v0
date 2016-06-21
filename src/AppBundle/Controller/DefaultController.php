@@ -73,4 +73,26 @@ class DefaultController extends Controller
             'planning' => $planning,
             'dateDebut' => $dateDebut));
     }
+
+    /**
+     * @Route("/liste-de-course/sauvegardes", name="consulter_listes_de_course")
+     */
+    public function consulterListesDeCourseAction(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $liste = $em->getRepository('AppBundle:ListeDeCourse')->findAll();
+
+        return $this->render('default/liste-de-course/sauvegarde.html.twig', array(
+            'liste' => $liste));
+    }
+
+    /**
+     * @Route("/liste-de-course/{id}", name="consulter_liste_de_course")
+     */
+    public function consulterListeDeCourseAction(Request $request, ListeDeCourse $liste)
+    {
+        return $this->render('default/liste-de-course/consulter.html.twig', array(
+            'liste' => $liste));
+    }
 }
