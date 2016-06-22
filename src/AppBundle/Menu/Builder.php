@@ -50,15 +50,16 @@ class Builder extends ContainerAware
         $username = $security->getToken()->getUser();
         $translator = $this->container->get('translator');
         if ($security->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
-            $menu->addChild('Accueil', array('route' => 'homepage'));
             $menu->addChild('Ajouter une recette', array('route' => 'ajouter_recette'));
-            $menu->addChild('Ajouter une catégorie de recette', array('route' => 'ajouter_categorie_recette'));
-            $menu->addChild('Ajouter une unité', array('route' => 'ajouter_unite'));
-            $menu->addChild('Ajouter un ingrédient', array('route' => 'ajouter_ingredient'));
-            $menu->addChild('Ajouter une catégorie ingrédient', array('route' => 'ajouter_categorie_ingredient'));
-            $menu->addChild('Ajouter un tag de recette', array('route' => 'ajouter_tag_recette'));
-            $menu->addChild('Ajouter un produit ménager', array('route' => 'ajouter_produit'));
             $menu->addChild('Créer une liste de course', array('route' => 'ajouter_liste_de_course'));
+            $menu->addChild('Ajouter un ingrédient', array('route' => 'ajouter_ingredient'));
+            
+            $menu->addChild('Autre')->setAttribute('dropdown', true);
+            $menu['Autre']->addChild('Ajouter une catégorie de recette', array('route' => 'ajouter_categorie_recette'));
+            $menu['Autre']->addChild('Ajouter une unité', array('route' => 'ajouter_unite'));
+            $menu['Autre']->addChild('Ajouter une catégorie ingrédient', array('route' => 'ajouter_categorie_ingredient'));
+            $menu['Autre']->addChild('Ajouter un tag de recette', array('route' => 'ajouter_tag_recette'));
+            $menu['Autre']->addChild('Ajouter un produit ménager', array('route' => 'ajouter_produit'));
         }
         return $menu;
     }
