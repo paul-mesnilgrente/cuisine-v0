@@ -13,7 +13,7 @@ use AppBundle\Entity\Periode;
 use AppBundle\Entity\QuantiteIngredientListeDeCourse;
 
 /**
- * @Route("admin/liste-de-course")
+ * @Route("{slugUser}/liste-de-course")
  */
 class ListeDeCourseController extends Controller
 {
@@ -46,7 +46,7 @@ class ListeDeCourseController extends Controller
     /**
      * @Route("/ajouter", name="ajouter_liste_de_course")
      */
-    public function ajouterListeDeCourseAction(Request $request)
+    public function ajouterListeDeCourseAction(Request $request, User $user)
     {
         $periode = new Periode();
         $formDate = $this->creerFormulaire($periode);
@@ -60,10 +60,10 @@ class ListeDeCourseController extends Controller
             }
         }
         
-        $liste = new ListeDeCourse();
+        $liste = new ListeDeCourse($user);
         $em = $this->getDoctrine()->getManager();
 
-        $entrees = $em->getRepository('AppBundle:EntreePlanning')->getEntreesEntre2Dates(
+        $entrees = $em->getRepository('AppBundle:EntreePlanning')->getByDate(
             $periode->getDateDebut(), $periode->getDateFin());
         foreach ($entrees as $entree)
         {
@@ -87,8 +87,30 @@ class ListeDeCourseController extends Controller
     /**
      * @Route("/modifier/{id}", name="modifier_liste_de_course")
      */
-    public function modifierListeDeCourseAction(Request $request, ListeDeCourse $liste)
+    public function modifierListeDeCourseAction(Request $request, User $user, ListeDeCourse $liste)
     {
         return $this->formulaireListeDeCourseAction($request, $liste, "Modifier");
+    }
+
+    /**
+     * @Route("/sauvegardes", name="consulter_listes_de_course")
+     */
+    public function consulterListesDeCourseAction(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $liste = $em->getRepository('AppBundle:ListeDeCourse')->findAll();
+
+        return $this->render('liste-de-course/sauvegardes.html.twig', array(
+            'liste' => $liste));
+    }
+
+    /**
+     * @Route("/{id}", name="consulter_liste_de_course")
+     */
+    public function consulterListeDeCourseAction(Request $request, ListeDeCourse $liste)
+    {
+        return $this->render('liste-de-course/consulter.html.twig', array(
+            'liste' => $liste));
     }
 }

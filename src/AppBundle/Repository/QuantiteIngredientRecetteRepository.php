@@ -10,4 +10,16 @@ namespace AppBundle\Repository;
  */
 class QuantiteIngredientRecetteRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function getQuantiteEntre2Dates(\Datetime $dateDebut, \Datetime $dateFin)
+    {
+        return $this->_em->createQuery('
+            SELECT q
+            FROM AppBundle:QuantiteIngredientRecette q
+            WHERE q.date >= :dateDebut AND
+                q.date <= :dateFin
+            ORDER BY q.ingredient.nom ASC')
+            ->setParameter('dateDebut', $dateDebut)
+            ->setParameter('dateFin', $dateFin)
+            ->getResult();
+    }
 }

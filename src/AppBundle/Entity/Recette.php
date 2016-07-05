@@ -38,6 +38,14 @@ class Recette
     private $slug;
 
     /**
+     * @var User
+     *
+     * @ORM\ManyToOne(targetEntity="User")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $user;
+
+    /**
      * @var Datetime
      *
      * @ORM\Column(name="date", type="datetime", unique=false)
@@ -326,8 +334,9 @@ class Recette
     /**
      * Constructor
      */
-    public function __construct()
+    public function __construct($user)
     {
+        $this->user = $user;
         $this->tempsDeCuisson = 0;
         $this->date = new \Datetime();
         $this->ingredients = new \Doctrine\Common\Collections\ArrayCollection();
@@ -404,5 +413,29 @@ class Recette
     public function getDifficulte()
     {
         return $this->difficulte;
+    }
+
+    /**
+     * Set user
+     *
+     * @param \AppBundle\Entity\User $user
+     *
+     * @return Recette
+     */
+    public function setUser(\AppBundle\Entity\User $user = null)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \AppBundle\Entity\User
+     */
+    public function getUser()
+    {
+        return $this->user;
     }
 }

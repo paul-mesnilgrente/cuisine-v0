@@ -20,7 +20,7 @@
 
       {% if etape > 0 %}
         <li class="previous">
-          <a class="previous" href="{{ path('executer_recette', {'slug': recette.slug, 'etape': etape - 1}) }}">
+          <a class="previous" href="{{ path('executer_recette', {'slugUser': app.user.slugUser, 'slug': recette.slug, 'etape': etape - 1}) }}">
             <span aria-hidden="true">&larr;</span> Étape précédente
           </a>
         </li>
@@ -34,7 +34,7 @@
         </li>
       {% else %}
         <li class="next">
-          <a class="next" href="{{ path('executer_recette', {'slug': recette.slug, 'etape': etape + 1}) }}">
+          <a class="next" href="{{ path('executer_recette', {'slugUser': app.user.slugUser, 'slug': recette.slug, 'etape': etape + 1}) }}">
             Étape suivante<span aria-hidden="true">&rarr;</span>
           </a>
         </li>
@@ -44,5 +44,5 @@
   </div>
   <a href="{{ path('homepage') }}">Retour à l'accueil</a>
   <hr>
-  {% include 'default/recette/recette.html.twig' %}
+  {% include 'recette/contenu.html.twig' %}
 {% endblock %}

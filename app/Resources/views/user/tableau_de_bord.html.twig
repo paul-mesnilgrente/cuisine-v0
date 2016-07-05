@@ -1,0 +1,8 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+{% include 'user/actions.html.twig' %}
+<h1>Planning de la semaine</h1>
+<hr>
+{% render(controller('AppBundle:Planning:tableau', {'user': app.user})) %}
+{% endblock %}

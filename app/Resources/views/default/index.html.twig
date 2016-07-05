@@ -1,100 +1,12 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-<div class="page-header">
-  <h1>Tableau de bord <small>Cool non ?</small></h1>
-</div>
-
 <div class="row">
-  <div class="col-md-6">
-    <div class="media">
-      <div class="media-left">
-        <a href="{{ path('liste_recette') }}">
-          <img class="media-object" width="100" src="{{ asset('app/images/tableau_de_bord/recettes.jpg') }}" alt="Recettes">
-        </a>
-      </div>
-      <div class="media-body">
-        <h2 class="media-heading">Consulter les recettes</h2>
-        <p>
-          Chercher et lire de nouvelles recettes, c'est ici !
-        </p>
-      </div>
-    </div>
-  </div>
-  <div class="col-md-6">
-    <div class="media">
-      <div class="media-left">
-        <a href="{{ path('ajouter_recette') }}">
-          <img class="media-object" width="100" src="{{ asset('app/images/tableau_de_bord/recettes.jpg') }}" alt="Recettes">
-        </a>
-      </div>
-      <div class="media-body">
-        <h2 class="media-heading">Ajouter une recette</h2>
-        <p>
-          Vous avez trouvé une nouvelle recette sur internet et souhaitez l'ajouter à votre classeur ? C'est ici !
-        </p>
-      </div>
-    </div>
-  </div>
-  <div class="col-md-6">
-    <div class="media">
-      <div class="media-left">
-        <a href="{{ path('consulter_planning', {'date': "now"|date("d-m-Y")}) }}">
-          <img class="media-object" width="100" src="{{ asset('app/images/tableau_de_bord/planning.jpg') }}" alt="Planning">
-        </a>
-      </div>
-      <div class="media-body">
-        <h2 class="media-heading">Consulter le planning</h2>
-        <p>
-          Vous voulez consulter votre planning pour savoir ce que vous allez manger ce soir ? C'est ici !
-        </p>
-      </div>
-    </div>
-  </div>
-  <div class="col-md-6">
-    <div class="media">
-      <div class="media-left">
-        <a href="{{ path('ajouter_ingredient') }}">
-          <img class="media-object" width="100" src="{{ asset('app/images/tableau_de_bord/ingredients.jpg') }}" alt="Ingrédients">
-        </a>
-      </div>
-      <div class="media-body">
-        <h2 class="media-heading">Ajouter un ingrédient</h2>
-        <p>
-          Vous avez essayer d'ajouter une recette, mais l'ingrédient n'était pas dans la liste proposée ? Alors ajoutez-le ici et ça apparaîtra !
-        </p>
-      </div>
-    </div>
-  </div>
-  <div class="col-md-6">
-    <div class="media">
-      <div class="media-left">
-        <a href="{{ path('consulter_listes_de_course') }}">
-          <img class="media-object" width="100" src="{{ asset('app/images/tableau_de_bord/liste_des_courses.png') }}" alt="Liste des courses">
-        </a>
-      </div>
-      <div class="media-body">
-        <h2 class="media-heading">Récupérer la liste des courses</h2>
-        <p>
-          Vous partez faire les courses et vous chercher votre liste ? C'est ici !
-        </p>
-      </div>
-    </div>
-  </div>
-  <div class="col-md-6">
-    <div class="media">
-      <div class="media-left">
-        <a href="#">
-          <img class="media-object" width="100" src="{{ asset('app/images/tableau_de_bord/ingredients.jpg') }}" alt="Ingrédients">
-        </a>
-      </div>
-      <div class="media-body">
-        <h2 class="media-heading">Consulter les ingrédients</h2>
-        <p>
-          Consulter ici les ingrédients avec des tutoriels associés !
-        </p>
-      </div>
-    </div>
+  <div class="col-md-12">
+    <h1>Présentation</h1>
+    <p>
+      Ce site est destiné à créer votre propre livre de cuisine, partager vos recettes.
+    </p>
   </div>
 </div>
 {% endblock %}

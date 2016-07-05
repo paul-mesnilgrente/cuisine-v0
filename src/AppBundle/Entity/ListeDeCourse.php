@@ -22,6 +22,14 @@ class ListeDeCourse
     private $id;
 
     /**
+     * @var User
+     *
+     * @ORM\ManyToOne(targetEntity="User")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $user;
+    
+    /**
      * @var Datetime
      *
      * @ORM\Column(name="date", type="date", unique=false)
@@ -43,6 +51,17 @@ class ListeDeCourse
     private $produits;
 
     /**
+     * Constructor
+     */
+    public function __construct($user)
+    {
+        $this->user = $user;
+        $this->date = new \Datetime();
+        $this->ingredients = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->produits = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
      * Get id
      *
      * @return int
@@ -50,15 +69,6 @@ class ListeDeCourse
     public function getId()
     {
         return $this->id;
-    }
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->date = new \Datetime();
-        $this->ingredients = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->produits = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -151,5 +161,29 @@ class ListeDeCourse
     public function getProduits()
     {
         return $this->produits;
+    }
+
+    /**
+     * Set user
+     *
+     * @param \AppBundle\Entity\User $user
+     *
+     * @return ListeDeCourse
+     */
+    public function setUser(\AppBundle\Entity\User $user)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \AppBundle\Entity\User
+     */
+    public function getUser()
+    {
+        return $this->user;
     }
 }

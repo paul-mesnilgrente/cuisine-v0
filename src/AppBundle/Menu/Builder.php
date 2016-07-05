@@ -20,10 +20,14 @@ class Builder extends ContainerAware
 
     public function leftMenu(RequestStack $requestStack)
     {
+        $security = $this->container->get('security.context');
+        $user = $security->getToken()->getUser();
+
         $menu = $this->factory->createItem('root');
         $menu->addChild("Accueil", array('route' => 'homepage'));
-        $menu->addChild("Consulter planning", array('route' => 'consulter_planning', 'routeParameters' => array('date' => date('d-m-Y', strtotime("now")))));
-        $menu->addChild("Consulter recettes", array('route' => 'liste_recette'));
+        if ($security->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
+            $menu->addChild("Consulter recettes", array('route' => 'liste_recette', 'routeParameters' => array('slugUser' => $user->getSlugUser())));
+        }
         return $menu;
     }
 
@@ -31,10 +35,11 @@ class Builder extends ContainerAware
     {
         $menu = $this->factory->createItem('root');
         $security = $this->container->get('security.context');
-        $username = $security->getToken()->getUser();
+        $user = $security->getToken()->getUser();
         $translator = $this->container->get('translator');
         if ($security->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
-            $menu->addChild($translator->trans('layout.logout', array('%username%' => $username), 'FOSUserBundle'), array('route' => 'fos_user_security_logout'));
+            $menu->addChild("Tableau de bord", array('route' => 'user_tableau_de_bord', 'routeParameters' => array('slugUser' => $user->getSlugUser())));
+            $menu->addChild($translator->trans('layout.logout', array('%username%' => $user), 'FOSUserBundle'), array('route' => 'fos_user_security_logout'));
             $menu->addChild('Profil', array('route' => 'fos_user_profile_show'));
         } else {
             $menu->addChild($translator->trans('layout.login', array(), 'FOSUserBundle'), array('route' => 'fos_user_security_login'));
@@ -47,11 +52,11 @@ class Builder extends ContainerAware
     {
         $menu = $this->factory->createItem('root');
         $security = $this->container->get('security.context');
-        $username = $security->getToken()->getUser();
+        $user = $security->getToken()->getUser();
         $translator = $this->container->get('translator');
         if ($security->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
-            $menu->addChild('Ajouter une recette', array('route' => 'ajouter_recette'));
-            $menu->addChild('Créer une liste de course', array('route' => 'ajouter_liste_de_course'));
+            $menu->addChild('Ajouter une recette', array('route' => 'ajouter_recette', 'routeParameters' => array('slugUser' => $user->getSlugUser())));
+            $menu->addChild('Créer une liste de course', array('route' => 'ajouter_liste_de_course', 'routeParameters' => array('slugUser' => $user->getSlugUser())));
             $menu->addChild('Ajouter un ingrédient', array('route' => 'ajouter_ingredient'));
             
             $menu->addChild('Autre')->setAttribute('dropdown', true);

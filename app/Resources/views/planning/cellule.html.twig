@@ -1,6 +1,6 @@
 <td {% if entree is null %}class="danger"{% endif %}>
   {% if entree is null %}
-    <a href="{{ path('ajouter_entree_planning', {'date': dateDuJour, 'repas': repas}) }}">
+    <a href="{{ path('ajouter_entree_planning', {'slugUser': app.user.slugUser, 'date': dateDuJour, 'repas': repas}) }}">
       Ajouter le repas
     </a>
   {% else %}
@@ -9,7 +9,7 @@
     {% for recette in entree.recettes %}
         <dt>{{ recette.categorieRecette.nom }}</dt>
         <dd>
-          <a href="{{ path('voir_recette', {'slug': recette.slug}) }}">
+          <a href="{{ path('voir_recette', {'slugUser': app.user.slugUser, 'slug': recette.slug}) }}">
             {{ recette.nom }}
           </a>
         </dd>

@@ -29,6 +29,14 @@ class EntreePlanning
     private $midi;
 
     /**
+     * @var User
+     *
+     * @ORM\ManyToOne(targetEntity="User")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $user;
+
+    /**
      * @var \DateTime
      *
      * @ORM\Column(name="date", type="date")
@@ -42,7 +50,8 @@ class EntreePlanning
      */
     private $recettes;
 
-    public function __construct() {
+    public function __construct($user) {
+        $this->user = $user;
         $this->date = new \Datetime();
     }
 
@@ -136,5 +145,29 @@ class EntreePlanning
     public function getRecettes()
     {
         return $this->recettes;
+    }
+
+    /**
+     * Set user
+     *
+     * @param \AppBundle\Entity\User $user
+     *
+     * @return EntreePlanning
+     */
+    public function setUser(\AppBundle\Entity\User $user = null)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \AppBundle\Entity\User
+     */
+    public function getUser()
+    {
+        return $this->user;
     }
 }

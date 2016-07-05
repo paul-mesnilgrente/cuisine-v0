@@ -1,0 +1,67 @@
+<table class="table table-bordered table-hover">
+  <thead>
+    <tr>
+      <th>Jour</th>
+      <th>Midi</th>
+      <th>Soir</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% set jours = ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche'] %}
+    {% set repass = ['midi', 'soir'] %}
+    {% set index = 0 %}
+    {% set numJour = 0 %}
+    {% set dateDuJour = dateDebut|date_modify("-1 day")|date('d-m-Y') %}
+
+    {% for jour in jours %}
+      
+      {% set dateDuJour = dateDuJour|date_modify("+1 day")|date('d-m-Y') %}
+      {% set entreeMidi = null %}
+      {% set entreeSoir = null %}
+      
+      <tr>
+        <th scope="row">({{ dateDuJour|date('d/m') }}) {{ jour }}</th>
+
+          {% for i in [1, 2] %}
+
+            {% if (planning is not empty) and index < planning|length %}
+
+              {% if date(planning[index].date) == date(dateDuJour) %}
+              
+                {% if planning[index].midi == true %}
+                  {% set entreeMidi = planning[index] %}
+                  {% set index = index + 1 %}
+                {% else %}
+                  {% set entreeSoir = planning[index] %}
+                  {% set index = index + 1 %}
+                {% endif %}
+              
+              {% endif %}
+            {% endif %}
+
+          {% endfor %}
+        
+
+        {% include 'planning/cellule.html.twig' with {'entree': entreeMidi, 'repas': 'midi'} %}
+        {% include 'planning/cellule.html.twig' with {'entree': entreeSoir, 'repas': 'soir'} %}
+
+      </tr>
+      {% set numJour = numJour + 1 %}
+    {% endfor %} {# pour chaque jour #}
+  </tbody>
+</table>
+
+<nav>
+  <ul class="pager">
+    <li class="previous">
+      <a href="{{ path('consulter_planning', {'slugUser': app.user.slugUser, 'date': dateDebut|date_modify("-1 week")|date('d-m-Y')}) }}">
+        <span aria-hidden="true">&larr;</span> Semaine précédente
+      </a>
+    </li>
+    <li class="next">
+      <a href="{{ path('consulter_planning', {'slugUser': app.user.slugUser, 'date': dateDebut|date_modify("+1 week")|date('d-m-Y')}) }}">
+        Semaine suivante <span aria-hidden="true">&rarr;</span>
+      </a>
+    </li>
+  </ul>
+</nav>
