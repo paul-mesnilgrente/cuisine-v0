@@ -1,11 +1,53 @@
-{% extends 'base.html.twig' %}
+{% extends 'layout.html.twig' %}
 
-{% block body %}
+{% block stylesheets %}
+    {% stylesheets output="css/app.css"
+    "%kernel.root_dir%/../vendor/twbs/bootstrap/dist/css/bootstrap.min.css"
+    "app/css/mon_style.css"
+    "app/css/accueil.css" %}
+    <link rel="stylesheet" type="text/css" href="{{ asset_url }}" />
+    {% endstylesheets %}
+{% endblock %}
+
+{% block b %}
 <div class="row">
-  <div class="col-md-12">
-    <h1>Présentation</h1>
+  <div class="col-md-4 jumbotron">
+    <h1 class="text-center"><span class="label label-primary">1</span></h1>
+    <h2>Écrivez vos recettes</h2>
     <p>
-      Ce site est destiné à créer votre propre livre de cuisine, partager vos recettes.
+      Ce site permet à l'aide d'un formulaire de créer vos propres recettes. À base d'étapes simples,
+      les ingrédients sont déjà rentrées pour vous. Avec des informations complémentaires, vous pouvez
+      insérer une note, une difficulté.
+    </p>
+    <p>
+      Vous pouvez aussi partager vos recettes avec vos amis en rendant votre recette publique. La recette
+      sera alors visible sur votre page.
+    </p>
+  </div>
+  <div class="col-md-4 jumbotron">
+    <h1 class="text-center"><span class="label label-primary">2</span></h1>
+    <h2>Remplissez votre planning</h2>
+    <p>
+      Grâce à un planning, vous pouvez prévoir vos repas pour la semaine, le mois, ou même l'année à venir.
+      Indiquez le nombre de personne qui seront à table. Et vous pourrez accéder directement au plat à cuisiner
+      et l'effectuer étape par étape.
+    </p>
+    <p>
+      Ce planning pourra être utilisé par votre diététicienne pour explorer les menus que vous cuisinez. Le suivie
+      sera alors plus facile !
+    </p>
+  </div>
+  <div class="col-md-4 jumbotron">
+    <h1 class="text-center"><span class="label label-primary">3</span></h1>
+    <h2>Générer votre liste de course !</h2>
+    <p>
+      Grâce à votre planning, vous pouvez générer la liste de course et l'imprimer. Il suffira de supprimer les
+      ingrédients que vous avez déjà en stock et d'ajouter les produits ménagers.
+    </p>
+    <p>
+      Une liste de course type pour vous ne pas ajouter toujours les même choses. Votre liste de course sera
+      accessible directement sur votre smartphone tant que vous avez internet ! Où charger la page internet
+      avant d'aller faire vos courses.
     </p>
   </div>
 </div>
