@@ -17,13 +17,22 @@
     <div class="col-md-3">{{ form_row(form.tempsDeCuisson) }}</div>
   </div>
 
-  {{ form_row(form.etapes) }}
-  {{ form_row(form.ingredients) }}
+  {{ form_row(form.publique) }}
+  <div class="row">
+    <div class="col-md-4">
+      {{ form_row(form.ingredients) }}
+    </div>
+    <div class="col-md-8">
+      {{ form_row(form.etapes) }}
+    </div>
+  </div>
 
   <div class="row">
     <div class="col-md-6">{{ form_row(form.categorieRecette) }}</div>
     <div class="col-md-6">{{ form_row(form.tags) }}</div>
   </div>
+
+  {{ form_row(form.imageFile) }}
   <input type="submit" value="Valider" class="btn btn-primary"/>
   {{ form_end(form) }}
 

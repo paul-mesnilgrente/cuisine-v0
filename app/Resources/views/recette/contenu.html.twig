@@ -2,7 +2,10 @@
   <h1>{{ recette.nom }}</h1>
   <p><small>Publié le {{ recette.date|localizeddate('medium') }}</small></p>
   <div class="row">
-    <div class="col-md-6">
+    <div class="col-md-4">
+      <img src="{{ vich_uploader_asset(recette, 'imageFile') }}" alt="{{ recette.imageName }}" />
+    </div>
+    <div class="col-md-4">
       <div class="panel panel-primary">
         <div class="panel-body">
           <p>Note : {{ recette.note }}</p>
@@ -13,7 +16,7 @@
         </div>
       </div>
     </div>
-    <div class="col-md-6">
+    <div class="col-md-4">
       <div class="panel panel-primary">
         <div class="panel-body">
           <p>Difficulté : {{ recette.difficulte }}</p>
@@ -46,7 +49,7 @@
       </p>
     </div>
     <div class="col-md-8">
-      <h2>Etapes</h2>
+      <h2>Étapes</h2>
       <p>
         <ul>
         {% for etape in recette.etapes %}

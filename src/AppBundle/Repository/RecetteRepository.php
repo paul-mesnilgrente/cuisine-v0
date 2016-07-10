@@ -10,4 +10,12 @@ namespace AppBundle\Repository;
  */
 class RecetteRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function getPubliques() {
+        return $this->_em->createQuery('
+            SELECT r
+            FROM AppBundle:Recette r
+            WHERE r.publique = true
+            ORDER BY r.date DESC')
+            ->getResult();
+    }
 }

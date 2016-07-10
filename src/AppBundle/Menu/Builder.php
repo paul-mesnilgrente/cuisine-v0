@@ -38,6 +38,7 @@ class Builder extends ContainerAware
         $user = $security->getToken()->getUser();
         $translator = $this->container->get('translator');
         if ($security->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
+            $menu->addChild($user->getUsername(), array('route' => 'user_ma_page', 'routeParameters' => array('slugUser' => $user->getSlugUser())));
             $menu->addChild("Tableau de bord", array('route' => 'user_tableau_de_bord', 'routeParameters' => array('slugUser' => $user->getSlugUser())));
             $menu->addChild($translator->trans('layout.logout', array('%username%' => $user), 'FOSUserBundle'), array('route' => 'fos_user_security_logout'));
             $menu->addChild('Profil', array('route' => 'fos_user_profile_show'));

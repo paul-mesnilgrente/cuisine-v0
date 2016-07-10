@@ -15,6 +15,11 @@ class DefaultController extends Controller
      */
     public function indexAction(Request $request)
     {
+        $user = $this->get('security.context')->getToken()->getUser();
+        if ($this->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
+            return $this->redirectToRoute('user_tableau_de_bord', array(
+                'slugUser' => $user->getSlugUser()));
+        }
         // replace this example code with whatever you need
         return $this->render('default/index.html.twig');
     }

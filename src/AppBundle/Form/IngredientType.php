@@ -16,12 +16,20 @@ class IngredientType extends AbstractType
     {
         $builder
             ->add('nom')
+
             ->add('pluriel')
+
             ->add('categorie', 'entity', array(
                 'class' => 'AppBundle:CategorieIngredient',
                 'property' => 'nom',
                 'multiple' => false,
                 'expanded' => true))
+
+            ->add('imageFile', 'vich_image', array(
+                'required'      => false,
+                'allow_delete'  => true, // not mandatory, default is true
+                'download_link' => true, // not mandatory, default is true
+            ))
         ;
     }
     

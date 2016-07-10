@@ -6,3 +6,11 @@ body {
 .quantite {
     width: 90px;
 }
+
+.tableau-action {
+    color: black;
+}
+
+a.tableau-action:hover {
+    background-color: grey;
+}

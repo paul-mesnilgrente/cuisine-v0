@@ -27,7 +27,7 @@ class EntreePlanningRepository extends \Doctrine\ORM\EntityRepository
             ->getResult();
     }
 
-    public function getByDate(\Datetime $dateDebut, \Datetime $dateFin)
+    public function getByDate(User $user, \Datetime $dateDebut, \Datetime $dateFin)
     {
         return $this->_em->createQuery('
             SELECT ep
@@ -35,7 +35,7 @@ class EntreePlanningRepository extends \Doctrine\ORM\EntityRepository
             WHERE ep.date >= :dateDebut AND
                 ep.date <= :dateFin AND
                 ep.user = :user
-            ORDER BY ep.ingredients.ingredient.nom ASC')
+            ORDER BY ep.date ASC')
             ->setParameter('dateDebut', $dateDebut)
             ->setParameter('dateFin', $dateFin)
             ->setParameter('user', $user)

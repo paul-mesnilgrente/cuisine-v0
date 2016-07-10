@@ -50,4 +50,15 @@ class IngredientController extends Controller
     {
         return $this->formulaireIngredientAction($request, $ingredient, "Modifier");
     }
+
+    /**
+     * @Route("/liste", name="liste_ingredient")
+     */
+    public function indexAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+        $ingredients = $em->getRepository('AppBundle:Ingredient')->findAll();
+        return $this->render('admin/ingredient/liste.html.twig', array(
+            'ingredients' => $ingredients));
+    }
 }

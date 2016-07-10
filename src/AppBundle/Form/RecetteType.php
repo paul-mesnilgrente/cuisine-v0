@@ -19,6 +19,7 @@ class RecetteType extends AbstractType
     {
         $builder
             ->add('nom')
+            ->add('publique')
             ->add('note', ChoiceType::class, array(
                 'choices' => array(
                     1 => 'Mauvais',
@@ -70,6 +71,12 @@ class RecetteType extends AbstractType
                 'property' => 'nom',
                 'multiple' => true,
                 'expanded' => true))
+            
+            ->add('imageFile', 'vich_image', array(
+                'required'      => false,
+                'allow_delete'  => true, // not mandatory, default is true
+                'download_link' => true, // not mandatory, default is true
+            ))
         ;
     }
     

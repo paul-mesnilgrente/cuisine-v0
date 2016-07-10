@@ -9,6 +9,9 @@
         <th>Date</th>
         <th>Nom</th>
         <th>Exécution</th>
+        {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+          <th>Modifier</th>
+        {% endif %}
       </tr>
     </thead>
     <tbody>
@@ -17,6 +20,9 @@
         <td>{{ recette.date|localizeddate('medium', 'none') }}</td>
         <td><a href="{{ path('voir_recette', {'slugUser': app.user.slugUser, 'slug': recette.slug}) }}">{{ recette.nom }}</a></td>
         <td><a href="{{ path('executer_recette', {'slugUser': app.user.slugUser, 'slug': recette.slug}) }}">Go cooking !</a></td>
+        {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+          <td><a href="{{ path('modifier_recette', {'slugUser': app.user.slugUser, 'slug': recette.slug }) }}">Modifier</a></td>
+        {% endif %}
       </tr>
     {% endfor %}
     </tbody>

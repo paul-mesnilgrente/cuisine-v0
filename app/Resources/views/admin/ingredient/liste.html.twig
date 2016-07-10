@@ -1,0 +1,30 @@
+{% extends '::base.html.twig' %}
+
+{% block titre %}Liste des ingrédients{% endblock %}
+
+{% block body %}
+  <table class="table table-striped table-hover">
+    <thead>
+      <tr>
+        <th>Image</th>
+        <th>Nom</th>
+        <th>Pluriel</th>
+        {% if is_granted('ROLE_ADMIN') %}
+          <th>Modifier</th>
+        {% endif %}
+      </tr>
+    </thead>
+    <tbody>
+    {% for ingredient in ingredients %}
+      <tr>
+        <td><img src="{{ vich_uploader_asset(ingredient, 'imageFile') }}" alt="Image '{{ ingredient.imageName }}'" /></td>
+        <td>{{ ingredient.nom }}</td>
+        <td>{{ ingredient.pluriel }}</td>
+        {% if is_granted('ROLE_ADMIN') %}
+          <td><a href="{{ path('modifier_ingredient', {'slugUser': app.user.slugUser, 'slug': ingredient.slug }) }}">Modifier</a></td>
+        {% endif %}
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}

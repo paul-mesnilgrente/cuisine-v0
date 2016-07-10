@@ -73,7 +73,7 @@ class RecetteController extends Controller
      */
     public function voirRecetteAction(Request $request, User $user, Recette $recette)
     {
-        return $this->render('recette/voir.html.twig', array(
+        return $this->render('recette/consulter.html.twig', array(
             'recette' => $recette));
     }
 

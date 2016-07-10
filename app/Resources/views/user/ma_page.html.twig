@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+
+{% block titre %}Ma page{% endblock %}
+
+{% block body %}
+  {% for recette in recettes %}
+    {% include 'recette/contenu.html.twig' %}
+    <hr>
+  {% endfor %}
+{% endblock %}

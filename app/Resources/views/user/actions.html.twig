@@ -3,49 +3,64 @@
 </div>
 
 <div class="row">
-  <div class="col-md-4">
-    <div class="media">
-      <div class="media-left">
-        <a href="{{ path('ajouter_recette', {'slugUser': app.user.slugUser}) }}">
-          <img class="media-object" width="100" src="{{ asset('app/images/tableau_de_bord/recettes.jpg') }}" alt="Recettes">
-        </a>
-      </div>
-      <div class="media-body">
-        <h2 class="media-heading">Ajouter une recette</h2>
-        <p>
-          Vous avez trouvé une nouvelle recette sur internet et souhaitez l'ajouter à votre classeur ? C'est ici !
-        </p>
-      </div>
-    </div>
-  </div>
-  <div class="col-md-4">
-    <div class="media">
-      <div class="media-left">
-        <a href="{{ path('consulter_planning', {'slugUser': app.user.slugUser, 'date': "now"|date("d-m-Y")}) }}">
-          <img class="media-object" width="100" src="{{ asset('app/images/tableau_de_bord/planning.jpg') }}" alt="Planning">
-        </a>
-      </div>
-      <div class="media-body">
-        <h2 class="media-heading">Consulter le planning</h2>
-        <p>
-          Vous voulez consulter votre planning pour savoir ce que vous allez manger ce soir ? C'est ici !
-        </p>
+  <a class="tableau-action" href="{{ path('ajouter_recette', {'slugUser': app.user.slugUser}) }}">
+    <div class="col-md-3">
+      <div class="media">
+        <div class="media-left">
+            <img class="media-object" width="100" src="{{ asset('app/images/tableau_de_bord/recettes.jpg') }}" alt="Recettes">
+        </div>
+        <div class="media-body">
+          <h2 class="media-heading">Ajouter une recette</h2>
+          <p>
+            Vous avez trouvé une nouvelle recette sur internet et souhaitez l'ajouter à votre classeur ? C'est ici !
+          </p>
+        </div>
       </div>
     </div>
-  </div>
-  <div class="col-md-4">
-    <div class="media">
-      <div class="media-left">
-        <a href="{{ path('consulter_listes_de_course', {'slugUser': app.user.slugUser}) }}">
-          <img class="media-object" width="100" src="{{ asset('app/images/tableau_de_bord/liste_des_courses.png') }}" alt="Liste des courses">
-        </a>
-      </div>
-      <div class="media-body">
-        <h2 class="media-heading">Récupérer la liste des courses</h2>
-        <p>
-          Vous partez faire les courses et vous chercher votre liste ? C'est ici !
-        </p>
+  </a>
+  <a class="tableau-action" href="{{ path('consulter_planning', {'slugUser': app.user.slugUser, 'date': "now"|date("d-m-Y")}) }}">
+    <div class="col-md-3">
+      <div class="media">
+        <div class="media-left">
+            <img class="media-object" width="100" src="{{ asset('app/images/tableau_de_bord/planning.jpg') }}" alt="Planning">
+        </div>
+        <div class="media-body">
+          <h2 class="media-heading">Consulter le planning</h2>
+          <p>
+            Vous voulez consulter votre planning pour savoir ce que vous allez manger ce soir ? C'est ici !
+          </p>
+        </div>
       </div>
     </div>
-  </div>
+  </a>
+  <a class="tableau-action" href="{{ path('user_cuisiner', {'slugUser': app.user.slugUser}) }}">
+    <div class="col-md-3">
+      <div class="media">
+        <div class="media-left">
+            <img class="media-object" width="100" src="{{ asset('app/images/tableau_de_bord/planning.jpg') }}" alt="Planning">
+        </div>
+        <div class="media-body">
+          <h2 class="media-heading">Commencer la cuisine</h2>
+          <p>
+            Vous emmène directement à la recette que vous avez prévu pour maintenant !
+          </p>
+        </div>
+      </div>
+    </div>
+  </a>
+  <a class="tableau-action" href="{{ path('consulter_listes_de_course', {'slugUser': app.user.slugUser}) }}">
+    <div class="col-md-3">
+      <div class="media">
+        <div class="media-left">
+            <img class="media-object" width="100" src="{{ asset('app/images/tableau_de_bord/liste_des_courses.png') }}" alt="Liste des courses">
+        </div>
+        <div class="media-body">
+          <h2 class="media-heading">Récupérer la liste des courses</h2>
+          <p>
+            Vous partez faire les courses et vous chercher votre liste ? C'est ici !
+          </p>
+        </div>
+      </div>
+    </div>
+  </a>
 </div>
