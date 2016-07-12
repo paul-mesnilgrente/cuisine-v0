@@ -83,6 +83,15 @@ assetic:
         functions:
             jpegoptim: ~
 
+knp_menu:
+    # use "twig: false" to disable the Twig extension and the TwigRenderer
+    twig:
+        template: BraincraftedBootstrapBundle:Menu:bootstrap.html.twig
+    #  if true, enables the helper for PHP templates
+    templating: false
+    # the renderer to use, list is also available by default
+    default_renderer: twig
+
 braincrafted_bootstrap:
     output_dir:
     assets_dir: %kernel.root_dir%/../vendor/twbs/bootstrap

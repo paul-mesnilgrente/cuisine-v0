@@ -1,43 +1,35 @@
 <?php
 namespace AppBundle\Menu;
+
 use Knp\Menu\FactoryInterface;
-use Symfony\Component\HttpFoundation\RequestStack;
-use Symfony\Component\DependencyInjection\ContainerAware;
-use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\DependencyInjection\ContainerAwareInterface;
+use Symfony\Component\DependencyInjection\ContainerAwareTrait;
 
-class Builder extends ContainerAware
+class Builder implements ContainerAwareInterface
 {
-    private $factory;
-    protected $container;
-    /**
-     * @param FactoryInterface $factory
-     */
-    public function __construct(FactoryInterface $factory, ContainerInterface $container)
-    {
-        $this->factory = $factory;
-        $this->container = $container;
-    }
+    use ContainerAwareTrait;
 
-    public function leftMenu(RequestStack $requestStack)
+    public function leftMenu(FactoryInterface $factory, array $options)
     {
-        $security = $this->container->get('security.context');
+        $security = $this->container->get('security.token_storage');
         $user = $security->getToken()->getUser();
+        $auth = $this->container->get('security.authorization_checker');
 
-        $menu = $this->factory->createItem('root');
+        $menu = $factory->createItem('root');
         $menu->addChild("Accueil", array('route' => 'homepage'));
-        if ($security->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
+        if ($auth->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
             $menu->addChild("Consulter recettes", array('route' => 'liste_recette', 'routeParameters' => array('slugUser' => $user->getSlugUser())));
         }
         return $menu;
     }
 
-    public function rightMenu(RequestStack $requestStack)
+    public function rightMenu(FactoryInterface $factory, array $options)
     {
-        $menu = $this->factory->createItem('root');
-        $security = $this->container->get('security.context');
+        $menu = $factory->createItem('root');
+        $security = $this->container->get('security.token_storage');
         $user = $security->getToken()->getUser();
         $translator = $this->container->get('translator');
-        if ($security->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
+        if ($this->container->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
             $menu->addChild($user->getUsername(), array('route' => 'user_ma_page', 'routeParameters' => array('slugUser' => $user->getSlugUser())));
             $menu->addChild("Tableau de bord", array('route' => 'user_tableau_de_bord', 'routeParameters' => array('slugUser' => $user->getSlugUser())));
             $menu->addChild($translator->trans('layout.logout', array('%username%' => $user), 'FOSUserBundle'), array('route' => 'fos_user_security_logout'));
@@ -49,13 +41,13 @@ class Builder extends ContainerAware
         return $menu;
     }
 
-    public function footer(RequestStack $requestStack)
+    public function footerMenu(FactoryInterface $factory, array $options)
     {
-        $menu = $this->factory->createItem('root');
-        $security = $this->container->get('security.context');
+        $menu = $factory->createItem('root');
+        $security = $this->container->get('security.token_storage');
         $user = $security->getToken()->getUser();
         $translator = $this->container->get('translator');
-        if ($security->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
+        if ($this->container->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
             $menu->addChild('Ajouter une recette', array('route' => 'ajouter_recette', 'routeParameters' => array('slugUser' => $user->getSlugUser())));
             $menu->addChild('Créer une liste de course', array('route' => 'ajouter_liste_de_course', 'routeParameters' => array('slugUser' => $user->getSlugUser())));
             $menu->addChild('Ajouter un ingrédient', array('route' => 'ajouter_ingredient'));
