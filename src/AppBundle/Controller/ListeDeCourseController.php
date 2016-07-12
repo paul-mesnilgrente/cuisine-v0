@@ -11,6 +11,7 @@ use AppBundle\Form\ListeDeCourseType;
 use AppBundle\Entity\Periode;
 
 use AppBundle\Entity\QuantiteIngredientListeDeCourse;
+use AppBundle\Entity\User;
 
 /**
  * @Route("{slugUser}/liste-de-course")
@@ -106,11 +107,50 @@ class ListeDeCourseController extends Controller
     }
 
     /**
+     * @Route("/id/ajouter-produit", name="ajouter_produit_liste")
+     */
+    public function ajouterProduitAction()
+    {
+        
+    }
+
+    /**
+     * @Route("/id/ajouter-produit", name="ajouter_ingredient_liste")
+     */
+    public function ajouterIngredientAction()
+    {
+        
+    }
+
+    /**
      * @Route("/{id}", name="consulter_liste_de_course")
      */
     public function consulterListeDeCourseAction(Request $request, ListeDeCourse $liste)
     {
         return $this->render('liste-de-course/consulter.html.twig', array(
+            'liste' => $liste));
+    }
+
+    private function creerListeUser(User $user) {
+        $liste = new ListeDeCourse($user);
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($liste);
+        $em->flush();
+
+        return $liste;
+    }
+
+    public function listeAction(User $user)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $liste = $em->getRepository('AppBundle:ListeDeCourse')->findAll(
+            array('user' => $user));
+        if (count($liste) == 0) {
+            $liste = $this->creerListeUser($user);
+        } else {
+            $liste = $liste[0];
+        }
+        return $this->render('liste-de-course/liste.html.twig', array(
             'liste' => $liste));
     }
 }
