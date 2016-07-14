@@ -39,14 +39,14 @@ class ListeDeCourse
     /**
      * @var QuantiteIngredientRecette
      *
-     * @ORM\OneToMany(targetEntity="QuantiteIngredientListeDeCourse", mappedBy="ingredient", cascade={"persist"})
+     * @ORM\OneToMany(targetEntity="QuantiteIngredientListeDeCourse", mappedBy="listeDeCourse", cascade={"persist"})
      */
     private $ingredients;
 
     /**
      * @var QuantiteProduit
      *
-     * @ORM\OneToMany(targetEntity="QuantiteProduit", mappedBy="produit", cascade={"persist"})
+     * @ORM\OneToMany(targetEntity="QuantiteProduit", mappedBy="listeDeCourse", cascade={"persist"})
      */
     private $produits;
 
