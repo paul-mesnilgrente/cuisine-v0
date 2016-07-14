@@ -1,0 +1,9 @@
+{% if recettes is empty %}
+  <p>Pas de resultats</p>
+{% else %}
+  <ul>
+    {% for recette in recettes %}
+      <li>{{ recette.nom }}</li>
+    {% endfor %}
+  </ul>
+{% endif %}
