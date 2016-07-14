@@ -10,4 +10,15 @@ namespace AppBundle\Repository;
  */
 class ProduitRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function rechercherProduit($mot) {
+        $qb = $this->_em->createQueryBuilder();
+        $qb->select('p')
+          ->from('AppBundle:Produit', 'p')
+          ->where("p.nom LIKE :mot")
+          ->orderBy('p.nom', 'ASC')
+          ->setParameter('mot', '%'.$motcle.'%');
+
+       $query = $qb->getQuery();
+       return $query->getResult();
+    }
 }

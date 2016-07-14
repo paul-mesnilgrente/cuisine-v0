@@ -90,4 +90,16 @@ class RecetteController extends Controller
             'recette' => $recette,
             'etape' => $etape));
     }
+
+    /**
+     * @Route("/chercher/{caracteres}", options={"expose"=true}, name="chercher_recette")
+     */
+    public function chercherRecetteAction($caracteres)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $recettes = $em->getRepository('AppBundle:Recette')->search($caracteres);
+
+        return $this->render('recette/reponse_ajax.html.twig', array(
+            'recettes' => $recettes));
+    }
 }

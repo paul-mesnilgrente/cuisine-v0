@@ -15,7 +15,7 @@ use AppBundle\Form\EntreePlanningType;
  */
 class PlanningController extends Controller
 {
-    private function formulaireEntreePlanningAction(Request $request, EntreePlanning $entreePlanning, $action)
+    private function formulaireEntreePlanningAction(Request $request, EntreePlanning $entreePlanning, User $user, $action)
     {
         $form = $this->createForm(new EntreePlanningType(), $entreePlanning);
         $form->handleRequest($request);
@@ -27,8 +27,9 @@ class PlanningController extends Controller
             $flash = $this->get('braincrafted_bootstrap.flash');
             $flash->info("L'entrée du planning a bien été soumise.");
 
-            return $this->redirectToRoute('consulter_planning', 
-                array('date' => $entreePlanning->getDate()->format('d-m-Y')));
+            return $this->redirectToRoute('consulter_planning', array(
+                'date' => $entreePlanning->getDate()->format('d-m-Y'),
+                'slugUser' => $user->getSlugUser()));
         }
         // replace this example code with whatever you need
         return $this->render('planning/form.html.twig', array(
@@ -49,7 +50,7 @@ class PlanningController extends Controller
         $m = $repas == "midi" ? true : false;
         $entreePlanning->setMidi($m);
         
-        return $this->formulaireEntreePlanningAction($request, $entreePlanning, "Ajouter");
+        return $this->formulaireEntreePlanningAction($request, $entreePlanning, $user, "Ajouter");
     }
 
     /**

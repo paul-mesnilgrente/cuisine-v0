@@ -32,8 +32,8 @@ class Builder implements ContainerAwareInterface
         if ($this->container->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
             $menu->addChild($user->getUsername(), array('route' => 'user_ma_page', 'routeParameters' => array('slugUser' => $user->getSlugUser())));
             $menu->addChild("Tableau de bord", array('route' => 'user_tableau_de_bord', 'routeParameters' => array('slugUser' => $user->getSlugUser())));
+            $menu->addChild('Paramètre', array('route' => 'fos_user_profile_show'));
             $menu->addChild($translator->trans('layout.logout', array('%username%' => $user), 'FOSUserBundle'), array('route' => 'fos_user_security_logout'));
-            $menu->addChild('Profil', array('route' => 'fos_user_profile_show'));
         } else {
             $menu->addChild($translator->trans('layout.login', array(), 'FOSUserBundle'), array('route' => 'fos_user_security_login'));
             $menu->addChild($translator->trans('layout.register', array(), 'FOSUserBundle'), array('route' => 'fos_user_registration_register'));

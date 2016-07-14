@@ -18,4 +18,16 @@ class RecetteRepository extends \Doctrine\ORM\EntityRepository
             ORDER BY r.date DESC')
             ->getResult();
     }
+
+    public function search($caracteres) {
+        $qb = $this->_em->createQueryBuilder();
+        $qb->select('r')
+          ->from('AppBundle:Recette', 'r')
+          ->where("r.nom LIKE :mot")
+          ->orderBy('r.nom', 'ASC')
+          ->setParameter('mot', '%'.$caracteres.'%');
+
+       $query = $qb->getQuery();
+       return $query->getResult();
+    }
 }

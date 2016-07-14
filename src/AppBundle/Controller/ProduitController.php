@@ -8,13 +8,13 @@ use Symfony\Component\HttpFoundation\Request;
 
 use AppBundle\Entity\Produit;
 use AppBundle\Form\ProduitType;
+use AppBundle\Form\ProduitSearchType;
 
 /**
- * @Route("admin/produit")
+ * @Route("/produit")
  */
 class ProduitController extends Controller
 {
-
     private function formulaireProduitAction(Request $request, Produit $produit, $action)
     {
         $form = $this->createForm(new ProduitType(), $produit);
@@ -49,5 +49,38 @@ class ProduitController extends Controller
     public function modifierProduitAction(Request $request, Produit $produit)
     {
         return $this->formulaireTagRecetteAction($request, $produit, "Modifier");
+    }
+
+    /**
+     * @Route("/formulaire-recherche", name="formulaire_recherche_produit", options = { "expose" = true })
+     */
+    public function formulaireRechercheAction(Request $request) {
+        $form = $this->createForm(new ProduitSearchType());
+        return $this->render('produit/form.html.twig', array(
+            'form' => $form->createView()));
+    }
+
+    /**
+     * @Route("/rechercher/{mot}", name="rechercher_produit")
+     */
+    public function rechercherProduitAction(Request $request, $mot) {
+        if ($request->isXmlHttpRequest()) {
+            $motcle = '';
+            $motcle = $request->request->get('motcle');
+
+            $em = $this->container->getDoctrine()->getManager();
+
+            if ($motcle != '') {
+                $produits = $em->getRepository('AppBundle:Produit')->rechercherProduit($mot);
+            } else {
+                $produits = $em->getRepository('AppBundle:Produit')->findAll();
+            }
+
+            return $this->render('admin/produits/liste.html.twig', array(
+                'produits' => $produits
+                ));
+        } else {
+            return $this->listerAction();
+        }
     }
 }

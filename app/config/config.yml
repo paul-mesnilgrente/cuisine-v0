@@ -9,6 +9,7 @@ parameters:
     locale: fr
 
 framework:
+    ide: "subl:///%%f:%%1"
     esi:             ~
     translator:      { fallbacks: ["%locale%"] }
     secret:          "%secret%"

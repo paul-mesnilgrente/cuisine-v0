@@ -13,6 +13,8 @@ use AppBundle\Entity\Periode;
 use AppBundle\Entity\QuantiteIngredientListeDeCourse;
 use AppBundle\Entity\User;
 
+use AppBundle\Form\ProduitSearchType;
+
 /**
  * @Route("{slugUser}/liste-de-course")
  */
