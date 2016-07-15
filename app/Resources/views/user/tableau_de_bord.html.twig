@@ -3,13 +3,10 @@
 {% block body %}
 <div class="row">
   <div class="col-md-6 col-md-offset-2">
-    <div id="div-planning">
-    <h1 class="titre-planning text-center">Planning de la semaine</h1>
-    {{ render(controller('AppBundle:Planning:tableau', {'user': app.user})) }}
-    </div>
+    {{ render(controller('AppBundle:Planning:tableau', {'user': app.user, 'date': "now"|date('d-m-Y')})) }}
   </div>
   <div class="col-md-3">
-   {{ render(controller('AppBundle:ListeDeCourse:liste', {'user': app.user})) }} 
+    {{ render(controller('AppBundle:ListeDeCourse:liste', {'user': app.user})) }} 
   </div>
 </div>
 {% endblock %}

@@ -1,16 +1,10 @@
-{% if liste is empty %}
-  <h1>La liste est vide</h1>
-{% else %}
 <div class="quote-container">
   <i class="pin"></i>
   <div class="note yellow">
     <h1 class="text-center">Liste de courses</h1>
-    <ul>
-      <li>1 concombre</li>
-      <li>3 tomates</li>
-    </ul>
-    <a class="btn btn-primary" id="ajouter-produit" href="#"><span class="glyphicon glyphicon-plus"></span></a>
+    {% for rayon in rayons %}
+      <h2>{{ rayon.nom }}</h2>
+      <a class="btn btn-primary" id="ajouter-produit" href="#"><span class="glyphicon glyphicon-plus"></span></a>
+    {% endfor %}
   </div>
 </div>
-  
-{% endif %}

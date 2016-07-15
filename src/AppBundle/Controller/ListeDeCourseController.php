@@ -2,6 +2,7 @@
 
 namespace AppBundle\Controller;
 
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -17,6 +18,7 @@ use AppBundle\Form\ProduitSearchType;
 
 /**
  * @Route("{slugUser}/liste-de-course")
+ * @Security("has_role('ROLE_USER')")
  */
 class ListeDeCourseController extends Controller
 {
@@ -152,7 +154,8 @@ class ListeDeCourseController extends Controller
         } else {
             $liste = $liste[0];
         }
+        $rayons = $em->getRepository('AppBundle:Rayon')->findAll();
         return $this->render('liste-de-course/liste.html.twig', array(
-            'liste' => $liste));
+            'rayons' => $rayons));
     }
 }

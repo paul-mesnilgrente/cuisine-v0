@@ -55,6 +55,13 @@ class Ingredient
     private $categorie;
 
     /**
+     * @var Rayon
+     *
+     * @ORM\ManyToMany(targetEntity="Rayon", mappedBy="ingredients")
+     */
+    private $rayons;
+
+    /**
      * @var File
      * 
      * @Vich\UploadableField(mapping="ingredient_image", fileNameProperty="imageName")
@@ -231,5 +238,70 @@ class Ingredient
     public function getImageName()
     {
         return $this->imageName;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->rayons = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Set updatedAt
+     *
+     * @param \DateTime $updatedAt
+     *
+     * @return Ingredient
+     */
+    public function setUpdatedAt($updatedAt)
+    {
+        $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    /**
+     * Get updatedAt
+     *
+     * @return \DateTime
+     */
+    public function getUpdatedAt()
+    {
+        return $this->updatedAt;
+    }
+
+    /**
+     * Add rayon
+     *
+     * @param \AppBundle\Entity\Rayon $rayon
+     *
+     * @return Ingredient
+     */
+    public function addRayon(\AppBundle\Entity\Rayon $rayon)
+    {
+        $this->rayons[] = $rayon;
+
+        return $this;
+    }
+
+    /**
+     * Remove rayon
+     *
+     * @param \AppBundle\Entity\Rayon $rayon
+     */
+    public function removeRayon(\AppBundle\Entity\Rayon $rayon)
+    {
+        $this->rayons->removeElement($rayon);
+    }
+
+    /**
+     * Get rayons
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getRayons()
+    {
+        return $this->rayons;
     }
 }

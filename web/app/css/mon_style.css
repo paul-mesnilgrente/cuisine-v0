@@ -44,6 +44,10 @@ a.tableau-action:hover {
     margin-top: 300px;
 }
 
+#planning dl {
+    margin-bottom: 0px;
+}
+
 #planning tr, #planning th, #planning td {
     border: 1px solid #6f502f;
 }
@@ -67,9 +71,12 @@ a.tableau-action:hover {
 }
 
 .quote-container, .quote-container h1 {
-  margin-top: 50px;
-  position: relative;
   font-family: 'post-it';
+}
+
+.quote-container {
+  margin-top: 50px;
+  position: relative;  
 }
 
 .note {

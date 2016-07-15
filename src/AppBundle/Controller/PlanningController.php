@@ -2,6 +2,7 @@
 
 namespace AppBundle\Controller;
 
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -12,6 +13,7 @@ use AppBundle\Form\EntreePlanningType;
 
 /**
  * @Route("{slugUser}/planning")
+ * @Security("has_role('ROLE_USER')")
  */
 class PlanningController extends Controller
 {
@@ -81,21 +83,23 @@ class PlanningController extends Controller
     }
 
     /**
-     * @Route("/planning/consulter/{date}", name="consulter_planning")
+     * @Route("planning/tableau/{date}", name="tableau_planning")
      */
-    public function consulterPlanningAction(Request $request, User $user, \Datetime $date)
-    {
+    public function tableauAction(User $user, \Datetime $date) {
         $dateDebut = $this->getDebutSemaine($date);
         $planning = $this->recupererPlanning($user, $dateDebut);
-        return $this->render('planning/consulter.html.twig', array(
+        return $this->render('planning/tableau.html.twig', array(
             'planning' => $planning,
             'dateDebut' => $dateDebut));
     }
 
-    public function tableauAction(User $user) {
-        $dateDebut = $this->getDebutSemaine(new \Datetime());
+    /**
+     * @Route("planning/tableau-body/{date}", options={"expose" = true}, name="tableau_body_planning")
+     */
+    public function tableauBodyAction(User $user, \Datetime $date) {
+        $dateDebut = $this->getDebutSemaine($date);
         $planning = $this->recupererPlanning($user, $dateDebut);
-        return $this->render('planning/tableau.html.twig', array(
+        return $this->render('planning/tableau_body.html.twig', array(
             'planning' => $planning,
             'dateDebut' => $dateDebut));
     }

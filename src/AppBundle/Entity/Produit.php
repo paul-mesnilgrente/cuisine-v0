@@ -28,6 +28,12 @@ class Produit
      */
     private $nom;
 
+    /**
+     * @var Rayon
+     *
+     * @ORM\ManyToMany(targetEntity="Rayon", mappedBy="ingredients")
+     */
+    private $rayons;
 
     /**
      * Get id
@@ -62,5 +68,45 @@ class Produit
     {
         return $this->nom;
     }
-}
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->rayons = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
+    /**
+     * Add rayon
+     *
+     * @param \AppBundle\Entity\Rayon $rayon
+     *
+     * @return Produit
+     */
+    public function addRayon(\AppBundle\Entity\Rayon $rayon)
+    {
+        $this->rayons[] = $rayon;
+
+        return $this;
+    }
+
+    /**
+     * Remove rayon
+     *
+     * @param \AppBundle\Entity\Rayon $rayon
+     */
+    public function removeRayon(\AppBundle\Entity\Rayon $rayon)
+    {
+        $this->rayons->removeElement($rayon);
+    }
+
+    /**
+     * Get rayons
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getRayons()
+    {
+        return $this->rayons;
+    }
+}
