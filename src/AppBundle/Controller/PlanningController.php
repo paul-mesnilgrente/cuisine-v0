@@ -61,35 +61,40 @@ class PlanningController extends Controller
         return $this->formulaireEntreePlanningAction($request, $entreePlanning, "Modifier");
     }
 
+    private function getDebutSemaine(\Datetime $date) {
+        $dateDebut = clone $date;
+        if ($date->format('l') != 'Monday') {
+            $dateDebut->modify("last Monday");
+        }
+        return $dateDebut;
+    }
+
+    public function recupererPlanning(User $user, \Datetime $dateDebut) {
+        $dateFin = clone $dateDebut;
+        $dateFin->modify('Sunday');
+
+        $em = $this->getDoctrine()->getManager();
+        $planning = $em->getRepository("AppBundle:EntreePlanning")
+            ->getEntre2Dates($user, $dateDebut, $dateFin);
+
+        return $planning;
+    }
+
     /**
      * @Route("/planning/consulter/{date}", name="consulter_planning")
      */
     public function consulterPlanningAction(Request $request, User $user, \Datetime $date)
     {
-        $dateDebut = clone $date;
-        if ($date->format('l') != 'Monday') {
-            $dateDebut->modify("last Monday");
-        }
-        $dateFin = clone $dateDebut;
-        $dateFin->modify('Sunday');
-        $em = $this->getDoctrine()->getManager();
-        $planning = $em->getRepository("AppBundle:EntreePlanning")
-            ->getEntreesEntre2Dates($user, $dateDebut, $dateFin);
+        $dateDebut = $this->getDebutSemaine($date);
+        $planning = $this->recupererPlanning($user, $dateDebut);
         return $this->render('planning/consulter.html.twig', array(
             'planning' => $planning,
             'dateDebut' => $dateDebut));
     }
 
     public function tableauAction(User $user) {
-        $dateDebut = new \Datetime();
-        if ($dateDebut->format('l') != 'Monday') {
-            $dateDebut->modify("last Monday");
-        }
-        $dateFin = clone $dateDebut;
-        $dateFin->modify('Sunday');
-        $em = $this->getDoctrine()->getManager();
-        $planning = $em->getRepository("AppBundle:EntreePlanning")
-            ->getEntreesEntre2Dates($user, $dateDebut, $dateFin);
+        $dateDebut = $this->getDebutSemaine(new \Datetime());
+        $planning = $this->recupererPlanning($user, $dateDebut);
         return $this->render('planning/tableau.html.twig', array(
             'planning' => $planning,
             'dateDebut' => $dateDebut));

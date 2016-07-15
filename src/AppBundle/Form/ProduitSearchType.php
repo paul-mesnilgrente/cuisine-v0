@@ -15,7 +15,7 @@ class ProduitSearchType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('mot', 'text', array('label' => ''));
+            ->add('mot', 'text');
         ;
     }
     

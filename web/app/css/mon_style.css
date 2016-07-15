@@ -1,6 +1,26 @@
+@font-face {
+    font-family: 'post-it';
+    src: url('/app/fonts/Always In My Heart.ttf');
+}
+
+@font-face {
+    font-family: 'moon-flower';
+    src: url('/app/fonts/Moon Flower Bold.ttf');
+}
+
+h1 {
+    font-family: 'moon-flower';
+    font-weight: 900;
+}
+
 body {
     padding-top: 70px;
     padding-bottom: 70px;
+    background: url('/app/images/accueil/background.jpg') no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
 }
 
 .quantite {
@@ -13,4 +33,116 @@ body {
 
 a.tableau-action:hover {
     background-color: grey;
+}
+
+.titre-planning {
+    background-color: rgb(255, 208, 126);
+    margin-bottom: 0px;
+}
+
+#div-planning {
+    margin-top: 300px;
+}
+
+#planning tr, #planning th, #planning td {
+    border: 1px solid #6f502f;
+}
+
+#planning th {
+    font-family: 'moon-flower';
+    font-size: 25px;
+    font-weight: 500;
+}
+
+.midi {
+    background-color: rgb(254, 202, 255);
+}
+
+.soir {
+    background-color: rgb(224, 255, 119);
+}
+
+.jour {
+    background-color: rgb(199, 255, 254);
+}
+
+.quote-container, .quote-container h1 {
+  margin-top: 50px;
+  position: relative;
+  font-family: 'post-it';
+}
+
+.note {
+  color: #333;
+  position: relative;
+  margin: 0 auto;
+  padding: 20px;
+  font-size: 25px;
+  box-shadow: 0 13px 13px 4px rgba(0,0,0,0.9);
+}
+
+.note .author {
+  display: block;
+  margin: 40px 0 0 0;
+  text-align: right;
+}
+
+.yellow {
+  background: #eae672;
+  -webkit-transform: rotate(2deg);
+  -moz-transform: rotate(2deg);
+  -o-transform: rotate(2deg);
+  -ms-transform: rotate(2deg);
+  transform: rotate(2deg);
+}
+
+.pin {
+  background-color: #aaa;
+  display: block;
+  height: 32px;
+  width: 2px;
+  position: absolute;
+  left: 50%;
+  top: -16px;
+  z-index: 1;
+}
+
+.pin:after {
+  background-color: #F81AFF;
+  background-image: radial-gradient(25% 25%, circle, hsla(0,0%,100%,.9), hsla(0,0%,0%,.9));
+  border-radius: 50%;
+  box-shadow: inset 0 0 0 1px hsla(0,0%,0%,.1),
+              inset 3px 3px 3px hsla(0,0%,100%,.2),
+              inset -3px -3px 3px hsla(0,0%,0%,.2),
+              23px 20px 3px hsla(0,0%,0%,.15);
+  content: '';
+  height: 12px;
+  left: -5px;
+  position: absolute;
+  top: -10px;
+  width: 12px;
+}
+
+.pin:before {
+  background-color: hsla(0,0%,0%,0.1);
+  box-shadow: 0 0 .25em hsla(0,0%,0%,.1);
+  content: '';
+
+  height: 24px;
+  width: 2px;
+  left: 0;
+  position: absolute;
+  top: 8px;
+
+  transform: rotate(57.5deg);
+  -moz-transform: rotate(57.5deg);
+  -webkit-transform: rotate(57.5deg);
+  -o-transform: rotate(57.5deg);
+  -ms-transform: rotate(57.5deg);
+
+  transform-origin: 50% 100%;
+  -moz-transform-origin: 50% 100%;
+  -webkit-transform-origin: 50% 100%;
+  -ms-transform-origin: 50% 100%;
+  -o-transform-origin: 50% 100%;
 }

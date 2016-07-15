@@ -1,25 +1,16 @@
 {% if liste is empty %}
   <h1>La liste est vide</h1>
 {% else %}
-  <h1>La liste des courses</h1>
-  <div class="row">
-    <div class="col-md-6">
-      <h2>Ingredients</h2>
-      <ul>
-        {% for entreeIngredient in liste.ingredients %}
-          <li>{{ entreeIngredient.ingredient.nom }} : {{ entreeIngredient.quantite }} {{ entreeIngredient.unite.nom }}</li>
-        {% endfor %}
-      </ul>
-      <a class="btn btn-primary" id="ajouter-ingredient" href="{{ path('ajouter_ingredient_liste', {'slugUser': app.user.slugUser, 'id': liste.id}) }}">Ajouter un ingredient</a>
-    </div>
-    <div class="col-md-6">
-      <h2>Produits</h2>
-      <ul>
-        {% for entreeProduit in liste.produits %}
-          <li>{{ entreeProduit.ingredient.nom }} : {{ entreeProduit.quantite }} {{ entreeProduit.unite.nom }}</li>
-        {% endfor %}
-      </ul>
-      <a class="btn btn-primary" id="ajouter-produit" href="#">Ajouter un produit</a>
-    </div>
+<div class="quote-container">
+  <i class="pin"></i>
+  <div class="note yellow">
+    <h1 class="text-center">Liste de courses</h1>
+    <ul>
+      <li>1 concombre</li>
+      <li>3 tomates</li>
+    </ul>
+    <a class="btn btn-primary" id="ajouter-produit" href="#"><span class="glyphicon glyphicon-plus"></span></a>
   </div>
+</div>
+  
 {% endif %}

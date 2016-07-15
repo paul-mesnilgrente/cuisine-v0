@@ -2,14 +2,14 @@
 
 {% block body %}
 <div class="row">
-  <div class="col-md-8">
-    <h1>Planning de la semaine</h1>
+  <div class="col-md-6 col-md-offset-2">
+    <div id="div-planning">
+    <h1 class="titre-planning text-center">Planning de la semaine</h1>
     {{ render(controller('AppBundle:Planning:tableau', {'user': app.user})) }}
+    </div>
   </div>
-  <div class="col-md-4">
+  <div class="col-md-3">
    {{ render(controller('AppBundle:ListeDeCourse:liste', {'user': app.user})) }} 
   </div>
 </div>
-<hr>
-{% include 'user/actions.html.twig' %}
 {% endblock %}

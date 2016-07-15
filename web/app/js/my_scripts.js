@@ -30,3 +30,9 @@ $("#rechercher-recette").keyup(function() {
     $("#results").html("");
   }
 });
+
+$("#semaine-precedente").click(function() {
+  var slug = $();
+  var date = $();
+  var urlSemaine = Routing.generate('consulter_planning', {'slugUser': slug, 'date': date})
+});

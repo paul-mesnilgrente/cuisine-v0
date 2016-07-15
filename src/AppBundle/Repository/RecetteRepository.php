@@ -23,7 +23,7 @@ class RecetteRepository extends \Doctrine\ORM\EntityRepository
         $qb = $this->_em->createQueryBuilder();
         $qb->select('r')
           ->from('AppBundle:Recette', 'r')
-          ->where("r.nom LIKE :mot")
+          ->where('r.nom LIKE :mot')
           ->orderBy('r.nom', 'ASC')
           ->setParameter('mot', '%'.$caracteres.'%');
 

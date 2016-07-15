@@ -12,22 +12,7 @@ use AppBundle\Entity\User;
  */
 class EntreePlanningRepository extends \Doctrine\ORM\EntityRepository
 {
-    public function getEntreesEntre2Dates(User $user, \Datetime $dateDebut, \Datetime $dateFin)
-    {
-        return $this->_em->createQuery('
-            SELECT ep
-            FROM AppBundle:EntreePlanning ep
-            WHERE ep.date >= :dateDebut AND
-                ep.date <= :dateFin AND
-                ep.user = :user
-            ORDER BY ep.date ASC')
-            ->setParameter('dateDebut', $dateDebut)
-            ->setParameter('dateFin', $dateFin)
-            ->setParameter('user', $user)
-            ->getResult();
-    }
-
-    public function getByDate(User $user, \Datetime $dateDebut, \Datetime $dateFin)
+    public function getEntre2Dates(User $user, \Datetime $dateDebut, \Datetime $dateFin)
     {
         return $this->_em->createQuery('
             SELECT ep

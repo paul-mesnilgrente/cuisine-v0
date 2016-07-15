@@ -1,9 +1,9 @@
-<table class="table table-bordered table-hover">
+<table id="planning" class="table table-bordered table-hover">
   <thead>
     <tr>
-      <th>Jour</th>
-      <th>Midi</th>
-      <th>Soir</th>
+      <th class="jour">Jour</th>
+      <th class="midi">Midi</th>
+      <th class="soir">Soir</th>
     </tr>
   </thead>
   <tbody>
@@ -20,7 +20,7 @@
       {% set entreeSoir = null %}
       
       <tr>
-        <th scope="row">({{ dateDuJour|date('d/m') }}) {{ jour }}</th>
+        <th scope="row" class="jour">({{ dateDuJour|date('d/m') }}) {{ jour }}</th>
 
           {% for i in [1, 2] %}
 
@@ -54,12 +54,12 @@
 <nav>
   <ul class="pager">
     <li class="previous">
-      <a href="{{ path('consulter_planning', {'slugUser': app.user.slugUser, 'date': dateDebut|date_modify("-1 week")|date('d-m-Y')}) }}">
+      <a id="semaine-precedente" href="#">
         <span aria-hidden="true">&larr;</span> Semaine précédente
       </a>
     </li>
     <li class="next">
-      <a href="{{ path('consulter_planning', {'slugUser': app.user.slugUser, 'date': dateDebut|date_modify("+1 week")|date('d-m-Y')}) }}">
+      <a id="semaine-suivante" href="{{ path('consulter_planning', {'slugUser': app.user.slugUser, 'date': dateDebut|date_modify("+1 week")|date('d-m-Y')}) }}">
         Semaine suivante <span aria-hidden="true">&rarr;</span>
       </a>
     </li>

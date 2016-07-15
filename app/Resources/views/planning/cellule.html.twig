@@ -1,4 +1,4 @@
-<td {% if entree is null %}class="danger"{% endif %}>
+<td {% if repas == 'midi' %}class="midi"{% else %}class="soir"{% endif %}>
   {% if entree is null %}
     <a href="{{ path('ajouter_entree_planning', {'slugUser': app.user.slugUser, 'date': dateDuJour, 'repas': repas}) }}">
       Ajouter le repas
