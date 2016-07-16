@@ -15,6 +15,10 @@
           <h2>{{ rayons[index].nom }}</h2>
           {% set index = index + 1 %}
         {% endfor %}
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
         <p class="text-right">
           <a class="btn btn-primary" id="ajouter-produit" href="#"><span class="glyphicon glyphicon-plus"></span></a>
         </p>
@@ -22,3 +26,4 @@
     </div>
   </div>
 </div>
+<script>var slugUser = '{{ app.user.slugUser }}'</script>

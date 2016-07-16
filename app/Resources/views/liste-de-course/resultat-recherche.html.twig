@@ -1,0 +1,11 @@
+<p>
+{% if produits is empty %}
+  Aucun résultat.
+{% else %}
+  <ul class="list-inline">
+    {% for produit in produits %}
+      <li>{{ produit.nom }}</li>
+    {% endfor %}
+  </ul>
+{% endif %}
+</p>

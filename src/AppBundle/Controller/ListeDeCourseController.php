@@ -97,19 +97,6 @@ class ListeDeCourseController extends Controller
         return $this->formulaireListeDeCourseAction($request, $liste, "Modifier");
     }
 
-    /**
-     * @Route("/sauvegardes", name="consulter_listes_de_course")
-     */
-    public function consulterListesDeCourseAction(Request $request)
-    {
-        $em = $this->getDoctrine()->getManager();
-
-        $liste = $em->getRepository('AppBundle:ListeDeCourse')->findAll();
-
-        return $this->render('liste-de-course/sauvegardes.html.twig', array(
-            'liste' => $liste));
-    }
-
     private function creerListeUser(User $user) {
         $liste = new ListeDeCourse($user);
         $em = $this->getDoctrine()->getManager();
@@ -146,11 +133,27 @@ class ListeDeCourseController extends Controller
     }
 
     /**
-     * @Route("/{id}", name="consulter_liste_de_course")
+     * @Route("/formulaire-recherche", options={"expose"=true}, name="formulaire_recherche_produit")
      */
-    public function consulterListeDeCourseAction(Request $request, ListeDeCourse $liste)
-    {
-        return $this->render('liste-de-course/consulter.html.twig', array(
-            'liste' => $liste));
+    public function formulaireRechercheAction(Request $request) {
+        $form = $this->createForm(new ProduitSearchType());
+        return $this->render('liste-de-course/form-recherche.html.twig', array(
+            'form' => $form->createView()));
+    }
+
+    /**
+     * @Route("/rechercher/{caracteres}", options={"expose"=true}, name="rechercher_produit")
+     */
+    public function rechercherProduitAction(Request $request, $caracteres) {
+        $em = $this->getDoctrine()->getManager();
+
+        if ($caracteres != '') {
+            $produits = $em->getRepository('AppBundle:Produit')->rechercherProduit($caracteres);
+        } else {
+            $produits = $em->getRepository('AppBundle:Produit')->findAll();
+        }
+
+        return $this->render('liste-de-course/resultat-recherche.html.twig', array(
+            'produits' => $produits));
     }
 }

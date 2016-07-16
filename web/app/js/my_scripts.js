@@ -1,6 +1,7 @@
-$( document ).ready(function() {
+
+$(document).ready(function() {
   $("#ajouter-produit").click(function() { 
-    var urlFormulaire = Routing.generate('formulaire_recherche_produit');
+    var urlFormulaire = Routing.generate('formulaire_recherche_produit', {'slugUser': slugUser});
     $.ajax({
       type: "POST",
       url: urlFormulaire,
@@ -8,10 +9,33 @@ $( document ).ready(function() {
       cache: false,
       success: function(codeHTML, statut) {
         $("#ajouter-produit").before($(codeHTML).fadeIn());
+        $("form").index();
       }
     });
     return false;
   });
+
+  $(document).on('keyup', '#produit_search_mot', function() {
+    searchText = $(this).val();
+    var urlChercherProduit = Routing.generate('rechercher_produit', {'slugUser': slugUser, 'caracteres': searchText});
+    if (searchText.length >= 3) {
+      $("#resultat-recherche-produit").load(urlChercherProduit);
+    } else {
+      $("#resultat-recherche-produit").html("");
+    }
+  });
+
+
+
+
+
+
+
+
+
+
+
+
 
   $("#rechercher-recette").keyup(function() {
     searchText = $(this).val();
@@ -49,7 +73,7 @@ $( document ).ready(function() {
       cache: false,
       success: function(codeHTML) {
         $("#planning tbody").fadeOut("slow", function() {
-          $("#div-planning tbody").replaceWith($(codeHTML).fadeIn());
+          $("#planning tbody").replaceWith($(codeHTML).fadeIn());
         });
       }
     });
@@ -68,7 +92,7 @@ $( document ).ready(function() {
       cache: false,
       success: function(codeHTML) {
         $("#planning tbody").fadeOut("slow", function() {
-          $("#div-planning tbody").replaceWith($(codeHTML).fadeIn());
+          $("#planning tbody").replaceWith($(codeHTML).fadeIn());
         });
       }
     });

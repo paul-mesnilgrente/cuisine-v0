@@ -29,8 +29,7 @@ class PlanningController extends Controller
             $flash = $this->get('braincrafted_bootstrap.flash');
             $flash->info("L'entrée du planning a bien été soumise.");
 
-            return $this->redirectToRoute('consulter_planning', array(
-                'date' => $entreePlanning->getDate()->format('d-m-Y'),
+            return $this->redirectToRoute('user_tableau_de_bord', array(
                 'slugUser' => $user->getSlugUser()));
         }
         // replace this example code with whatever you need

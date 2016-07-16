@@ -1,4 +1,5 @@
 {{ form_start(form, {style: 'inline'}) }}
-  {{ form_row(form.mot) }}
+  {{ form_widget(form) }}
+  <div id="resultat-recherche-produit"></div>
   <button class="btn btn-primary" type="submit"><span class="glyphicon glyphicon-ok"></span></button>
 {{ form_rest(form) }}
