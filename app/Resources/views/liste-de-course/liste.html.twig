@@ -2,9 +2,23 @@
   <i class="pin"></i>
   <div class="note yellow">
     <h1 class="text-center">Liste de courses</h1>
-    {% for rayon in rayons %}
-      <h2>{{ rayon.nom }}</h2>
-      <a class="btn btn-primary" id="ajouter-produit" href="#"><span class="glyphicon glyphicon-plus"></span></a>
-    {% endfor %}
+    <p class="text-center"><small><a href="{{ path('faire_mes_courses', {'slugUser': app.user.slugUser}) }}">Je fais mes courses</a></small></p>
+    <div class="row">
+      <div class="col-md-6 col-sm-6 col-xs-6">
+        {% for index in 0..(rayons|length / 2) %}
+          <h2>{{ rayons[index].nom }}</h2>
+          {% set index = index + 1 %}
+        {% endfor %}
+      </div>
+      <div class="col-md-6 col-sm-6 col-xs-6">
+        {% for index in (rayons|length / 2)..rayons|length - 1 %}
+          <h2>{{ rayons[index].nom }}</h2>
+          {% set index = index + 1 %}
+        {% endfor %}
+        <p class="text-right">
+          <a class="btn btn-primary" id="ajouter-produit" href="#"><span class="glyphicon glyphicon-plus"></span></a>
+        </p>
+      </div>
+    </div>
   </div>
 </div>

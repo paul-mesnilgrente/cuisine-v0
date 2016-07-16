@@ -23,6 +23,13 @@ body {
     background-size: cover;
 }
 
+#results .media {
+  background-color: rgb(199, 255, 254);
+  border-radius: 5px;
+  padding: 10px;
+  margin: 10px;
+}
+
 .quantite {
     width: 90px;
 }
@@ -72,6 +79,16 @@ a.tableau-action:hover {
 
 .quote-container, .quote-container h1 {
   font-family: 'post-it';
+}
+
+.quote-container h1 {
+  margin: 0px;
+}
+.quote-container h2 {
+  font-weight: 900;
+}
+.quote-container p {
+  margin: 0px;
 }
 
 .quote-container {

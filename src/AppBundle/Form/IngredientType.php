@@ -19,6 +19,12 @@ class IngredientType extends AbstractType
 
             ->add('pluriel')
 
+            ->add('rayons', 'entity', array(
+                'class' => 'AppBundle:Rayon',
+                'property' => 'nom',
+                'multiple' => true,
+                'expanded' => true))
+
             ->add('categorie', 'entity', array(
                 'class' => 'AppBundle:CategorieIngredient',
                 'property' => 'nom',

@@ -49,7 +49,6 @@ class Builder implements ContainerAwareInterface
         $translator = $this->container->get('translator');
         if ($this->container->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
             $menu->addChild('Ajouter une recette', array('route' => 'ajouter_recette', 'routeParameters' => array('slugUser' => $user->getSlugUser())));
-            $menu->addChild('Créer une liste de course', array('route' => 'ajouter_liste_de_course', 'routeParameters' => array('slugUser' => $user->getSlugUser())));
             $menu->addChild('Ajouter un ingrédient', array('route' => 'ajouter_ingredient'));
             
             $menu->addChild('Autre')->setAttribute('dropdown', true);

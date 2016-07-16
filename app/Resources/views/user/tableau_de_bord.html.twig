@@ -2,10 +2,10 @@
 
 {% block body %}
 <div class="row">
-  <div class="col-md-6 col-md-offset-2">
+  <div class="col-md-5 col-md-offset-2">
     {{ render(controller('AppBundle:Planning:tableau', {'user': app.user, 'date': "now"|date('d-m-Y')})) }}
   </div>
-  <div class="col-md-3">
+  <div class="col-md-4">
     {{ render(controller('AppBundle:ListeDeCourse:liste', {'user': app.user})) }} 
   </div>
 </div>

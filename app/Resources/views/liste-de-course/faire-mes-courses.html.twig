@@ -1,0 +1,68 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+  <div class="row">
+    <div class="col-md-6 col-md-offset-4">
+      <div class="quote-container">
+        <i class="pin"></i>
+        <div class="note yellow">
+          <h1 class="text-center">Liste de courses</h1>
+            <form>
+              <div class="row">
+                <div class="col-md-6 col-sm-6 col-xs-6">
+
+                  {% for index in 0..(rayons|length / 2) %}
+
+                    <div class="form-group">
+                      <label for="exampleInputEmail1">{{ rayons[index].nom }}</label>
+                      <div class="checkbox">
+                        <label>
+                          <input type="checkbox" value="">
+                          concombre
+                        </label>
+                      </div>
+                      <div class="checkbox">
+                        <label>
+                          <input type="checkbox" value="">
+                          tomates
+                        </label>
+                      </div>
+                      {% set index = index + 1 %}
+                    </div>
+
+                  {% endfor %}
+                </div>
+                <div class="col-md-6 col-sm-6 col-xs-6">
+                  {% for index in (rayons|length / 2)..rayons|length - 1 %}
+
+                    <div class="form-group">
+                      <label for="exampleInputEmail1">{{ rayons[index].nom }}</label>
+                      <div class="checkbox">
+                        <label>
+                          <input type="checkbox" value="">
+                          concombre
+                        </label>
+                      </div>
+                      <div class="checkbox">
+                        <label>
+                          <input type="checkbox" value="">
+                          tomates
+                        </label>
+                      </div>
+
+                      {% set index = index + 1 %}
+                    </div>
+
+                  {% endfor %}
+                </div>
+              </div>
+            <p class="text-right">
+              <button type="submit" class="btn btn-primary">Valider</button>
+            </p>
+            
+            </form>
+
+        </div>
+      </div>
+  </div>
+{% endblock %}

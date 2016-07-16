@@ -16,6 +16,12 @@ class ProduitType extends AbstractType
     {
         $builder
             ->add('nom')
+            
+            ->add('rayons', 'entity', array(
+                'class' => 'AppBundle:Rayon',
+                'property' => 'nom',
+                'multiple' => true,
+                'expanded' => true))
         ;
     }
     

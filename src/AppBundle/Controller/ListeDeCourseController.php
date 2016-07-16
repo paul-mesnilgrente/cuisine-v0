@@ -110,31 +110,6 @@ class ListeDeCourseController extends Controller
             'liste' => $liste));
     }
 
-    /**
-     * @Route("/id/ajouter-produit", name="ajouter_produit_liste")
-     */
-    public function ajouterProduitAction()
-    {
-        
-    }
-
-    /**
-     * @Route("/id/ajouter-produit", name="ajouter_ingredient_liste")
-     */
-    public function ajouterIngredientAction()
-    {
-        
-    }
-
-    /**
-     * @Route("/{id}", name="consulter_liste_de_course")
-     */
-    public function consulterListeDeCourseAction(Request $request, ListeDeCourse $liste)
-    {
-        return $this->render('liste-de-course/consulter.html.twig', array(
-            'liste' => $liste));
-    }
-
     private function creerListeUser(User $user) {
         $liste = new ListeDeCourse($user);
         $em = $this->getDoctrine()->getManager();
@@ -157,5 +132,25 @@ class ListeDeCourseController extends Controller
         $rayons = $em->getRepository('AppBundle:Rayon')->findAll();
         return $this->render('liste-de-course/liste.html.twig', array(
             'rayons' => $rayons));
+    }
+
+    /**
+     * @Route("/faire-mes-courses", name="faire_mes_courses")
+     */
+    public function faireMesCoursesAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+        $rayons = $em->getRepository('AppBundle:Rayon')->findAll();
+        return $this->render('liste-de-course/faire-mes-courses.html.twig', array(
+            'rayons' => $rayons));
+    }
+
+    /**
+     * @Route("/{id}", name="consulter_liste_de_course")
+     */
+    public function consulterListeDeCourseAction(Request $request, ListeDeCourse $liste)
+    {
+        return $this->render('liste-de-course/consulter.html.twig', array(
+            'liste' => $liste));
     }
 }
