@@ -81,6 +81,11 @@ a.tableau-action:hover {
   font-family: 'post-it';
 }
 
+.quote-container input, .quote-container option, .quote-container select
+{
+    font-size: 20px;
+}
+
 .quote-container h1 {
   margin: 0px;
 }

@@ -50,9 +50,10 @@ class QuantiteProduit
      */
     private $listeDeCourse;
 
-    public function __construct()
+    public function __construct($liste)
     {
         $this->quantite = 1;
+        $this->listeDeCourse = $liste;
     }
 
     /**
@@ -159,5 +160,17 @@ class QuantiteProduit
     public function getListeDeCourse()
     {
         return $this->listeDeCourse;
+    }
+
+    public function __toString() {
+        $var = '';
+        if ($this->unite === null && $this->quantite > 1) {
+            $var = $var.$this->quantite.' ';
+        }
+        $var = $var.$this->produit->getNom();
+        if ($this->unite !== null) {
+            $var = $var.' : '.$this->quantite.' '.$this->unite->getNom();
+        }
+        return $var;
     }
 }

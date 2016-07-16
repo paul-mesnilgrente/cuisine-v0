@@ -12,4 +12,14 @@ use AppBundle\Entity\User;
  */
 class RayonRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function getListe(User $user) {
+        return $this->_em->createQuery('
+            SELECT ldc
+                 AppBundle:ListeDeCourse ldc,
+            WHERE
+                ldc.user = :user
+            ORDER BY r.nom ASC')
+            ->setParameter('user', $user)
+            ->getResult();
+    }
 }

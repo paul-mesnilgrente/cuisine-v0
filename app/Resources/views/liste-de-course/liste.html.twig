@@ -5,8 +5,29 @@
     <p class="text-center"><small><a href="{{ path('faire_mes_courses', {'slugUser': app.user.slugUser}) }}">Je fais mes courses</a></small></p>
     <div class="row">
       <div class="col-md-6 col-sm-6 col-xs-6">
-        {% for index in 0..(rayons|length / 2) %}
+        {% for quantiteIngredient in liste.ingredients %}
+          {{ quantiteIngredient.ingredient.nom }}: {{ quantiteIngredient.quantite }} {{ quantiteIngredient.unite.nom }}
+        {% endfor %}
+        <ul>
+          {% for quantiteProduit in liste.produits %}
+            <li>{{ quantiteProduit }}</li>
+          {% endfor %}
+        </ul>
+
+        {% for index in 0..(rayons|length / 2) - 1 %}
           <h2>{{ rayons[index].nom }}</h2>
+          <ul>
+          {% for quantiteIngredient in liste.ingredients %}
+            {% if rayons[index] in quantiteIngredient.ingredient.rayons %}
+              {{ quantiteIngredient.ingredient.nom }}: {{ quantiteIngredient.quantite }} {{ quantiteIngredient.unite.nom }}
+            {% endif %}
+          {% endfor %}
+          {% for quantiteProduit in liste.produits %}
+            {% if rayons[index] in quantiteProduit.produit.rayons %}
+              {{ quantiteProduit }}
+            {% endif %}
+          {% endfor %}
+          </ul>
           {% set index = index + 1 %}
         {% endfor %}
       </div>
@@ -19,9 +40,7 @@
     </div>
     <div class="row">
       <div class="col-md-12">
-        <p class="text-right">
           <a class="btn btn-primary" id="ajouter-produit" href="#"><span class="glyphicon glyphicon-plus"></span></a>
-        </p>
       </div>
     </div>
   </div>

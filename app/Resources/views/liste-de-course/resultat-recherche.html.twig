@@ -4,7 +4,7 @@
 {% else %}
   <ul class="list-inline">
     {% for produit in produits %}
-      <li>{{ produit.nom }}</li>
+      <li><a class="resultat-produit" href="#">{{ produit.nom }}</a></li>
     {% endfor %}
   </ul>
 {% endif %}

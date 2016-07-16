@@ -8,6 +8,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
 use AppBundle\Entity\User;
+use AppBundle\Entity\QuantiteProduit;
+
+use AppBundle\Form\ProduitSearchType;
 
 /**
  * @Route("/{slugUser}")
@@ -20,6 +23,23 @@ class UserController extends Controller
      */
     public function tableauDeBordAction(Request $request, User $user)
     {
+        $em = $this->getDoctrine()->getManager();
+        $liste = $em->getRepository('AppBundle:ListeDeCourse')->findOneByUser($user);
+
+        $qp = new QuantiteProduit($liste);
+        $form = $this->createForm(ProduitSearchType::class, $qp);
+        $form->handleRequest($request);
+
+        if ($form->isValid()) {
+
+            $em->persist($qp);
+            $em->flush();
+            $flash = $this->get('braincrafted_bootstrap.flash');
+            $flash->info("Bien ajouté.");
+            $this->redirectToRoute('user_tableau_de_bord', array(
+                'slugUser' => $user->getSlugUser()));
+        }
+
         return $this->render('user/tableau_de_bord.html.twig');
     }
 

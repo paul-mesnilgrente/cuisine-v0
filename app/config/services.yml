@@ -8,3 +8,9 @@ services:
         class: Twig_Extensions_Extension_Intl
         tags:
             - { name: twig.extension }
+
+    app.form.type.produit_search:
+        class: AppBundle\Form\ProduitSearchType
+        arguments: ["@doctrine.orm.entity_manager"]
+        tags:
+            - { name: form.type }

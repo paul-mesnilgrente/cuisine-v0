@@ -38,25 +38,17 @@ class Builder implements ContainerAwareInterface
             $menu->addChild($translator->trans('layout.login', array(), 'FOSUserBundle'), array('route' => 'fos_user_security_login'));
             $menu->addChild($translator->trans('layout.register', array(), 'FOSUserBundle'), array('route' => 'fos_user_registration_register'));
         }
-        return $menu;
-    }
-
-    public function footerMenu(FactoryInterface $factory, array $options)
-    {
-        $menu = $factory->createItem('root');
-        $security = $this->container->get('security.token_storage');
-        $user = $security->getToken()->getUser();
-        $translator = $this->container->get('translator');
-        if ($this->container->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
-            $menu->addChild('Ajouter une recette', array('route' => 'ajouter_recette', 'routeParameters' => array('slugUser' => $user->getSlugUser())));
-            $menu->addChild('Ajouter un ingrédient', array('route' => 'ajouter_ingredient'));
+        if ($this->container->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
+            $menu->addChild('Admin')->setAttribute('dropdown', true);
+            $menu['Admin']->addChild('Ajouter une recette', array('route' => 'ajouter_recette', 'routeParameters' => array('slugUser' => $user->getSlugUser())));
+            $menu['Admin']->addChild('Ajouter un ingrédient', array('route' => 'ajouter_ingredient'));
             
-            $menu->addChild('Autre')->setAttribute('dropdown', true);
-            $menu['Autre']->addChild('Ajouter une catégorie de recette', array('route' => 'ajouter_categorie_recette'));
-            $menu['Autre']->addChild('Ajouter une unité', array('route' => 'ajouter_unite'));
-            $menu['Autre']->addChild('Ajouter une catégorie ingrédient', array('route' => 'ajouter_categorie_ingredient'));
-            $menu['Autre']->addChild('Ajouter un tag de recette', array('route' => 'ajouter_tag_recette'));
-            $menu['Autre']->addChild('Ajouter un produit ménager', array('route' => 'ajouter_produit'));
+            $menu['Admin']->addChild('Autre')->setAttribute('dropdown', true);
+            $menu['Admin']['Autre']->addChild('Ajouter une catégorie de recette', array('route' => 'ajouter_categorie_recette'));
+            $menu['Admin']['Autre']->addChild('Ajouter une unité', array('route' => 'ajouter_unite'));
+            $menu['Admin']['Autre']->addChild('Ajouter une catégorie ingrédient', array('route' => 'ajouter_categorie_ingredient'));
+            $menu['Admin']['Autre']->addChild('Ajouter un tag de recette', array('route' => 'ajouter_tag_recette'));
+            $menu['Admin']['Autre']->addChild('Ajouter un produit ménager', array('route' => 'ajouter_produit'));
         }
         return $menu;
     }

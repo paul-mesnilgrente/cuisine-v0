@@ -15,7 +15,7 @@ $(document).ready(function() {
     return false;
   });
 
-  $(document).on('keyup', '#produit_search_mot', function() {
+  $(document).on('keyup', '#produit_search_produit', function() {
     searchText = $(this).val();
     var urlChercherProduit = Routing.generate('rechercher_produit', {'slugUser': slugUser, 'caracteres': searchText});
     if (searchText.length >= 3) {
@@ -23,6 +23,11 @@ $(document).ready(function() {
     } else {
       $("#resultat-recherche-produit").html("");
     }
+  });
+
+  $(document).on('click', '.resultat-produit', function() {
+    nom = $(this).text();
+    $("#produit_search_produit").val(nom);
   });
 
 

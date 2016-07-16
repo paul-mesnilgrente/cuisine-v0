@@ -12,6 +12,7 @@ use AppBundle\Form\ListeDeCourseType;
 use AppBundle\Entity\Periode;
 
 use AppBundle\Entity\QuantiteIngredientListeDeCourse;
+use AppBundle\Entity\QuantiteProduit;
 use AppBundle\Entity\User;
 
 use AppBundle\Form\ProduitSearchType;
@@ -111,14 +112,15 @@ class ListeDeCourseController extends Controller
         $em = $this->getDoctrine()->getManager();
         $liste = $em->getRepository('AppBundle:ListeDeCourse')->findAll(
             array('user' => $user));
-        if (count($liste) == 0) {
+        if ($liste === null) {
             $liste = $this->creerListeUser($user);
         } else {
             $liste = $liste[0];
         }
         $rayons = $em->getRepository('AppBundle:Rayon')->findAll();
         return $this->render('liste-de-course/liste.html.twig', array(
-            'rayons' => $rayons));
+            'rayons' => $rayons,
+            'liste' => $liste));
     }
 
     /**
@@ -135,8 +137,24 @@ class ListeDeCourseController extends Controller
     /**
      * @Route("/formulaire-recherche", options={"expose"=true}, name="formulaire_recherche_produit")
      */
-    public function formulaireRechercheAction(Request $request) {
-        $form = $this->createForm(new ProduitSearchType());
+    public function formulaireRechercheAction(Request $request, User $user) {
+        $em = $this->getDoctrine()->getManager();
+        $liste = $em->getRepository('AppBundle:ListeDeCourse')->findAll(
+            array('user' => $user));
+        $qp = new QuantiteProduit($liste);
+        $form = $this->createForm(ProduitSearchType::class, $qp);
+        $form->handleRequest($request);
+
+        if ($form->isValid()) {
+
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($liste);
+            $em->flush();
+            $flash = $this->get('braincrafted_bootstrap.flash');
+            $flash->info("Bien ajouté.");
+            $this->redirectToRoute('user_tableau_de_bord', array(
+                'slugUser' => $user->getSlugUser()));
+        }
         return $this->render('liste-de-course/form-recherche.html.twig', array(
             'form' => $form->createView()));
     }
