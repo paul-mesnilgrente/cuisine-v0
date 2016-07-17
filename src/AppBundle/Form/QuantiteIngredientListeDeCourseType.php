@@ -6,6 +6,8 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+
 class QuantiteIngredientListeDeCourseType extends AbstractType
 {
     /**
@@ -22,7 +24,7 @@ class QuantiteIngredientListeDeCourseType extends AbstractType
                 'multiple' => false,
                 'expanded' => false))
 
-            ->add('unite', 'entity', array(
+            ->add('unite', EntityType::class, array(
                 'class' => 'AppBundle:Unite',
                 'choice_label' => 'abrege',
                 'multiple' => false,

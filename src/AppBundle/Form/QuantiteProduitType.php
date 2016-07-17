@@ -6,6 +6,8 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+
 class QuantiteProduitType extends AbstractType
 {
     /**
@@ -17,13 +19,13 @@ class QuantiteProduitType extends AbstractType
         $builder
             ->add('quantite')
             
-            ->add('produit', 'entity', array(
+            ->add('produit', EntityType::class, array(
                 'class' => 'AppBundle:Produit',
                 'choice_label' => 'nom',
                 'multiple' => false,
                 'expanded' => false))
 
-            ->add('unite', 'entity', array(
+            ->add('unite', EntityType::class, array(
                 'class' => 'AppBundle:Unite',
                 'choice_label' => 'abrege',
                 'multiple' => false,

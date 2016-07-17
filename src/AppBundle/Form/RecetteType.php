@@ -9,6 +9,8 @@ use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+
 class RecetteType extends AbstractType
 {
     /**
@@ -60,13 +62,13 @@ class RecetteType extends AbstractType
                     'class' => 'liste_etape')
                 ))
             
-            ->add('categorieRecette', 'entity', array(
+            ->add('categorieRecette', EntityType::class, array(
                 'class' => 'AppBundle:CategorieRecette',
                 'choice_label' => 'nom',
                 'multiple' => false,
                 'expanded' => true))
 
-            ->add('tags', 'entity', array(
+            ->add('tags', EntityType::class, array(
                 'class' => 'AppBundle:TagRecette',
                 'choice_label' => 'nom',
                 'multiple' => true,

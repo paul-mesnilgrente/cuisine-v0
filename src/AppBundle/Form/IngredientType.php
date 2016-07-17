@@ -6,6 +6,8 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+
 class IngredientType extends AbstractType
 {
     /**
@@ -21,7 +23,7 @@ class IngredientType extends AbstractType
 
             ->add('rayons')
 
-            ->add('categorie', 'entity', array(
+            ->add('categorie', EntityType::class, array(
                 'class' => 'AppBundle:CategorieIngredient',
                 'choice_label' => 'nom',
                 'multiple' => false,
