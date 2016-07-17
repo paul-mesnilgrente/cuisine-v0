@@ -10,6 +10,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Vich\UploaderBundle\Form\Type\VichImageType;
 
 class RecetteType extends AbstractType
 {
@@ -28,8 +29,7 @@ class RecetteType extends AbstractType
                     2 => 'Pas super',
                     3 => 'Bon',
                     4 => 'Très bon',
-                    5 => 'Excellent',
-                )
+                    5 => 'Excellent')
             ))
             ->add('difficulte', ChoiceType::class, array(
                 'choices' => array(
@@ -37,8 +37,7 @@ class RecetteType extends AbstractType
                     2 => '2',
                     3 => '3',
                     4 => '4',
-                    5 => '5',
-                )
+                    5 => '5')
             ))
             ->add('tempsDePreparation')
             ->add('tempsDeCuisson')
@@ -49,8 +48,7 @@ class RecetteType extends AbstractType
                 'allow_delete' => true,
                 'by_reference' => false,
                 'prototype' => true,
-                'attr' => array(
-                    'class' => 'liste_ingredient')
+                'attr' => array('class' => 'liste_ingredient')
                 ))
 
             ->add('etapes', CollectionType::class, array(
@@ -58,8 +56,7 @@ class RecetteType extends AbstractType
                 'allow_add' => true,
                 'allow_delete' => true,
                 'prototype' => true,
-                'attr' => array(
-                    'class' => 'liste_etape')
+                'attr' => array('class' => 'liste_etape')
                 ))
             
             ->add('categorieRecette', EntityType::class, array(
@@ -74,7 +71,7 @@ class RecetteType extends AbstractType
                 'multiple' => true,
                 'expanded' => true))
             
-            ->add('imageFile', 'vich_image', array(
+            ->add('imageFile', VichImageType::class, array(
                 'required'      => false,
                 'allow_delete'  => true, // not mandatory, default is true
                 'download_link' => true, // not mandatory, default is true

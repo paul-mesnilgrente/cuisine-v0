@@ -34,7 +34,7 @@ class RecetteController extends Controller
 
     private function formulaireRecetteAction(Request $request, Recette $recette, $action)
     {
-        $form = $this->createForm(new RecetteType(), $recette);
+        $form = $this->createForm(RecetteType::class, $recette);
         $form->handleRequest($request);
 
         if ($form->isValid()) {
