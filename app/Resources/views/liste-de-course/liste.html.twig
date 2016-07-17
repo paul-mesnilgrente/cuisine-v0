@@ -5,20 +5,6 @@
     <p class="text-center"><small><a href="{{ path('faire_mes_courses', {'slugUser': app.user.slugUser}) }}">Je fais mes courses</a></small></p>
     <div class="row">
       <div class="col-md-6 col-sm-6 col-xs-6">
-        {% for quantiteIngredient in liste.ingredients %}
-          {{ quantiteIngredient }}
-        {% endfor %}
-        <ul>
-          {% for quantiteProduit in liste.produits %}
-            <li>
-              {{ quantiteProduit }} : 
-              {% for rayon in quantiteProduit.produit.rayons %}
-                {{ rayon.nom }}, 
-              {% endfor %}
-            </li>
-          {% endfor %}
-        </ul>
-
         {% for index in 0..(rayons|length / 2) - 1 %}
           <h2>{{ rayons[index].nom }}</h2>
           <ul>

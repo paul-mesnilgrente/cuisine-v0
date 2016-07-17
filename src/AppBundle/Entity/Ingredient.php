@@ -57,7 +57,7 @@ class Ingredient
     /**
      * @var Rayon
      *
-     * @ORM\ManyToMany(targetEntity="Rayon", mappedBy="ingredients", cascade={"persist"})
+     * @ORM\ManyToMany(targetEntity="Rayon", cascade={"persist"})
      */
     private $rayons;
 
