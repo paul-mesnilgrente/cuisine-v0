@@ -6,11 +6,16 @@
     <div class="row">
       <div class="col-md-6 col-sm-6 col-xs-6">
         {% for quantiteIngredient in liste.ingredients %}
-          {{ quantiteIngredient.ingredient.nom }}: {{ quantiteIngredient.quantite }} {{ quantiteIngredient.unite.nom }}
+          {{ quantiteIngredient }}
         {% endfor %}
         <ul>
           {% for quantiteProduit in liste.produits %}
-            <li>{{ quantiteProduit }}</li>
+            <li>
+              {{ quantiteProduit }} : 
+              {% for rayon in quantiteProduit.produit.rayons %}
+                {{ rayon.nom }}, 
+              {% endfor %}
+            </li>
           {% endfor %}
         </ul>
 
@@ -19,12 +24,12 @@
           <ul>
           {% for quantiteIngredient in liste.ingredients %}
             {% if rayons[index] in quantiteIngredient.ingredient.rayons %}
-              {{ quantiteIngredient.ingredient.nom }}: {{ quantiteIngredient.quantite }} {{ quantiteIngredient.unite.nom }}
+              <li>{{ quantiteIngredient }}</li>
             {% endif %}
           {% endfor %}
           {% for quantiteProduit in liste.produits %}
             {% if rayons[index] in quantiteProduit.produit.rayons %}
-              {{ quantiteProduit }}
+              <li>{{ quantiteProduit }}</li>
             {% endif %}
           {% endfor %}
           </ul>
@@ -34,6 +39,18 @@
       <div class="col-md-6 col-sm-6 col-xs-6">
         {% for index in (rayons|length / 2)..rayons|length - 1 %}
           <h2>{{ rayons[index].nom }}</h2>
+          <ul>
+            {% for quantiteIngredient in liste.ingredients %}
+            {% if rayons[index] in quantiteIngredient.ingredient.rayons %}
+              <li>{{ quantiteIngredient }}</li>
+            {% endif %}
+          {% endfor %}
+          {% for quantiteProduit in liste.produits %}
+            {% if rayons[index] in quantiteProduit.produit.rayons %}
+              <li>{{ quantiteProduit }}</li>
+            {% endif %}
+          {% endfor %}
+          </ul>
           {% set index = index + 1 %}
         {% endfor %}
       </div>

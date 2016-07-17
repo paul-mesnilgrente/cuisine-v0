@@ -5,36 +5,40 @@
 {% form_theme form with [_self, '::default/jquery.collection.html.twig', '::admin/recette/advanced-theme.html.twig'] %}
 
 {% block body %}
-  <h1>{{ action }} une recette</h1>
+<div class="row">
+  <div class="col-md-12 well">
+    <h1>{{ action }} une recette</h1>
 
-  {{ form_start(form) }}
+    {{ form_start(form) }}
 
-  {{ form_row(form.nom) }}
-  <div class="row">
-    <div class="col-md-3">{{ form_row(form.note) }}</div>
-    <div class="col-md-3">{{ form_row(form.difficulte) }}</div>
-    <div class="col-md-3">{{ form_row(form.tempsDePreparation) }}</div>
-    <div class="col-md-3">{{ form_row(form.tempsDeCuisson) }}</div>
-  </div>
-
-  {{ form_row(form.publique) }}
-  <div class="row">
-    <div class="col-md-4">
-      {{ form_row(form.ingredients) }}
+    {{ form_row(form.nom) }}
+    <div class="row">
+      <div class="col-md-3">{{ form_row(form.note) }}</div>
+      <div class="col-md-3">{{ form_row(form.difficulte) }}</div>
+      <div class="col-md-3">{{ form_row(form.tempsDePreparation) }}</div>
+      <div class="col-md-3">{{ form_row(form.tempsDeCuisson) }}</div>
     </div>
-    <div class="col-md-8">
-      {{ form_row(form.etapes) }}
+
+    {{ form_row(form.publique) }}
+    <div class="row">
+      <div class="col-md-4">
+        {{ form_row(form.ingredients) }}
+      </div>
+      <div class="col-md-8">
+        {{ form_row(form.etapes) }}
+      </div>
     </div>
-  </div>
 
-  <div class="row">
-    <div class="col-md-6">{{ form_row(form.categorieRecette) }}</div>
-    <div class="col-md-6">{{ form_row(form.tags) }}</div>
-  </div>
+    <div class="row">
+      <div class="col-md-6">{{ form_row(form.categorieRecette) }}</div>
+      <div class="col-md-6">{{ form_row(form.tags) }}</div>
+    </div>
 
-  {{ form_row(form.imageFile) }}
-  <input type="submit" value="Valider" class="btn btn-primary"/>
-  {{ form_end(form) }}
+    {{ form_row(form.imageFile) }}
+    <input type="submit" value="Valider" class="btn btn-primary"/>
+    {{ form_end(form) }}
+  </div>
+</div>
 
 {% endblock %}
 

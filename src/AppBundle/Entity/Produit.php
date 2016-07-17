@@ -31,7 +31,7 @@ class Produit
     /**
      * @var Rayon
      *
-     * @ORM\ManyToMany(targetEntity="Rayon", mappedBy="ingredients")
+     * @ORM\ManyToMany(targetEntity="Rayon", mappedBy="produits", cascade={"persist"})
      */
     private $rayons;
 

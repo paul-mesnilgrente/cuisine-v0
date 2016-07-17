@@ -50,14 +50,14 @@ class Ingredient
     /**
      * @var CategorieIngredient
      *
-     * @ORM\ManyToOne(targetEntity="CategorieIngredient")
+     * @ORM\ManyToOne(targetEntity="CategorieIngredient", cascade={"persist"})
      */
     private $categorie;
 
     /**
      * @var Rayon
      *
-     * @ORM\ManyToMany(targetEntity="Rayon", mappedBy="ingredients")
+     * @ORM\ManyToMany(targetEntity="Rayon", mappedBy="ingredients", cascade={"persist"})
      */
     private $rayons;
 

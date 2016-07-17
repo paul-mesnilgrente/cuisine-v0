@@ -19,7 +19,7 @@ class ProduitController extends Controller
 {
     private function formulaireProduitAction(Request $request, Produit $produit, $action)
     {
-        $form = $this->createForm(new ProduitType(), $produit);
+        $form = $this->createForm(ProduitType::class, $produit);
         $form->handleRequest($request);
 
         if ($form->isValid()) {

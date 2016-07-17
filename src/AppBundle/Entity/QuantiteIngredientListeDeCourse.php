@@ -180,4 +180,16 @@ class QuantiteIngredientListeDeCourse
     {
         return $this->listeDeCourse;
     }
+
+    public function __toString() {
+        $var = '';
+        if ($this->unite === null && $this->quantite > 1) {
+            $var = $var.$this->quantite.' ';
+        }
+        $var = $var.$this->ingredient->getNom();
+        if ($this->unite !== null) {
+            $var = $var.' : '.$this->quantite.' '.$this->unite->getNom();
+        }
+        return $var;
+    }
 }

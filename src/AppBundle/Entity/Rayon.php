@@ -43,6 +43,15 @@ class Rayon
     private $produits;
 
     /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->ingredients = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->produits = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+    
+    /**
      * Get id
      *
      * @return int
@@ -74,14 +83,6 @@ class Rayon
     public function getNom()
     {
         return $this->nom;
-    }
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->ingredients = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->produits = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -150,5 +151,9 @@ class Rayon
     public function getProduits()
     {
         return $this->produits;
+    }
+
+    public function __toString() {
+        return $this->nom;
     }
 }

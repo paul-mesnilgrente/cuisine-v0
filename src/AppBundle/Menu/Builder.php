@@ -29,9 +29,16 @@ class Builder implements ContainerAwareInterface
         $security = $this->container->get('security.token_storage');
         $user = $security->getToken()->getUser();
         $translator = $this->container->get('translator');
-        if ($this->container->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
+        if ($this->container->get('security.authorization_checker')->isGranted('ROLE_USER')) {
             $menu->addChild($user->getUsername(), array('route' => 'user_ma_page', 'routeParameters' => array('slugUser' => $user->getSlugUser())));
             $menu->addChild("Tableau de bord", array('route' => 'user_tableau_de_bord', 'routeParameters' => array('slugUser' => $user->getSlugUser())));
+
+            $menu->addChild("Mes actions")->setAttribute('dropdown', true);
+            $menu['Mes actions']->addChild("Ajouter une recette", array('route' => 'ajouter_recette', 'routeParameters' => array('slugUser' => $user->getSlugUser())));
+            $menu['Mes actions']->addChild("Ajouter produit ménager", array('route' => 'ajouter_produit', 'routeParameters' => array('slugUser' => $user->getSlugUser())));
+            $menu['Mes actions']->addChild("Ajouter un ingrédient", array('route' => 'ajouter_ingredient', 'routeParameters' => array('slugUser' => $user->getSlugUser())));
+
+
             $menu->addChild('Paramètre', array('route' => 'fos_user_profile_show'));
             $menu->addChild($translator->trans('layout.logout', array('%username%' => $user), 'FOSUserBundle'), array('route' => 'fos_user_security_logout'));
         } else {

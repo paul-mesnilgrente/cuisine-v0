@@ -28,7 +28,6 @@ class CategorieIngredient
      */
     private $nom;
 
-
     /**
      * Get id
      *

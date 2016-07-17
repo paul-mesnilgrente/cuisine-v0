@@ -5,6 +5,7 @@ namespace AppBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
 class ProduitType extends AbstractType
 {
@@ -17,7 +18,7 @@ class ProduitType extends AbstractType
         $builder
             ->add('nom')
             
-            ->add('rayons', 'entity', array(
+            ->add('rayons', EntityType::class, array(
                 'class' => 'AppBundle:Rayon',
                 'property' => 'nom',
                 'multiple' => true,
