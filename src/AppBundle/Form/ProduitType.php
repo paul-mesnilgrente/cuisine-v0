@@ -20,7 +20,7 @@ class ProduitType extends AbstractType
             
             ->add('rayons', EntityType::class, array(
                 'class' => 'AppBundle:Rayon',
-                'property' => 'nom',
+                'choice_label' => 'nom',
                 'multiple' => true,
                 'expanded' => true))
         ;

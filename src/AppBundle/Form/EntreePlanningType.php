@@ -18,7 +18,7 @@ class EntreePlanningType extends AbstractType
     {
         $builder->add('recettes', EntityType::class, array(
                 'class' => 'AppBundle:Recette',
-                'property' => 'nom',
+                'choice_label' => 'nom',
                 'multiple' => true,
                 'expanded' => true))
         ;

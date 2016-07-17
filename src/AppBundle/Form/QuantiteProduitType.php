@@ -19,13 +19,13 @@ class QuantiteProduitType extends AbstractType
             
             ->add('produit', 'entity', array(
                 'class' => 'AppBundle:Produit',
-                'property' => 'nom',
+                'choice_label' => 'nom',
                 'multiple' => false,
                 'expanded' => false))
 
             ->add('unite', 'entity', array(
                 'class' => 'AppBundle:Unite',
-                'property' => 'abrege',
+                'choice_label' => 'abrege',
                 'multiple' => false,
                 'expanded' => false,
                 'required' => false))

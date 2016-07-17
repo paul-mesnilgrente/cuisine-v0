@@ -23,7 +23,7 @@ class IngredientType extends AbstractType
 
             ->add('categorie', 'entity', array(
                 'class' => 'AppBundle:CategorieIngredient',
-                'property' => 'nom',
+                'choice_label' => 'nom',
                 'multiple' => false,
                 'expanded' => true))
 

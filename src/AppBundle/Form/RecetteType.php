@@ -62,13 +62,13 @@ class RecetteType extends AbstractType
             
             ->add('categorieRecette', 'entity', array(
                 'class' => 'AppBundle:CategorieRecette',
-                'property' => 'nom',
+                'choice_label' => 'nom',
                 'multiple' => false,
                 'expanded' => true))
 
             ->add('tags', 'entity', array(
                 'class' => 'AppBundle:TagRecette',
-                'property' => 'nom',
+                'choice_label' => 'nom',
                 'multiple' => true,
                 'expanded' => true))
             

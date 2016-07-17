@@ -18,13 +18,13 @@ class QuantiteIngredientListeDeCourseType extends AbstractType
             ->add('quantite')
             ->add('ingredient', 'entity', array(
                 'class' => 'AppBundle:Ingredient',
-                'property' => 'nom',
+                'choice_label' => 'nom',
                 'multiple' => false,
                 'expanded' => false))
 
             ->add('unite', 'entity', array(
                 'class' => 'AppBundle:Unite',
-                'property' => 'abrege',
+                'choice_label' => 'abrege',
                 'multiple' => false,
                 'expanded' => false))
         ;

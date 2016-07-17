@@ -36,7 +36,7 @@ class ProduitSearchType extends AbstractType
 
             ->add('unite', EntityType::class, array(
                 'class' => 'AppBundle:Unite',
-                'property' => 'abrege',
+                'choice_label' => 'abrege',
                 'multiple' => false,
                 'expanded' => false,
                 'required' => false))

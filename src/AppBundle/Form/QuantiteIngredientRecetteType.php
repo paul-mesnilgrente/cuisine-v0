@@ -19,13 +19,13 @@ class QuantiteIngredientRecetteType extends AbstractType
             
             ->add('ingredient', 'entity', array(
                 'class' => 'AppBundle:Ingredient',
-                'property' => 'nom',
+                'choice_label' => 'nom',
                 'multiple' => false,
                 'expanded' => false))
 
             ->add('unite', 'entity', array(
                 'class' => 'AppBundle:Unite',
-                'property' => 'nom',
+                'choice_label' => 'nom',
                 'multiple' => false,
                 'expanded' => false))
         ;
