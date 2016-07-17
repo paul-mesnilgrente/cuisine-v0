@@ -113,8 +113,6 @@ class ListeDeCourseController extends Controller
         $liste = $em->getRepository('AppBundle:ListeDeCourse')->findOneByUser($user);
         if ($liste === null) {
             $liste = $this->creerListeUser($user);
-        } else {
-            $liste = $liste[0];
         }
         $rayons = $em->getRepository('AppBundle:Rayon')->findAll();
         return $this->render('liste-de-course/liste.html.twig', array(
