@@ -110,8 +110,7 @@ class ListeDeCourseController extends Controller
     public function listeAction(User $user)
     {
         $em = $this->getDoctrine()->getManager();
-        $liste = $em->getRepository('AppBundle:ListeDeCourse')->findAll(
-            array('user' => $user));
+        $liste = $em->getRepository('AppBundle:ListeDeCourse')->findOneByUser($user);
         if ($liste === null) {
             $liste = $this->creerListeUser($user);
         } else {
