@@ -1,14 +1,5 @@
 {% extends 'layout.html.twig' %}
 
-{% block stylesheets %}
-    {% stylesheets output="css/app.css"
-    "%kernel.root_dir%/../vendor/twbs/bootstrap/dist/css/bootstrap.min.css"
-    "app/css/mon_style.css"
-    "app/css/accueil.css" %}
-    <link rel="stylesheet" type="text/css" href="{{ asset_url }}" />
-    {% endstylesheets %}
-{% endblock %}
-
 {% block b %}
 <div class="row">
   <div class="col-md-4 col-md-offset-1 etapes">

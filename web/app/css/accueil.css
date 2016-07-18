@@ -1,11 +1,3 @@
-body {
-    background: url('/app/images/accueil/background.jpg') no-repeat center center fixed;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
-}
-
 .etapes {
     background-color: rgba(255, 255, 255, 0.8);
     border-radius: 10px;
