@@ -23,11 +23,13 @@ $(document).ready(function() {
     } else {
       $("#resultat-recherche-produit").html("");
     }
+    return false;
   });
 
   $(document).on('click', '.resultat-produit', function() {
     nom = $(this).text();
     $("#produit_search_produit").val(nom);
+    return false;
   });
 
 
@@ -55,10 +57,10 @@ $(document).ready(function() {
           $("#results").html(codeHTML);
         }
       });
-      return false;
     } else {
       $("#results").html("");
     }
+    return false;
   });
 
   var strPrecedente = $("#semaine-precedente").attr("title").split("-");
@@ -103,4 +105,5 @@ $(document).ready(function() {
     });
     return false;
   });
+  return false;
 });
