@@ -96,7 +96,7 @@ knp_menu:
 braincrafted_bootstrap:
     output_dir:
     assets_dir: %kernel.root_dir%/../vendor/twbs/bootstrap
-    jquery_path: %kernel.root_dir%/../vendor/components/jquery.min.js
+    jquery_path: %kernel.root_dir%/../vendor/components/jquery/jquery.min.js
     css_preprocessor: less
     fonts_dir: %kernel.root_dir%/../web/fonts
     auto_configure:
