@@ -6,6 +6,8 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+
 class CategorieIngredientType extends AbstractType
 {
     /**
@@ -15,7 +17,9 @@ class CategorieIngredientType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('nom')
+            ->add('nom', TextType::class, array(
+                'attr' => array('autofocus' => true)
+                ))
         ;
     }
     

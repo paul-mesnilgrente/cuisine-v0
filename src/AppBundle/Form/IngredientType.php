@@ -6,6 +6,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
 class IngredientType extends AbstractType
@@ -17,11 +18,17 @@ class IngredientType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('nom')
+            ->add('nom', TextType::class, array(
+                'attr' => array('autofocus' => true)
+                ))
 
             ->add('pluriel')
 
-            ->add('rayons')
+            ->add('rayons', EntityType::class, array(
+                'class' => 'AppBundle:Rayon',
+                'choice_label' => 'nom',
+                'multiple' => true,
+                'expanded' => true))
 
             ->add('categorie', EntityType::class, array(
                 'class' => 'AppBundle:CategorieIngredient',

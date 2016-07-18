@@ -47,15 +47,10 @@ class Builder implements ContainerAwareInterface
         }
         if ($this->container->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
             $menu->addChild('Admin')->setAttribute('dropdown', true);
-            $menu['Admin']->addChild('Ajouter une recette', array('route' => 'ajouter_recette', 'routeParameters' => array('slugUser' => $user->getSlugUser())));
-            $menu['Admin']->addChild('Ajouter un ingrédient', array('route' => 'ajouter_ingredient'));
-            
-            $menu['Admin']->addChild('Autre')->setAttribute('dropdown', true);
-            $menu['Admin']['Autre']->addChild('Ajouter une catégorie de recette', array('route' => 'ajouter_categorie_recette'));
-            $menu['Admin']['Autre']->addChild('Ajouter une unité', array('route' => 'ajouter_unite'));
-            $menu['Admin']['Autre']->addChild('Ajouter une catégorie ingrédient', array('route' => 'ajouter_categorie_ingredient'));
-            $menu['Admin']['Autre']->addChild('Ajouter un tag de recette', array('route' => 'ajouter_tag_recette'));
-            $menu['Admin']['Autre']->addChild('Ajouter un produit ménager', array('route' => 'ajouter_produit'));
+            $menu['Admin']->addChild('Ajouter une catégorie de recette', array('route' => 'ajouter_categorie_recette'));
+            $menu['Admin']->addChild('Ajouter une unité', array('route' => 'ajouter_unite'));
+            $menu['Admin']->addChild('Ajouter une catégorie ingrédient', array('route' => 'ajouter_categorie_ingredient'));
+            $menu['Admin']->addChild('Ajouter un tag de recette', array('route' => 'ajouter_tag_recette'));
         }
         return $menu;
     }
