@@ -50,6 +50,17 @@ class ProduitController extends Controller
      */
     public function modifierProduitAction(Request $request, Produit $produit)
     {
-        return $this->formulaireTagRecetteAction($request, $produit, "Modifier");
+        return $this->formulaireProduitAction($request, $produit, "Modifier");
+    }
+
+    /**
+     * @Route("/liste", name="liste_produit")
+     */
+    public function listerAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+        $produits = $em->getRepository('AppBundle:Produit')->findAll();
+        return $this->render('admin/produit/liste.html.twig', array(
+            'produits' => $produits));
     }
 }

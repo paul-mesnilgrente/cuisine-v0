@@ -24,21 +24,26 @@ class LoadRayonData extends AbstractFixture implements FixtureInterface, Contain
     public function load(ObjectManager $manager)
     {
         $rayons = array(
+            'Apéro', 'Boissons',
             'Animaux', 'Salle de bain',
             'Autre', 'Boucherie/Volailles',
-            'Charcuterie', 'Conserve',
-            'Crèmerie/oeufs', 'Epicerie salée',
+            'Charcuterie', 'Conserve', 'Céréales',
+            'Crèmerie', 'Condiments',
+            'Epices et Aromates', 'Epicerie salée',
+            'Légumineuses',
             'Frais', 'Fromages',
             'Fruits', 'Légumes',
-            'High-tech', 'Médias',
+            'High-tech', 'Médias', 'Ménagers',
             'Librairie', 'Jardin',
-            'Papeterie', 'Loisir',
+            'Papeterie', 'Patisserie', 
+            'Petit déjeuner/Goûter', 'Loisir',
             'Poisson et produits de la mer',
-            'Surgelés', 'Yaourts et dessert');
+            'Surgelés', 'Viande', 'Yaourts et dessert');
 
         foreach ($rayons as $rayon) {
             $r = new Rayon();
             $r->setNom($rayon);
+            
             $manager->persist($r);
             $manager->flush();
             

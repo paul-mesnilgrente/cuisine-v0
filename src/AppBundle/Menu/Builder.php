@@ -1,4 +1,5 @@
 <?php
+
 namespace AppBundle\Menu;
 
 use Knp\Menu\FactoryInterface;
@@ -37,7 +38,8 @@ class Builder implements ContainerAwareInterface
             $menu['Mes actions']->addChild("Ajouter une recette", array('route' => 'ajouter_recette', 'routeParameters' => array('slugUser' => $user->getSlugUser())));
             $menu['Mes actions']->addChild("Ajouter produit ménager", array('route' => 'ajouter_produit', 'routeParameters' => array('slugUser' => $user->getSlugUser())));
             $menu['Mes actions']->addChild("Ajouter un ingrédient", array('route' => 'ajouter_ingredient', 'routeParameters' => array('slugUser' => $user->getSlugUser())));
-
+            $menu['Mes actions']->addChild("Liste des ingrédients", array('route' => 'liste_ingredient'));
+            $menu['Mes actions']->addChild("Liste des produits", array('route' => 'liste_produit'));
 
             $menu->addChild('Paramètre', array('route' => 'fos_user_profile_show'));
             $menu->addChild($translator->trans('layout.logout', array('%username%' => $user), 'FOSUserBundle'), array('route' => 'fos_user_security_logout'));

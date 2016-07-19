@@ -11,8 +11,8 @@ use AppBundle\Entity\Ingredient;
 use AppBundle\Form\IngredientType;
 
 /**
- * @Route("admin/ingredient")
- * @Security("has_role('ROLE_ADMIN')")
+ * @Route("ingredient")
+ * @Security("has_role('ROLE_USER')")
  */
 class IngredientController extends Controller
 {
@@ -56,7 +56,7 @@ class IngredientController extends Controller
     /**
      * @Route("/liste", name="liste_ingredient")
      */
-    public function indexAction()
+    public function listerAction()
     {
         $em = $this->getDoctrine()->getManager();
         $ingredients = $em->getRepository('AppBundle:Ingredient')->findAll();

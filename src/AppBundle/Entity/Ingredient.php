@@ -51,6 +51,7 @@ class Ingredient
      * @var CategorieIngredient
      *
      * @ORM\ManyToOne(targetEntity="CategorieIngredient", cascade={"persist"})
+     * @ORM\JoinColumn(nullable=true)
      */
     private $categorie;
 
@@ -244,6 +245,7 @@ class Ingredient
      */
     public function __construct()
     {
+        $this->updatedAt = new \Datetime();
         $this->rayons = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
