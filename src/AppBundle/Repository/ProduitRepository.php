@@ -21,4 +21,12 @@ class ProduitRepository extends \Doctrine\ORM\EntityRepository
        $query = $qb->getQuery();
        return $query->getResult();
     }
+
+    public function getAllProduits() {
+        $qb = $this->createQueryBuilder('p')
+            ->leftJoin('p.rayons', 'r')
+            ->addSelect('r');
+
+        return $qb->getQuery()->getResult();
+    }
 }

@@ -10,4 +10,11 @@ namespace AppBundle\Repository;
  */
 class IngredientRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function getAllIngredients() {
+        $qb = $this->createQueryBuilder('i')
+            ->leftJoin('i.rayons', 'r')
+            ->addSelect('r');
+
+        return $qb->getQuery()->getResult();
+    }
 }

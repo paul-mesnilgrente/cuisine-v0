@@ -40,7 +40,7 @@ class Produit
     /**
      * @var Rayon
      *
-     * @ORM\ManyToMany(targetEntity="Rayon", cascade={"persist"})
+     * @ORM\ManyToMany(targetEntity="Rayon", inversedBy="produits", cascade={"persist"})
      */
     private $rayons;
 
