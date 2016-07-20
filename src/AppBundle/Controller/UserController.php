@@ -14,7 +14,7 @@ use AppBundle\Form\ProduitSearchType;
 
 /**
  * @Route("/{slugUser}")
- * @Security("has_role('ROLE_ADMIN')")
+ * @Security("has_role('ROLE_USER')")
  */
 class UserController extends Controller
 {

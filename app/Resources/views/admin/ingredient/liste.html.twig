@@ -24,7 +24,7 @@
         {% for ingredient in rayon.ingredients %}
           <tr>
             <td>{{ loop.index }}</td>
-            <td><img height=120 src="{{ vich_uploader_asset(ingredient, 'imageFile') }}" alt="Image '{{ ingredient.imageName }}'" /></td>
+            <td><img height=60 src="{{ vich_uploader_asset(ingredient, 'imageFile') }}" alt="Image '{{ ingredient.imageName }}'" /></td>
             <td>{{ ingredient.nom|capitalize }}</td>
             <td>{{ ingredient.pluriel|capitalize }}</td>
             <td>{% for rayon in ingredient.rayons %}{{ rayon.nom }}{% if not loop.last %}, {% endif %}{% endfor %}</td>

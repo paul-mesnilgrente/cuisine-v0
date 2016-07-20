@@ -59,7 +59,7 @@ class ProduitController extends Controller
     public function listerAction()
     {
         $em = $this->getDoctrine()->getManager();
-        $produits = $em->getRepository('AppBundle:Rayon')->findAll();
+        $produits = $em->getRepository('AppBundle:Rayon')->getProduits();
         return $this->render('admin/produit/liste.html.twig', array(
             'rayons' => $produits));
     }

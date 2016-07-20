@@ -59,7 +59,7 @@ class IngredientController extends Controller
     public function listerAction()
     {
         $em = $this->getDoctrine()->getManager();
-        $ingredients = $em->getRepository('AppBundle:Rayon')->findAll();
+        $ingredients = $em->getRepository('AppBundle:Rayon')->getIngredients();
         return $this->render('admin/ingredient/liste.html.twig', array(
             'rayons' => $ingredients));
     }
