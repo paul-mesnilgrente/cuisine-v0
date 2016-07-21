@@ -1,0 +1,9 @@
+{% autoescape %}
+[
+    {% for ingredient in ingredients %}
+    {
+        "value": "{{ ingredient.nom }}"
+    }{% if not loop.last %},{% endif %}
+    {% endfor %}
+]
+{% endautoescape %}

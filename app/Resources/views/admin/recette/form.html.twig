@@ -61,6 +61,7 @@
   <script src="{{ asset('app/js/jquery.collection.js') }}"></script>
 
   <script type="text/javascript">
+      var slugUser = "{{ app.user.slugUser }}"
       $('.liste_etape').collection({
         'add': '<a href="#" class="btn btn-info">Ajouter une étape</a>',
         allow_duplicate: true

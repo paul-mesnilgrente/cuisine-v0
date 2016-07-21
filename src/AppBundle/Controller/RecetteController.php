@@ -94,6 +94,17 @@ class RecetteController extends Controller
     }
 
     /**
+     * @Route("/ingredients/{caracteres}", options={"expose"=true}, name="autocomplete_ingredient_recette")
+     */
+    public function autocompleteIngredient(Request $request, $caracteres) {
+        $em = $this->getDoctrine()->getManager();
+        $ingredients = $em->getRepository('AppBundle:Ingredient')->rechercherIngredient($caracteres);
+
+        return $this->render('recette/autocomplete_ingredient.json.twig', array(
+            'ingredients' => $ingredients));
+    }
+
+    /**
      * @Route("/chercher/{caracteres}", options={"expose"=true}, name="chercher_recette")
      */
     public function chercherRecetteAction($caracteres)

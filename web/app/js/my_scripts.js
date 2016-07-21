@@ -1,5 +1,29 @@
-
 $(document).ready(function() {
+
+  recette_ingredients_0_ingredient
+  var ingredients = new Bloodhound({
+    datumTokenizer: Bloodhound.tokenizers.obj.whitespace('value'),
+    queryTokenizer: Bloodhound.tokenizers.whitespace,
+    remote: {
+      url: Routing.generate('autocomplete_ingredient_recette', {'slugUser': slugUser, 'caracteres': 'caracteres'}),
+      wildcard: 'caracteres'
+    }
+  });
+
+  $('.ingredient_search').typeahead(null, {
+    name: 'ingredients',
+    display: 'value',
+    source: ingredients
+  });
+
+
+
+
+
+
+
+
+
   $("#ajouter-produit").click(function() { 
     var urlFormulaire = Routing.generate('formulaire_recherche_produit', {'slugUser': slugUser});
     $.ajax({

@@ -17,4 +17,16 @@ class IngredientRepository extends \Doctrine\ORM\EntityRepository
 
         return $qb->getQuery()->getResult();
     }
+
+    public function rechercherIngredient($caracteres) {
+        $qb = $this->_em->createQueryBuilder();
+        $qb->select('p')
+          ->from('AppBundle:Ingredient', 'p')
+          ->where("p.nom LIKE :caracteres")
+          ->orderBy('p.nom', 'ASC')
+          ->setParameter('caracteres', '%'.$caracteres.'%');
+
+       $query = $qb->getQuery();
+       return $query->getResult();
+    }
 }
