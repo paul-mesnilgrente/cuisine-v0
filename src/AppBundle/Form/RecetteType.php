@@ -25,7 +25,9 @@ class RecetteType extends AbstractType
             ->add('nom', TextType::class, array(
                 'attr' => array('autofocus' => true)
                 ))
+
             ->add('publique')
+
             ->add('note', ChoiceType::class, array(
                 'choices' => array(
                     1 => 'Mauvais',
@@ -34,6 +36,7 @@ class RecetteType extends AbstractType
                     4 => 'Très bon',
                     5 => 'Excellent')
             ))
+
             ->add('difficulte', ChoiceType::class, array(
                 'choices' => array(
                     1 => '1',
@@ -42,7 +45,9 @@ class RecetteType extends AbstractType
                     4 => '4',
                     5 => '5')
             ))
+
             ->add('tempsDePreparation')
+            
             ->add('tempsDeCuisson')
 
             ->add('ingredients', CollectionType::class, array(

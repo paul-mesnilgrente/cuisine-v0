@@ -1,62 +1,89 @@
-<article>
-  <h1>{{ recette.nom }}</h1>
-  <p><small>Publié le {{ recette.date|localizeddate('medium') }}</small></p>
-  <div class="row">
-    <div class="col-md-4">
-      <img src="{{ vich_uploader_asset(recette, 'imageFile') }}" alt="{{ recette.imageName }}" />
-    </div>
-    <div class="col-md-4">
-      <div class="panel panel-primary">
-        <div class="panel-body">
-          <p>Note : {{ recette.note }}</p>
-          <p>Temps de préparation : {{ recette.tempsDePreparation }} minutes</p>
-          {% if recette.tempsDeCuisson != 0 %}
-            <p>Temps de cuisson : {{ recette.tempsDeCuisson }} minutes</p>
-          {% endif %}
+<div class="row">
+  <div class="col-md-10 col-md-offset-1 well">
+    <article>
+      <div class="row">
+        <div class="col-md-12">
+        <h1>{{ recette.nom }}</h1>
+        <p>
+          <ul class="list-inline">
+          {% for tag in recette.tags %}
+            <li><a href="">#{{ tag.nom }}</a></li>
+          {% endfor %}
+          </ul>
+        </p>
+      </div>
+      <div class="row">
+        <div class="col-md-4">
+          <img class="img-responsive" src="{{ vich_uploader_asset(recette, 'imageFile') }}" alt="{{ recette.imageName }}" />
+        </div>
+        <div class="col-md-4">
+          <div class="panel panel-primary">
+            <div class="panel-body">
+              <p>
+                {% for i in 1..recette.note %}
+                  <span class="glyphicon glyphicon-heart"></span>
+                {% endfor %}
+                {% if recette.note != 5 %}
+                {% for i in (recette.note + 1)..5 %}
+                  <span class="glyphicon glyphicon-heart-empty"></span>
+                {% endfor %}
+                {% endif %}
+              </p>
+              <p>
+                <span class="glyphicon glyphicon-hourglass"> {{ recette.tempsDePreparation }}min
+                {% if recette.tempsDeCuisson != 0 %}
+                  ({{ recette.tempsDeCuisson }}min de cuisson)
+                {% endif %}
+              </p>
+              <p><span class="glyphicon glyphicon-piggy-bank"></span> Economique</p>
+              <p>
+                {% for i in 1..recette.difficulte %}
+                  <span class="glyphicon glyphicon-star"></span>
+                {% endfor %}
+                {% if recette.difficulte != 5 %}
+                {% for i in (recette.difficulte + 1)..5 %}
+                  <span class="glyphicon glyphicon-star-empty"></span>
+                {% endfor %}
+                {% endif %}
+              </p>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="col-md-4">
-      <div class="panel panel-primary">
-        <div class="panel-body">
-          <p>Difficulté : {{ recette.difficulte }}</p>
+      <div class="row">
+        <div class="col-md-4">
           <p>
-            Tags :
-            {% for tag in recette.tags %}
-              <a href="">#{{ tag.nom }}</a> 
+            <h2>Ingrédients</h2>
+            <ul>
+              {% for ingredient in recette.ingredients %}
+                <li>
+                  {{ ingredient.quantite }} {{ ingredient.unite.nom }} de 
+                  {% if ingredient.quantite < 2 %}
+                    {{ ingredient.ingredient.nom }}
+                  {% else %}
+                    {{ ingredient.ingredient.pluriel }}
+                  {% endif %}
+                </li>
+              {% endfor %}
+            </ul>
+          </p>
+        </div>
+        <div class="col-md-8">
+          <h2>Étapes</h2>
+          <p>
+            <ul>
+            {% for etape in recette.etapes %}
+              <li>{{ etape }}</li>
             {% endfor %}
+            </ul>
           </p>
         </div>
       </div>
-    </div>
+      <div class="row">
+        <div class="col-md-12">
+          <p class="text-right"><small>Publié le {{ recette.date|localizeddate('medium') }}</small></p>
+        </div>
+      </div>
+    </article>
   </div>
-  <div class="row">
-    <div class="col-md-4">
-      <p>
-        <h2>Ingrédients</h2>
-        <ul>
-          {% for ingredient in recette.ingredients %}
-            <li>
-              {{ ingredient.quantite }} {{ ingredient.unite.nom }} de 
-              {% if ingredient.quantite < 2 %}
-                {{ ingredient.ingredient.nom }}
-              {% else %}
-                {{ ingredient.ingredient.pluriel }}
-              {% endif %}
-            </li>
-          {% endfor %}
-        </ul>
-      </p>
-    </div>
-    <div class="col-md-8">
-      <h2>Étapes</h2>
-      <p>
-        <ul>
-        {% for etape in recette.etapes %}
-          <li>{{ etape }}</li>
-        {% endfor %}
-        </ul>
-      </p>
-    </div>
-  </div>
-</article>
+</div>
