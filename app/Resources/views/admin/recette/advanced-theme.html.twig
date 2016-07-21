@@ -21,9 +21,7 @@
       <div class="col-md-10">
         <div class="form-inline">
           <div class="form-group">
-            <div id="remote">
-              {{ form_widget(form.ingredient, {'attr': {'class': 'ingredient_search', 'placeholder': 'Ingrédient'}}) }}
-            </div>
+            {{ form_widget(form.ingredient, {'attr': {'class': 'ingredient_search', 'placeholder': 'Ingrédient'}}) }}
           </div>
           <div class="form-group">{{ form_widget(form.quantite, {'attr': {'class': 'quantite'}}) }}</div>
           <div class="form-group">{{ form_widget(form.unite) }}</div>
