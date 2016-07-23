@@ -58,7 +58,7 @@ class Ingredient
     /**
      * @var Rayon
      *
-     * @ORM\ManyToMany(targetEntity="Rayon", cascade={"persist"})
+     * @ORM\ManyToMany(targetEntity="Rayon", inversedBy="ingredients", cascade={"persist"})
      */
     private $rayons;
 
@@ -102,7 +102,7 @@ class Ingredient
      */
     public function setNom($nom)
     {
-        $this->nom = $nom;
+        $this->nom = strtolower($nom);
 
         return $this;
     }

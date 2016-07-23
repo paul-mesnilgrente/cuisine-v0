@@ -14,3 +14,8 @@ services:
         arguments: ["@doctrine.orm.entity_manager"]
         tags:
             - { name: form.type }
+    app.form.type.quantite_ingredient_recette:
+        class: AppBundle\Form\QuantiteIngredientRecetteType
+        arguments: ["@doctrine.orm.entity_manager"]
+        tags:
+            - { name: form.type }

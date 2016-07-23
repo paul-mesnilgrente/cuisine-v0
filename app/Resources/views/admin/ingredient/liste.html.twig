@@ -5,34 +5,37 @@
 {% block body %}
 <div class="row">
   <div class="col-md-10 col-md-offset-1 well">
-    <table class="table table-striped table-hover">
-      <thead>
-        <tr>
-          <th>N°</th>
-          <th>Image</th>
-          <th>Nom</th>
-          <th>Pluriel</th>
-          <th>Rayons</th>
-          {% if is_granted('ROLE_ADMIN') %}
-            <th>Modifier</th>
-          {% endif %}
-        </tr>
-      </thead>
-      <tbody>
-      {% for ingredient in ingredients %}
-        <tr>
-          <td>{{ loop.index }}</td>
-          <td><img height=30 src="{{ vich_uploader_asset(ingredient, 'imageFile') }}" alt="Image '{{ ingredient.imageName }}'" /></td>
-          <td>{{ ingredient.nom|capitalize }}</td>
-          <td>{{ ingredient.pluriel|capitalize }}</td>
-          <td>{% for rayon in ingredient.rayons %}{{ rayon.nom }} {% if not loop.last %}, {% endif %}{% endfor %}</td>
-          {% if is_granted('ROLE_ADMIN') %}
-            <td><a href="{{ path('modifier_ingredient', {'slugUser': app.user.slugUser, 'slug': ingredient.slug }) }}">Modifier</a></td>
-          {% endif %}
-        </tr>
-      {% endfor %}
-      </tbody>
-    </table>
+    {% for rayon in rayons %}
+      <h1>{{ rayon.nom }}</h1>
+      <table class="table table-striped table-hover">
+        <thead>
+          <tr>
+            <th>N°</th>
+            <th>Image</th>
+            <th>Nom</th>
+            <th>Pluriel</th>
+            <th>Rayons</th>
+            {% if is_granted('ROLE_ADMIN') %}
+              <th>Modifier</th>
+            {% endif %}
+          </tr>
+        </thead>
+        <tbody>
+        {% for ingredient in rayon.ingredients %}
+          <tr>
+            <td>{{ loop.index }}</td>
+            <td><img height=60 src="{{ vich_uploader_asset(ingredient, 'imageFile') }}" alt="Image '{{ ingredient.imageName }}'" /></td>
+            <td>{{ ingredient.nom|capitalize }}</td>
+            <td>{{ ingredient.pluriel|capitalize }}</td>
+            <td>{% for rayon in ingredient.rayons %}{{ rayon.nom }}{% if not loop.last %}, {% endif %}{% endfor %}</td>
+            {% if is_granted('ROLE_ADMIN') %}
+              <td><a href="{{ path('modifier_ingredient', {'slugUser': app.user.slugUser, 'slug': ingredient.slug }) }}">Modifier</a></td>
+            {% endif %}
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+    {% endfor %}
   </div>
 </div>
 {% endblock %}

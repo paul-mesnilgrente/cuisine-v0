@@ -22,4 +22,24 @@ class RayonRepository extends \Doctrine\ORM\EntityRepository
             ->setParameter('user', $user)
             ->getResult();
     }
+
+    public function getIngredients() {
+        $qb = $this->createQueryBuilder('r')
+            ->join('r.ingredients', 'i')
+            ->join('i.rayons' ,'r1')
+            ->addSelect('i')
+            ->addSelect('r1');
+
+        return $qb->getQuery()->getResult();
+    }
+
+    public function getProduits() {
+        $qb = $this->createQueryBuilder('r')
+            ->join('r.produits', 'p')
+            ->join('p.rayons' ,'r1')
+            ->addSelect('p')
+            ->addSelect('r1');
+
+        return $qb->getQuery()->getResult();
+    }
 }

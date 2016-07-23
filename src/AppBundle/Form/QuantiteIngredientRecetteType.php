@@ -6,10 +6,20 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+
+use Doctrine\Common\Persistence\ObjectManager;
+use AppBundle\Form\DataTransformer\StringToIngredientTransformer;
 
 class QuantiteIngredientRecetteType extends AbstractType
 {
+    private $manager;
+    
+    public function __construct(ObjectManager $manager) {
+        $this->manager = $manager;
+    }
+
     /**
      * @param FormBuilderInterface $builder
      * @param array $options
@@ -19,11 +29,7 @@ class QuantiteIngredientRecetteType extends AbstractType
         $builder
             ->add('quantite')
             
-            ->add('ingredient', EntityType::class, array(
-                'class' => 'AppBundle:Ingredient',
-                'choice_label' => 'nom',
-                'multiple' => false,
-                'expanded' => false))
+            ->add('ingredient', TextType::class)
 
             ->add('unite', EntityType::class, array(
                 'class' => 'AppBundle:Unite',
@@ -31,6 +37,9 @@ class QuantiteIngredientRecetteType extends AbstractType
                 'multiple' => false,
                 'expanded' => false))
         ;
+
+        $builder->get('ingredient')
+                ->addModelTransformer(new StringToIngredientTransformer($this->manager));
     }
     
     /**

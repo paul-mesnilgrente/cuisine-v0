@@ -4,7 +4,7 @@
 {% block textarea_widget %}
 
     <div class="row">
-      <div class="col-md-8">
+      <div class="col-md-10">
         {{ form_widget(form) }}
       </div>
       {% include '::admin/recette/boutons_de_control.html.twig' %}
@@ -18,9 +18,11 @@
 
 {% block quantite_ingredient_recette_widget %}
     <div class="row">
-      <div class="col-md-8">
+      <div class="col-md-10">
         <div class="form-inline">
-          <div class="form-group">{{ form_widget(form.ingredient) }}</div>
+          <div class="form-group">
+            {{ form_widget(form.ingredient, {'attr': {'class': 'ingredient_search', 'placeholder': 'Ingrédient'}}) }}
+          </div>
           <div class="form-group">{{ form_widget(form.quantite, {'attr': {'class': 'quantite'}}) }}</div>
           <div class="form-group">{{ form_widget(form.unite) }}</div>
         </div>

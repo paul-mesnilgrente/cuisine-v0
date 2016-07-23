@@ -179,6 +179,7 @@ class LoadIngredientData extends AbstractFixture implements FixtureInterface, Co
         $this->addIngredient($manager, array('rayon-légumineuses'), 'haricot-rouge.jpg', 'haricots rouges', 'haricots rouges');
         $this->addIngredient($manager, array('rayon-légumineuses'), 'haricots-blancs.jpg', 'haricots blancs', 'haricot blancs');
         $this->addIngredient($manager, array('rayon-légumineuses'), 'lentilles.jpg', 'lentilles', 'lentilles');
+        $this->addIngredient($manager, array('rayon-légumineuses'), 'corail.jpg', 'lentilles corails', 'lentilles corails');
         $this->addIngredient($manager, array('rayon-légumineuses'), 'pois cassés.jpg', 'pois cassés', 'pois cassés');
 
         $this->addIngredient($manager, array('rayon-patisserie'), 'farine.jpg', 'farine', 'farines');

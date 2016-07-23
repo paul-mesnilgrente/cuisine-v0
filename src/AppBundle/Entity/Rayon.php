@@ -27,6 +27,20 @@ class Rayon
      * @ORM\Column(name="nom", type="string", length=255, unique=true)
      */
     private $nom;
+
+    /**
+     * @var Ingredient
+     *
+     * @ORM\ManyToMany(targetEntity="Ingredient", mappedBy="rayons")
+     */
+    private $ingredients;
+
+    /**
+     * @var Ingredient
+     *
+     * @ORM\ManyToMany(targetEntity="Produit", mappedBy="rayons")
+     */
+    private $produits;
     
     /**
      * Get id
@@ -64,5 +78,80 @@ class Rayon
 
     public function __toString() {
         return $this->nom;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->ingredients = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add ingredient
+     *
+     * @param \AppBundle\Entity\Ingredient $ingredient
+     *
+     * @return Rayon
+     */
+    public function addIngredient(\AppBundle\Entity\Ingredient $ingredient)
+    {
+        $this->ingredients[] = $ingredient;
+
+        return $this;
+    }
+
+    /**
+     * Remove ingredient
+     *
+     * @param \AppBundle\Entity\Ingredient $ingredient
+     */
+    public function removeIngredient(\AppBundle\Entity\Ingredient $ingredient)
+    {
+        $this->ingredients->removeElement($ingredient);
+    }
+
+    /**
+     * Get ingredients
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getIngredients()
+    {
+        return $this->ingredients;
+    }
+
+    /**
+     * Add produit
+     *
+     * @param \AppBundle\Entity\Produit $produit
+     *
+     * @return Rayon
+     */
+    public function addProduit(\AppBundle\Entity\Produit $produit)
+    {
+        $this->produits[] = $produit;
+
+        return $this;
+    }
+
+    /**
+     * Remove produit
+     *
+     * @param \AppBundle\Entity\Produit $produit
+     */
+    public function removeProduit(\AppBundle\Entity\Produit $produit)
+    {
+        $this->produits->removeElement($produit);
+    }
+
+    /**
+     * Get produits
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getProduits()
+    {
+        return $this->produits;
     }
 }

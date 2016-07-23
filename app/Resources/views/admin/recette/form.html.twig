@@ -21,10 +21,10 @@
 
     {{ form_row(form.publique) }}
     <div class="row">
-      <div class="col-md-4">
+      <div class="col-md-6">
         {{ form_row(form.ingredients) }}
       </div>
-      <div class="col-md-8">
+      <div class="col-md-6">
         {{ form_row(form.etapes) }}
       </div>
     </div>
@@ -61,6 +61,7 @@
   <script src="{{ asset('app/js/jquery.collection.js') }}"></script>
 
   <script type="text/javascript">
+      var slugUser = "{{ app.user.slugUser }}"
       $('.liste_etape').collection({
         'add': '<a href="#" class="btn btn-info">Ajouter une étape</a>',
         allow_duplicate: true
