@@ -41,14 +41,16 @@ class Builder implements ContainerAwareInterface
             $menu['Mes actions']->addChild("Liste des ingrédients", array('route' => 'liste_ingredient'));
             $menu['Mes actions']->addChild("Liste des produits", array('route' => 'liste_produit'));
 
-            $menu->addChild('Paramètre', array('route' => 'fos_user_profile_show'));
-            $menu->addChild($translator->trans('layout.logout', array('%username%' => $user), 'FOSUserBundle'), array('route' => 'fos_user_security_logout'));
+            $menu['Mes actions']->addChild("#")->setAttribute('divider', true);
+            $menu['Mes actions']->addChild('Paramètre', array('route' => 'fos_user_profile_show'));
+            $menu['Mes actions']->addChild($translator->trans('layout.logout', array('%username%' => $user), 'FOSUserBundle'), array('route' => 'fos_user_security_logout'));
         } else {
             $menu->addChild($translator->trans('layout.login', array(), 'FOSUserBundle'), array('route' => 'fos_user_security_login'));
             $menu->addChild($translator->trans('layout.register', array(), 'FOSUserBundle'), array('route' => 'fos_user_registration_register'));
         }
         if ($this->container->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
-            $menu->addChild('Admin')->setAttribute('dropdown', true);
+            $menu->addChild('Admin')
+                ->setAttribute('dropdown', true);
             $menu['Admin']->addChild('Ajouter une catégorie de recette', array('route' => 'ajouter_categorie_recette'));
             $menu['Admin']->addChild('Ajouter une unité', array('route' => 'ajouter_unite'));
             $menu['Admin']->addChild('Ajouter une catégorie ingrédient', array('route' => 'ajouter_categorie_ingredient'));
