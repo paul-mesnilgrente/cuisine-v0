@@ -35,13 +35,6 @@ class Ingredient
     /**
      * @var string
      *
-     * @ORM\Column(name="pluriel", type="string", length=255, unique=true)
-     */
-    private $pluriel;
-
-    /**
-     * @var string
-     *
      * @Gedmo\Slug(fields={"nom"})
      * @ORM\Column(name="slug", type="string", length=255, unique=true)
      */
@@ -163,30 +156,6 @@ class Ingredient
     public function getSlug()
     {
         return $this->slug;
-    }
-
-    /**
-     * Set pluriel
-     *
-     * @param string $pluriel
-     *
-     * @return Ingredient
-     */
-    public function setPluriel($pluriel)
-    {
-        $this->pluriel = $pluriel;
-
-        return $this;
-    }
-
-    /**
-     * Get pluriel
-     *
-     * @return string
-     */
-    public function getPluriel()
-    {
-        return $this->pluriel;
     }
 
     /**

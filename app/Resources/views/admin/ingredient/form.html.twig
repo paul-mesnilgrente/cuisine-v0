@@ -7,13 +7,12 @@
   <div class="col-md-6 col-md-offset-4 well">
     <h1>{{ action }} un ingrédient</h1>
     {{ form_start(form) }}
+      {{ form_row(form.nom) }}
       <div class="row">
         <div class="col-md-6">
-          {{ form_row(form.nom) }}
           {{ form_row(form.rayons) }}
         </div>
         <div class="col-md-6">
-          {{ form_row(form.pluriel) }}
           {{ form_row(form.categorie) }}
         </div>
       </div>

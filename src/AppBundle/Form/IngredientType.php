@@ -22,8 +22,6 @@ class IngredientType extends AbstractType
                 'attr' => array('autofocus' => true)
                 ))
 
-            ->add('pluriel')
-
             ->add('rayons', EntityType::class, array(
                 'class' => 'AppBundle:Rayon',
                 'choice_label' => 'nom',
