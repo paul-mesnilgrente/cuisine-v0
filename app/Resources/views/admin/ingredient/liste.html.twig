@@ -13,7 +13,7 @@
             <th>N°</th>
             <th>Image</th>
             <th>Nom</th>
-            <th>Pluriel</th>
+            <th>Categorie</th>
             <th>Rayons</th>
             {% if is_granted('ROLE_ADMIN') %}
               <th>Modifier</th>
@@ -26,7 +26,7 @@
             <td>{{ loop.index }}</td>
             <td><img height=60 src="{{ vich_uploader_asset(ingredient, 'imageFile') }}" alt="Image '{{ ingredient.imageName }}'" /></td>
             <td>{{ ingredient.nom|capitalize }}</td>
-            <td>{{ ingredient.pluriel|capitalize }}</td>
+            <td>{% if ingredient.categorie is null %}-{% else %}{{ ingredient.categorie.nom }}{% endif %}</td>
             <td>{% for rayon in ingredient.rayons %}{{ rayon.nom }}{% if not loop.last %}, {% endif %}{% endfor %}</td>
             {% if is_granted('ROLE_ADMIN') %}
               <td><a href="{{ path('modifier_ingredient', {'slugUser': app.user.slugUser, 'slug': ingredient.slug }) }}">Modifier</a></td>

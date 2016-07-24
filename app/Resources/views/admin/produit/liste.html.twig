@@ -11,6 +11,7 @@
       <thead>
         <tr>
           <th>N°</th>
+          <th>Image</th>
           <th>Nom</th>
           <th>Rayons</th>
           {% if is_granted('ROLE_ADMIN') %}
@@ -22,6 +23,7 @@
       {% for produit in rayon.produits %}
         <tr>
           <td>{{ loop.index }}</td>
+          <td><img height=60 src="{{ vich_uploader_asset(produit, 'imageFile') }}" alt="Image '{{ produit.imageName }}'" /></td>
           <td>{{ produit.nom|capitalize }}</td>
           <td>{% for rayon in produit.rayons %}{{ rayon.nom }} {% if not loop.last %}, {% endif %}{% endfor %}</td>
           {% if is_granted('ROLE_ADMIN') %}

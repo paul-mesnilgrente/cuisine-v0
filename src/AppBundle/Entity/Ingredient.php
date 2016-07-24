@@ -77,6 +77,15 @@ class Ingredient
     private $updatedAt;
 
     /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->updatedAt = new \Datetime();
+        $this->rayons = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+    
+    /**
      * Get id
      *
      * @return int
@@ -208,14 +217,6 @@ class Ingredient
     public function getImageName()
     {
         return $this->imageName;
-    }
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->updatedAt = new \Datetime();
-        $this->rayons = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**

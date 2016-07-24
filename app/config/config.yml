@@ -119,6 +119,9 @@ vich_uploader:
         ingredient_image:
             uri_prefix:         /uploads/ingredients/
             upload_destination: %kernel.root_dir%/../web/uploads/ingredients/
+        produit_image:
+            uri_prefix:         /uploads/produits/
+            upload_destination: %kernel.root_dir%/../web/uploads/produits/
 
 stof_doctrine_extensions:
     orm:

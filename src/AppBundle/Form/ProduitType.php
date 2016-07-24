@@ -27,6 +27,12 @@ class ProduitType extends AbstractType
                 'choice_label' => 'nom',
                 'multiple' => true,
                 'expanded' => true))
+
+            ->add('imageFile', 'vich_image', array(
+                'required'      => false,
+                'allow_delete'  => true, // not mandatory, default is true
+                'download_link' => true // not mandatory, default is true
+            ))
         ;
     }
     

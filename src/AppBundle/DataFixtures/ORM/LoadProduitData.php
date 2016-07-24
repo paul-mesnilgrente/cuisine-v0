@@ -26,6 +26,7 @@ class LoadProduitData extends AbstractFixture implements FixtureInterface, Conta
 
             $produit = new Produit();
             $produit->setNom($nom);
+            $produit->setImageName($nom.'.jpg');
 
             foreach ($rayons as $rayon) {
                 $produit->addRayon($rayon);
@@ -41,7 +42,7 @@ class LoadProduitData extends AbstractFixture implements FixtureInterface, Conta
     public function load(ObjectManager $manager)
     {
         $produits = array(
-            'adoussissant',
+            'adoucissant',
             'aluminium',
             'dépoussierant',
             'éponge',
@@ -60,22 +61,23 @@ class LoadProduitData extends AbstractFixture implements FixtureInterface, Conta
         $this->addProduits($manager, $produits, $rayons);
 
         $produits = array(
-            'coton',
-            'démaquillant',
-            'dentifrice',
+            'après-shampooing',
             'brosse à dent',
             'bain de bouche',
-            'shampooing',
-            'après-shampooing',
-            'soin capillaire',
-            'coiffants',
-            'gel fixateur',
+            'bas',
+            'collants',
+            'coton',
             'coloration',
-            'gel douche',
-            'déodorant',
             'crème hydratante',
+            'démaquillant',
+            'déodorant',
+            'dentifrice',
+            'gel fixateur',
+            'gel douche',
             'savon',
+            'shampooing',
             'serviette hygiénique',
+            'soin capillaire',
             'tampon',
             'mousse à raser',
             'lame de rasoir',
@@ -83,8 +85,6 @@ class LoadProduitData extends AbstractFixture implements FixtureInterface, Conta
             'rasoir jetable',
             'parfum',
             'mouchoirs',
-            'collants',
-            'bas',
             'mis-bas',
             'papier toilettes',
             'protège slip');
