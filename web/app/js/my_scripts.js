@@ -1,6 +1,5 @@
 $(document).ready(function() {
 
-  recette_ingredients_0_ingredient
   var ingredients = new Bloodhound({
     datumTokenizer: Bloodhound.tokenizers.obj.whitespace('value'),
     queryTokenizer: Bloodhound.tokenizers.whitespace,
