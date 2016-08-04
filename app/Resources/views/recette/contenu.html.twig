@@ -14,7 +14,11 @@
       </div>
       <div class="row">
         <div class="col-md-4">
-          <img class="img-responsive" src="{{ vich_uploader_asset(recette, 'imageFile') }}" alt="{{ recette.imageName }}" />
+          {% if vich_uploader_asset(recette, 'imageFile') == "" %}
+              <img class="img-responsive" src="{{ asset('app/images/no-image.jpg') }}" alt="No image" />
+            {% else %}
+              <img class="img-responsive" src="{{ vich_uploader_asset(recette, 'imageFile') }}" alt="{{ recette.imageName }}" />
+            {% endif %}
         </div>
         <div class="col-md-4">
           <div class="panel panel-primary">
