@@ -45,19 +45,6 @@ class UserController extends Controller
     }
 
     /**
-     * @Route("/mes-recettes", name="mes_recettes")
-     */
-    public function mesRecettesAction(Request $request)
-    {
-        $em = $this->getDoctrine()->getManager();
-        $recettes = $em->getRepository('AppBundle:Recette')->findAll(
-            array('user' => $this->getUser()),
-            array('date' => 'desc'));
-        return $this->render('recette/liste.html.twig', array(
-            'recettes' => $recettes));
-    }
-
-    /**
      * @Route("/{slugUser}", name="user_ma_page")
      */
     public function maPageAction(Request $request, User $user)

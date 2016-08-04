@@ -12,7 +12,6 @@ use AppBundle\Form\ProduitType;
 use AppBundle\Form\ProduitSearchType;
 
 /**
- * @Route("/produit")
  * @Security("has_role('ROLE_USER')")
  */
 class ProduitController extends Controller
@@ -36,7 +35,7 @@ class ProduitController extends Controller
     }
 
     /**
-     * @Route("/ajouter", name="ajouter_produit")
+     * @Route("/produit/ajouter", name="ajouter_produit")
      */
     public function ajouterProduitAction(Request $request)
     {
@@ -46,7 +45,7 @@ class ProduitController extends Controller
     }
 
     /**
-     * @Route("/modifier/{slug}", name="modifier_produit")
+     * @Route("/produit/modifier/{slug}", name="modifier_produit")
      */
     public function modifierProduitAction(Request $request, Produit $produit)
     {
@@ -54,7 +53,7 @@ class ProduitController extends Controller
     }
 
     /**
-     * @Route("/liste", name="liste_produit")
+     * @Route("/mes-produits", name="liste_produit")
      */
     public function listerAction()
     {

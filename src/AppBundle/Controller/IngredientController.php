@@ -11,7 +11,6 @@ use AppBundle\Entity\Ingredient;
 use AppBundle\Form\IngredientType;
 
 /**
- * @Route("ingredient")
  * @Security("has_role('ROLE_USER')")
  */
 class IngredientController extends Controller
@@ -36,7 +35,7 @@ class IngredientController extends Controller
     }
 
     /**
-     * @Route("/ajouter", name="ajouter_ingredient")
+     * @Route("/ingredient/ajouter", name="ajouter_ingredient")
      */
     public function ajouterIngredientAction(Request $request)
     {
@@ -46,7 +45,7 @@ class IngredientController extends Controller
     }
 
     /**
-     * @Route("/modifier/{slug}", name="modifier_ingredient")
+     * @Route("/ingredient/modifier/{slug}", name="modifier_ingredient")
      */
     public function modifierIngredientAction(Request $request, Ingredient $ingredient)
     {
@@ -54,7 +53,7 @@ class IngredientController extends Controller
     }
 
     /**
-     * @Route("/liste", name="liste_ingredient")
+     * @Route("/mes-ingredients", name="liste_ingredient")
      */
     public function listerAction()
     {

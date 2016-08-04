@@ -13,7 +13,7 @@ use AppBundle\Entity\User;
 use AppBundle\Form\RecetteType;
 
 /**
- * @Route("/recette")
+ * @Route("")
  * @Security("has_role('ROLE_USER')")
  */
 class RecetteController extends Controller
@@ -37,7 +37,7 @@ class RecetteController extends Controller
     }
 
     /**
-     * @Route("/ajouter", name="ajouter_recette")
+     * @Route("/recette/ajouter", name="ajouter_recette")
      */
     public function ajouterRecetteAction(Request $request)
     {
@@ -49,7 +49,7 @@ class RecetteController extends Controller
     }
 
     /**
-     * @Route("/modifier/{slug}", name="modifier_recette")
+     * @Route("/recette/modifier/{slug}", name="modifier_recette")
      */
     public function modifierRecetteAction(Request $request, User $user, Recette $recette)
     {
@@ -57,7 +57,7 @@ class RecetteController extends Controller
     }
 
     /**
-     * @Route("/{slug}", name="voir_recette")
+     * @Route("/recette/{slug}", name="voir_recette")
      */
     public function voirRecetteAction(Request $request, User $user, Recette $recette)
     {
@@ -66,7 +66,20 @@ class RecetteController extends Controller
     }
 
     /**
-     * @Route("/execution/{slug}/etape-{etape}",
+     * @Route("/mes-recettes", name="mes_recettes")
+     */
+    public function mesRecettesAction(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $recettes = $em->getRepository('AppBundle:Recette')->findAll(
+            array('user' => $this->getUser()),
+            array('date' => 'desc'));
+        return $this->render('recette/liste.html.twig', array(
+            'recettes' => $recettes));
+    }
+
+    /**
+     * @Route("/recette/execution/{slug}/etape-{etape}",
      *         name="executer_recette",
      *         defaults={"etape": "0"},
      *         requirements={"etape": "\d+"}
@@ -80,7 +93,7 @@ class RecetteController extends Controller
     }
 
     /**
-     * @Route("/ingredients/{caracteres}", options={"expose"=true}, name="autocomplete_ingredient_recette")
+     * @Route("/recette/ingredients/{caracteres}", options={"expose"=true}, name="autocomplete_ingredient_recette")
      */
     public function autocompleteIngredient(Request $request, $caracteres) {
         $em = $this->getDoctrine()->getManager();
@@ -91,7 +104,7 @@ class RecetteController extends Controller
     }
 
     /**
-     * @Route("/chercher/{caracteres}", options={"expose"=true}, name="chercher_recette")
+     * @Route("/recette/chercher/{caracteres}", options={"expose"=true}, name="chercher_recette")
      */
     public function chercherRecetteAction($caracteres)
     {
