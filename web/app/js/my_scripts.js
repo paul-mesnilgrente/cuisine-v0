@@ -9,13 +9,20 @@ $(document).ready(function() {
     }
   });
 
-  $('.ingredient_search').typeahead(null, {
-    name: 'ingredients',
-    display: 'value',
-    source: ingredients
-  });
+  function getTypeAheadReady() {
+    $('.ingredient_search').ready().typeahead(null, {
+      name: 'ingredients',
+      display: 'value',
+      source: ingredients
+    });
+  }
 
+  $(document).on('click', '.collection-add', function() {
+    $('.ingredient_search').typeahead('destroy');
+    getTypeAheadReady();
+  })
 
+  getTypeAheadReady();
 
 
 

@@ -7,6 +7,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
 use Doctrine\Common\Persistence\ObjectManager;
@@ -27,7 +28,7 @@ class QuantiteIngredientRecetteType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('quantite')
+            ->add('quantite', IntegerType::class)
             
             ->add('ingredient', TextType::class)
 

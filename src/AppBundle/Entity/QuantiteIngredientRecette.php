@@ -51,12 +51,6 @@ class QuantiteIngredientRecette
      */
     private $recette;
 
-
-    public function __construct()
-    {
-        $this->quantite = 1;
-    }
-
     /**
      * Get id
      *
