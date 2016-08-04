@@ -58,11 +58,7 @@
               {% for ingredient in recette.ingredients %}
                 <li>
                   {{ ingredient.quantite }} {{ ingredient.unite.nom }} de 
-                  {% if ingredient.quantite < 2 %}
-                    {{ ingredient.ingredient.nom }}
-                  {% else %}
-                    {{ ingredient.ingredient.pluriel }}
-                  {% endif %}
+                  {{ ingredient.ingredient.nom }}
                 </li>
               {% endfor %}
             </ul>
