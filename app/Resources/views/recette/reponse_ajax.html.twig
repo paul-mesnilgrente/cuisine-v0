@@ -8,13 +8,13 @@
       {% for recette in recettes %}
         <div class="col-md-3 media">
           <div class="media-left">
-            <a href="#">
-              {% if vich_uploader_asset(recette, 'imageFile') == "" %}
-                <img width=64 height=64 class="media-object" src="{{ asset('app/images/no-image.jpg') }}" alt="No image" />
-              {% else %}
-                <img width=64 height=64 class="media-object" src="{{ vich_uploader_asset(recette, 'imageFile') }}" alt="{{ recette.imageName }}" />
-              {% endif %}
-            </a>
+            <a href="{{ path('voir_recette', {'slug': recette.slug, 'slugUser': app.user.slugUser}) }}">
+            {% if vich_uploader_asset(recette, 'imageFile') == "" %}
+              <img width=64 height=64 class="media-object" src="{{ asset('app/images/no-image.jpg') }}" alt="No image" />
+            {% else %}
+              <img width=64 height=64 class="media-object" src="{{ vich_uploader_asset(recette, 'imageFile') }}" alt="{{ recette.imageName }}" />
+            {% endif %}
+          </a>
           </div>
           <div class="media-body">
             <h4 class="media-heading">{{ recette.nom }}</h4>
@@ -28,5 +28,4 @@
       {% endfor %}
     </ul>
   {% endif %}
-
 </div>
