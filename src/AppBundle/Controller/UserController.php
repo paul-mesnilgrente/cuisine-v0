@@ -13,16 +13,17 @@ use AppBundle\Entity\QuantiteProduit;
 use AppBundle\Form\ProduitSearchType;
 
 /**
- * @Route("/{slugUser}")
+ * @Route("/")
  * @Security("has_role('ROLE_USER')")
  */
 class UserController extends Controller
 {
     /**
-     * @Route("/tableau-de-bord", name="user_tableau_de_bord")
+     * @Route("/mon-tableau-de-bord", name="user_tableau_de_bord")
      */
-    public function tableauDeBordAction(Request $request, User $user)
+    public function tableauDeBordAction(Request $request)
     {
+        $user = $this->getUser();
         $em = $this->getDoctrine()->getManager();
         $liste = $em->getRepository('AppBundle:ListeDeCourse')->findOneByUser($user);
 
@@ -44,7 +45,20 @@ class UserController extends Controller
     }
 
     /**
-     * @Route("/", name="user_ma_page")
+     * @Route("/mes-recettes", name="mes_recettes")
+     */
+    public function mesRecettesAction(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $recettes = $em->getRepository('AppBundle:Recette')->findAll(
+            array('user' => $this->getUser()),
+            array('date' => 'desc'));
+        return $this->render('recette/liste.html.twig', array(
+            'recettes' => $recettes));
+    }
+
+    /**
+     * @Route("/{slugUser}", name="user_ma_page")
      */
     public function maPageAction(Request $request, User $user)
     {

@@ -13,25 +13,11 @@ use AppBundle\Entity\User;
 use AppBundle\Form\RecetteType;
 
 /**
- * @Route("{slugUser}/recette")
+ * @Route("/recette")
  * @Security("has_role('ROLE_USER')")
  */
 class RecetteController extends Controller
 {
-
-    /**
-     * @Route("/liste", name="liste_recette")
-     */
-    public function listeRecetteAction(Request $request, User $user)
-    {
-        $em = $this->getDoctrine()->getManager();
-        $recettes = $em->getRepository('AppBundle:Recette')->findAll(
-            array('user' => $user),
-            array('date' => 'desc'));
-        return $this->render('recette/liste.html.twig', array(
-            'recettes' => $recettes));
-    }
-
     private function formulaireRecetteAction(Request $request, Recette $recette, $action)
     {
         $form = $this->createForm(RecetteType::class, $recette);
@@ -53,9 +39,9 @@ class RecetteController extends Controller
     /**
      * @Route("/ajouter", name="ajouter_recette")
      */
-    public function ajouterRecetteAction(Request $request, User $user)
+    public function ajouterRecetteAction(Request $request)
     {
-        $recette = new Recette($user);
+        $recette = new Recette($this->getUser());
         $recette->addIngredient(new QuantiteIngredientRecette());
         $recette->setEtapes(array(""));
         

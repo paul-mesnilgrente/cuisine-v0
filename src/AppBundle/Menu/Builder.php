@@ -19,7 +19,7 @@ class Builder implements ContainerAwareInterface
         $menu = $factory->createItem('root');
         $menu->addChild("Accueil", array('route' => 'homepage'));
         if ($auth->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
-            $menu->addChild("Consulter recettes", array('route' => 'liste_recette', 'routeParameters' => array('slugUser' => $user->getSlugUser())));
+            $menu->addChild("Mes recettes", array('route' => 'mes_recettes'));
         }
         return $menu;
     }
@@ -32,12 +32,12 @@ class Builder implements ContainerAwareInterface
         $translator = $this->container->get('translator');
         if ($this->container->get('security.authorization_checker')->isGranted('ROLE_USER')) {
             $menu->addChild($user->getUsername(), array('route' => 'user_ma_page', 'routeParameters' => array('slugUser' => $user->getSlugUser())));
-            $menu->addChild("Tableau de bord", array('route' => 'user_tableau_de_bord', 'routeParameters' => array('slugUser' => $user->getSlugUser())));
+            $menu->addChild("Tableau de bord", array('route' => 'user_tableau_de_bord'));
 
             $menu->addChild("Mes actions")->setAttribute('dropdown', true);
-            $menu['Mes actions']->addChild("Ajouter une recette", array('route' => 'ajouter_recette', 'routeParameters' => array('slugUser' => $user->getSlugUser())));
-            $menu['Mes actions']->addChild("Ajouter produit ménager", array('route' => 'ajouter_produit', 'routeParameters' => array('slugUser' => $user->getSlugUser())));
-            $menu['Mes actions']->addChild("Ajouter un ingrédient", array('route' => 'ajouter_ingredient', 'routeParameters' => array('slugUser' => $user->getSlugUser())));
+            $menu['Mes actions']->addChild("Ajouter une recette", array('route' => 'ajouter_recette'));
+            $menu['Mes actions']->addChild("Ajouter produit ménager", array('route' => 'ajouter_produit'));
+            $menu['Mes actions']->addChild("Ajouter un ingrédient", array('route' => 'ajouter_ingredient'));
             $menu['Mes actions']->addChild("Liste des ingrédients", array('route' => 'liste_ingredient'));
             $menu['Mes actions']->addChild("Liste des produits", array('route' => 'liste_produit'));
 
@@ -49,8 +49,7 @@ class Builder implements ContainerAwareInterface
             $menu->addChild($translator->trans('layout.register', array(), 'FOSUserBundle'), array('route' => 'fos_user_registration_register'));
         }
         if ($this->container->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
-            $menu->addChild('Admin')
-                ->setAttribute('dropdown', true);
+            $menu->addChild('Admin')->setAttribute('dropdown', true);
             $menu['Admin']->addChild('Ajouter une catégorie de recette', array('route' => 'ajouter_categorie_recette'));
             $menu['Admin']->addChild('Ajouter une unité', array('route' => 'ajouter_unite'));
             $menu['Admin']->addChild('Ajouter une catégorie ingrédient', array('route' => 'ajouter_categorie_ingredient'));

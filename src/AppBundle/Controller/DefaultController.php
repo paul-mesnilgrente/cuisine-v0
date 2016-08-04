@@ -20,8 +20,7 @@ class DefaultController extends Controller
 
             $user = $this->get('security.token_storage')->getToken()->getUser();
             
-            return $this->redirectToRoute('user_tableau_de_bord', array(
-                'slugUser' => $user->getSlugUser()));
+            return $this->redirectToRoute('user_tableau_de_bord');
         }
 
         return $this->render('default/index.html.twig');

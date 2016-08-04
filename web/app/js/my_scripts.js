@@ -102,7 +102,7 @@ $(document).ready(function() {
   $("#semaine-precedente").click(function() {
     dateSuivante = datePrecedente;
     datePrecedente.setDate(datePrecedente.getDate() - 7);
-    var urlSemaine = Routing.generate('tableau_body_planning', {'slugUser': slug, 'date': datePrecedente});
+    var urlSemaine = Routing.generate('tableau_body_planning', {'date':  dateSuivante.getDate() + '-' + dateSuivante.getMonth() + '-' + dateSuivante.getFullYear()});
     $.ajax({
       type: "POST",
       url: urlSemaine,
@@ -121,7 +121,7 @@ $(document).ready(function() {
     datePrecedente = dateSuivante;
     dateSuivante.setDate(dateSuivante.getDate() + 7);
 
-    var urlSemaine = Routing.generate('tableau_body_planning', {'slugUser': slug, 'date': dateSuivante});
+    var urlSemaine = Routing.generate('tableau_body_planning', {'date': datePrecedente.getDate() + '-' + datePrecedente.getMonth() + '-' + datePrecedente.getFullYear()});
     $.ajax({
       type: "POST",
       url: urlSemaine,
