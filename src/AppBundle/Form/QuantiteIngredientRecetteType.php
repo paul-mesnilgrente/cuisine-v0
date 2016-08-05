@@ -30,7 +30,8 @@ class QuantiteIngredientRecetteType extends AbstractType
         $builder
             ->add('quantite', IntegerType::class)
             
-            ->add('ingredient', TextType::class)
+            ->add('ingredient', TextType::class, array(
+                'invalid_message' => 'Cet ingrédient n\'est pas dans votre liste'))
 
             ->add('unite', EntityType::class, array(
                 'class' => 'AppBundle:Unite',

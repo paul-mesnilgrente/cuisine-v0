@@ -49,7 +49,7 @@ class StringToTagTransformer implements DataTransformerInterface
             // this message is not shown to the user
             // see the invalid_message option
             throw new TransformationFailedException(
-                            "L'ingrédient avec le nom " .$nomTag."n'existe pas");
+                            "Le tag " .$nomTag." n'existe pas");
         }
 
         return $tag;

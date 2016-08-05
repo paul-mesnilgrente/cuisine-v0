@@ -9,7 +9,6 @@ use Symfony\Component\HttpFoundation\Request;
 
 use AppBundle\Entity\QuantiteIngredientRecette;
 use AppBundle\Entity\Recette;
-use AppBundle\Entity\User;
 use AppBundle\Form\RecetteType;
 
 /**
@@ -51,7 +50,7 @@ class RecetteController extends Controller
     /**
      * @Route("/recette/modifier/{slug}", name="modifier_recette")
      */
-    public function modifierRecetteAction(Request $request, User $user, Recette $recette)
+    public function modifierRecetteAction(Request $request, Recette $recette)
     {
         return $this->formulaireRecetteAction($request, $recette, "Modifier");
     }
@@ -59,7 +58,7 @@ class RecetteController extends Controller
     /**
      * @Route("/recette/{slug}", name="voir_recette")
      */
-    public function voirRecetteAction(Request $request, User $user, Recette $recette)
+    public function voirRecetteAction(Request $request, Recette $recette)
     {
         return $this->render('recette/consulter.html.twig', array(
             'recette' => $recette));
@@ -85,7 +84,7 @@ class RecetteController extends Controller
      *         requirements={"etape": "\d+"}
      *       )
      */
-    public function executerRecetteAction(Request $request, User $user, Recette $recette, $etape)
+    public function executerRecetteAction(Request $request, Recette $recette, $etape)
     {
         return $this->render('recette/executer.html.twig', array(
             'recette' => $recette,
@@ -100,7 +99,7 @@ class RecetteController extends Controller
         $ingredients = $em->getRepository('AppBundle:Ingredient')->rechercherIngredient($caracteres);
 
         return $this->render('recette/autocomplete_ingredient.json.twig', array(
-            'ingredients' => $ingredients));
+            'ingredients' => $ingredients, 'caracteres' => $caracteres));
     }
 
     /**

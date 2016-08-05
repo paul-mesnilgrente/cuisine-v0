@@ -12,6 +12,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Vich\UploaderBundle\Form\Type\VichImageType;
+use AppBundle\Form\TagSelectorType;
 
 class RecetteType extends AbstractType
 {
@@ -73,11 +74,7 @@ class RecetteType extends AbstractType
                 'multiple' => false,
                 'expanded' => true))
 
-            ->add('tags', EntityType::class, array(
-                'class' => 'AppBundle:TagRecette',
-                'choice_label' => 'nom',
-                'multiple' => true,
-                'expanded' => true))
+            ->add('tags', TagSelectorType::class)
             
             ->add('imageFile', VichImageType::class, array(
                 'required'      => false,

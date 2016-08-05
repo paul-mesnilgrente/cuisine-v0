@@ -1,9 +1,15 @@
 {% autoescape %}
 [
+  {% if ingredients is empty %}
+    {
+        "value": "Aucun résultat, ajoutez l'ingrédient à votre liste (Mes actions)"."
+    }
+  {% else %}
     {% for ingredient in ingredients %}
     {
         "value": "{{ ingredient.nom }}"
     }{% if not loop.last %},{% endif %}
     {% endfor %}
+  {% endif %}
 ]
 {% endautoescape %}
