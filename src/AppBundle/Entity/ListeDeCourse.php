@@ -37,18 +37,11 @@ class ListeDeCourse
     private $date;
 
     /**
-     * @var QuantiteIngredientRecette
+     * @var EntreeListe
      *
-     * @ORM\OneToMany(targetEntity="QuantiteIngredientListeDeCourse", mappedBy="listeDeCourse", cascade={"persist"})
+     * @ORM\OneToMany(targetEntity="EntreeListe", mappedBy="liste", cascade={"persist"})
      */
-    private $ingredients;
-
-    /**
-     * @var QuantiteProduit
-     *
-     * @ORM\OneToMany(targetEntity="QuantiteProduit", mappedBy="listeDeCourse", cascade={"persist"})
-     */
-    private $produits;
+    private $entrees;
 
     /**
      * Constructor
@@ -57,8 +50,7 @@ class ListeDeCourse
     {
         $this->user = $user;
         $this->date = new \Datetime();
-        $this->ingredients = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->produits = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->entree = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -96,74 +88,6 @@ class ListeDeCourse
     }
 
     /**
-     * Add ingredient
-     *
-     * @param \AppBundle\Entity\QuantiteIngredientListeDeCourse $ingredient
-     *
-     * @return ListeDeCourse
-     */
-    public function addIngredient(\AppBundle\Entity\QuantiteIngredientListeDeCourse $ingredient)
-    {
-        $this->ingredients[] = $ingredient;
-
-        return $this;
-    }
-
-    /**
-     * Remove ingredient
-     *
-     * @param \AppBundle\Entity\QuantiteIngredientListeDeCourse $ingredient
-     */
-    public function removeIngredient(\AppBundle\Entity\QuantiteIngredientListeDeCourse $ingredient)
-    {
-        $this->ingredients->removeElement($ingredient);
-    }
-
-    /**
-     * Get ingredients
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getIngredients()
-    {
-        return $this->ingredients;
-    }
-
-    /**
-     * Add produit
-     *
-     * @param \AppBundle\Entity\QuantiteProduit $produit
-     *
-     * @return ListeDeCourse
-     */
-    public function addProduit(\AppBundle\Entity\QuantiteProduit $produit)
-    {
-        $this->produits[] = $produit;
-
-        return $this;
-    }
-
-    /**
-     * Remove produit
-     *
-     * @param \AppBundle\Entity\QuantiteProduit $produit
-     */
-    public function removeProduit(\AppBundle\Entity\QuantiteProduit $produit)
-    {
-        $this->produits->removeElement($produit);
-    }
-
-    /**
-     * Get produits
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getProduits()
-    {
-        return $this->produits;
-    }
-
-    /**
      * Set user
      *
      * @param \AppBundle\Entity\User $user
@@ -185,5 +109,49 @@ class ListeDeCourse
     public function getUser()
     {
         return $this->user;
+    }
+
+    /**
+     * Add entree
+     *
+     * @param \AppBundle\Entity\EntreeListe $entree
+     *
+     * @return ListeDeCourse
+     */
+    public function addEntree(\AppBundle\Entity\EntreeListe $entree)
+    {
+        $this->entree[] = $entree;
+
+        return $this;
+    }
+
+    /**
+     * Remove entree
+     *
+     * @param \AppBundle\Entity\EntreeListe $entree
+     */
+    public function removeEntree(\AppBundle\Entity\EntreeListe $entree)
+    {
+        $this->entree->removeElement($entree);
+    }
+
+    /**
+     * Get entree
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getEntree()
+    {
+        return $this->entree;
+    }
+
+    /**
+     * Get entrees
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getEntrees()
+    {
+        return $this->entrees;
     }
 }

@@ -24,21 +24,35 @@ class RayonRepository extends \Doctrine\ORM\EntityRepository
     }
 
     public function getIngredients() {
-        $qb = $this->createQueryBuilder('r')
-            ->join('r.ingredients', 'i')
-            ->join('i.rayons' ,'r1')
-            ->addSelect('i')
-            ->addSelect('r1');
+        $qb = $this->createQueryBuilder('rayon')
+            ->join('rayon.produits', 'produit')
+            ->join('produit.rayons' ,'rayonProduit')
+            ->where('produit INSTANCE OF AppBundle\Entity\Ingredient')
+            ->addSelect('produit')
+            ->addSelect('rayonProduit');
 
         return $qb->getQuery()->getResult();
     }
 
     public function getProduits() {
+        $qb = $this->createQueryBuilder('rayon')
+            ->join('rayon.produits', 'produit')
+            ->join('produit.rayons' ,'rayonProduit')
+            ->where('produit INSTANCE OF AppBundle\Entity\Produit')
+            ->addSelect('produit')
+            ->addSelect('rayonProduit');
+
+        return $qb->getQuery()->getResult();
+    }
+
+    public function rechercherProduits($caracteres) {
         $qb = $this->createQueryBuilder('r')
             ->join('r.produits', 'p')
             ->join('p.rayons' ,'r1')
+            ->where("p.nom LIKE :caracteres")
             ->addSelect('p')
-            ->addSelect('r1');
+            ->addSelect('r1')
+            ->setParameter('caracteres', '%'.$caracteres.'%');;
 
         return $qb->getQuery()->getResult();
     }

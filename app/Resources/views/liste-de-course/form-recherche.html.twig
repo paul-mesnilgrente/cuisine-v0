@@ -1,18 +1,8 @@
-{{ form_start(form, {'style': 'inline'}) }}
-  <div class="row">
-    <div class="col-md-6">
-      {{ form_row(form.produit) }}
-    </div>
-    <div class="col-md-2">
-      {# {{ form_label(form.quantite, {'attr': {'class': 'sr-only'}}) }} #}
-      {{ form_widget(form.quantite, {'attr': {'style': 'width: 100px;'}}) }}
-    </div>
-    <div class="col-md-2">
-      {{ form_row(form.unite) }}
-    </div>
-    <div class="col-md-2">
-      {{ form_row(form.valider) }}
-    </div>
+{{ form_start(form) }}
+  {{ form_label(form.produit) }}
+  <div>
+    {{ form_widget(form.produit) }}
   </div>
+  {{ form_errors(form.produit) }}
+
 {{ form_rest(form) }}
-<div id="resultat-recherche-produit"></div>

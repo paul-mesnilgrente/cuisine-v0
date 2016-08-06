@@ -2,10 +2,11 @@
 
 namespace AppBundle\Form\DataTransformer;
 
-use AppBundle\Entity\Issue;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\Form\DataTransformerInterface;
 use Symfony\Component\Form\Exception\TransformationFailedException;
+
+use AppBundle\Entity\Produit;
 
 class StringToProduitTransformer implements DataTransformerInterface
 {
@@ -17,9 +18,9 @@ class StringToProduitTransformer implements DataTransformerInterface
     }
 
     /**
-     * Transforms an object (issue) to a string (number).
+     * Transforms an object (produit) to a string (number).
      *
-     * @param  Issue|null $issue
+     * @param  Produit|null $produit
      * @return string
      */
     public function transform($produit)
@@ -28,20 +29,21 @@ class StringToProduitTransformer implements DataTransformerInterface
             return '';
         }
 
-        return $produit->getNom();
+        return $produit;
     }
 
     /**
-     * Transforms a string (number) to an object (issue).
+     * Transforms a string (number) to an object (produit).
      *
      * @param  string $nomIngredient
-     * @return Issue|null
-     * @throws TransformationFailedException if object (issue) is not found.
+     * @return Produit|null
+     * @throws TransformationFailedException if object (produit) is not found.
      */
-    public function reverseTransform($nomProduit)
+    public function reverseTransform($string)
     {
+        $nomProduit = explode(' : ', $string)[1];
         $produit = $this->manager->getRepository('AppBundle:Produit')
-            // query for the issue with this name
+            // query for the produit with this name
             ->findOneByNom($nomProduit);
 
         if (null === $produit) {
@@ -49,7 +51,7 @@ class StringToProduitTransformer implements DataTransformerInterface
             // this message is not shown to the user
             // see the invalid_message option
             throw new TransformationFailedException(
-                            "L'ingrédient avec le nom " .$nomProduit."n'existe pas");
+                            "Le produit avec le nom ".$nomProduit."n'existe pas");
         }
 
         return $produit;

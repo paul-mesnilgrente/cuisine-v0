@@ -4,13 +4,13 @@ $(document).ready(function() {
     datumTokenizer: Bloodhound.tokenizers.obj.whitespace('value'),
     queryTokenizer: Bloodhound.tokenizers.whitespace,
     remote: {
-      url: Routing.generate('autocomplete_ingredient_recette', {'slugUser': slugUser, 'caracteres': 'caracteres'}),
+      url: Routing.generate('autocomplete_ingredient_recette', {'caracteres': 'caracteres'}),
       wildcard: 'caracteres'
     }
   });
 
   function getTypeAheadReady() {
-    $('.ingredient_search').ready().typeahead(null, {
+    $('.ingredient_search').typeahead(null, {
       name: 'ingredients',
       display: 'value',
       source: ingredients
@@ -31,35 +31,43 @@ $(document).ready(function() {
 
 
   $("#ajouter-produit").click(function() { 
-    var urlFormulaire = Routing.generate('formulaire_recherche_produit', {'slugUser': slugUser});
     $.ajax({
       type: "POST",
-      url: urlFormulaire,
+      url: Routing.generate('formulaire_recherche_produit'),
       dataType: 'html',
       cache: false,
       success: function(codeHTML, statut) {
         $("#ajouter-produit").before($(codeHTML).fadeIn());
-        $("form").index();
+        $('#entree_search_produit').typeahead('destroy');
+        getTypeAheadEntreeListeReady();
       }
     });
     return false;
   });
 
-  $(document).on('keyup', '#produit_search_produit', function() {
-    searchText = $(this).val();
-    var urlChercherProduit = Routing.generate('rechercher_produit', {'slugUser': slugUser, 'caracteres': searchText});
-    if (searchText.length >= 3) {
-      $("#resultat-recherche-produit").load(urlChercherProduit);
-    } else {
-      $("#resultat-recherche-produit").html("");
-    }
-    return false;
-  });
+  function getTypeAheadEntreeListeReady() {
+    $('#entree_liste_produit').typeahead(null, {
+      name: 'entreeListe',
+      display: 'value',
+      limit: 20,
+      source: entreeListe,
+      templates: {
+        empty: [
+            '<div class="empty-message">',
+            'No results',
+            '</div>'
+        ].join('\n')
+      }
+    });
+  }
 
-  $(document).on('click', '.resultat-produit', function() {
-    nom = $(this).text();
-    $("#produit_search_produit").val(nom);
-    return false;
+  var entreeListe = new Bloodhound({
+    datumTokenizer: Bloodhound.tokenizers.obj.whitespace('value'),
+    queryTokenizer: Bloodhound.tokenizers.whitespace,
+    remote: {
+      url: Routing.generate('rechercher_entree_liste', {'caracteres': 'caracteres'}),
+      wildcard: 'caracteres'
+    }
   });
 
 

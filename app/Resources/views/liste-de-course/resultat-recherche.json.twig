@@ -1,0 +1,13 @@
+{% autoescape %}
+[
+  {% set dernierRayon = false %}
+  {% for rayon in rayons %}
+    {% if loop.last %}{% set dernierRayon = true %}{% endif %}
+    {% for produit in rayon.produits %}
+      {
+        "value": "{{ rayon.nom }} : {{ produit.nom }}"
+      }{% if not dernierRayon or not loop.last %},{% endif %}
+    {% endfor %}
+  {% endfor %}
+]
+{% endautoescape %}

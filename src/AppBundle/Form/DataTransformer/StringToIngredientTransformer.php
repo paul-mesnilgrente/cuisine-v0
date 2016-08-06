@@ -2,10 +2,11 @@
 
 namespace AppBundle\Form\DataTransformer;
 
-use AppBundle\Entity\Issue;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\Form\DataTransformerInterface;
 use Symfony\Component\Form\Exception\TransformationFailedException;
+
+use AppBundle\Entity\Ingredient;
 
 class StringToIngredientTransformer implements DataTransformerInterface
 {
@@ -17,9 +18,9 @@ class StringToIngredientTransformer implements DataTransformerInterface
     }
 
     /**
-     * Transforms an object (issue) to a string (number).
+     * Transforms an object (ingredient) to a string (number).
      *
-     * @param  Issue|null $issue
+     * @param  Ingredient|null $ingredient
      * @return string
      */
     public function transform($ingredient)
@@ -32,16 +33,16 @@ class StringToIngredientTransformer implements DataTransformerInterface
     }
 
     /**
-     * Transforms a string (number) to an object (issue).
+     * Transforms a string (number) to an object (ingredient).
      *
      * @param  string $nomIngredient
-     * @return Issue|null
-     * @throws TransformationFailedException if object (issue) is not found.
+     * @return Ingredient|null
+     * @throws TransformationFailedException if object (ingredient) is not found.
      */
     public function reverseTransform($nomIngredient)
     {
         $ingredient = $this->manager->getRepository('AppBundle:Ingredient')
-            // query for the issue with this name
+            // query for the ingredient with this name
             ->findOneByNom($nomIngredient);
 
         if (null === $ingredient) {

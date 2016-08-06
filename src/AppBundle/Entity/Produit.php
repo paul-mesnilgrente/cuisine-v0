@@ -12,6 +12,11 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
  *
  * @ORM\Table(name="produit")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\ProduitRepository")
+ *
+ * @ORM\InheritanceType("JOINED")
+ * @ORM\DiscriminatorColumn(name="discr", type="string")
+ * @ORM\DiscriminatorMap({"produit"="produit", "ingredient"="Ingredient"})
+ *
  * @Vich\Uploadable
  */
 class Produit

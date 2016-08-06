@@ -21,7 +21,7 @@
           </tr>
         </thead>
         <tbody>
-        {% for ingredient in rayon.ingredients %}
+        {% for ingredient in rayon.produits %}
           <tr>
             <td>{{ loop.index }}</td>
             <td><img height=60 src="{{ vich_uploader_asset(ingredient, 'imageFile') }}" alt="Image '{{ ingredient.imageName }}'" /></td>

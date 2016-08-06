@@ -9,8 +9,8 @@ services:
         tags:
             - { name: twig.extension }
 
-    app.form.type.produit_search:
-        class: AppBundle\Form\ProduitSearchType
+    app.form.type.entree_liste:
+        class: AppBundle\Form\EntreeListeType
         arguments: ["@doctrine.orm.entity_manager"]
         tags:
             - { name: form.type }

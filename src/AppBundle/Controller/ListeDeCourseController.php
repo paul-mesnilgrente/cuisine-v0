@@ -11,14 +11,13 @@ use AppBundle\Entity\ListeDeCourse;
 use AppBundle\Form\ListeDeCourseType;
 use AppBundle\Entity\Periode;
 
-use AppBundle\Entity\QuantiteIngredientListeDeCourse;
-use AppBundle\Entity\QuantiteProduit;
+use AppBundle\Entity\EntreeListe;
 use AppBundle\Entity\User;
 
-use AppBundle\Form\ProduitSearchType;
+use AppBundle\Form\EntreeListeType;
 
 /**
- * @Route("{slugUser}/liste-de-course")
+ * @Route("/liste-de-course")
  * @Security("has_role('ROLE_USER')")
  */
 class ListeDeCourseController extends Controller
@@ -52,8 +51,9 @@ class ListeDeCourseController extends Controller
     /**
      * @Route("/ajouter", name="ajouter_liste_de_course")
      */
-    public function ajouterListeDeCourseAction(Request $request, User $user)
+    public function ajouterListeDeCourseAction(Request $request)
     {
+        $user = $this->getUser();
         $periode = new Periode();
         $formDate = $this->creerFormulaire($periode);
         $formDate->handleRequest($request);
@@ -93,13 +93,13 @@ class ListeDeCourseController extends Controller
     /**
      * @Route("/modifier/{id}", name="modifier_liste_de_course")
      */
-    public function modifierListeDeCourseAction(Request $request, User $user, ListeDeCourse $liste)
+    public function modifierListeDeCourseAction(Request $request, ListeDeCourse $liste)
     {
         return $this->formulaireListeDeCourseAction($request, $liste, "Modifier");
     }
 
-    private function creerListeUser(User $user) {
-        $liste = new ListeDeCourse($user);
+    private function creerListeUser() {
+        $liste = new ListeDeCourse($this->getUser());
         $em = $this->getDoctrine()->getManager();
         $em->persist($liste);
         $em->flush();
@@ -107,12 +107,13 @@ class ListeDeCourseController extends Controller
         return $liste;
     }
 
-    public function listeAction(User $user)
+    public function listeAction()
     {
+        $user = $this->getUser();
         $em = $this->getDoctrine()->getManager();
         $liste = $em->getRepository('AppBundle:ListeDeCourse')->findOneByUser($user);
         if ($liste === null) {
-            $liste = $this->creerListeUser($user);
+            $liste = $this->creerListeUser();
         }
         $rayons = $em->getRepository('AppBundle:Rayon')->findAll();
         return $this->render('liste-de-course/liste.html.twig', array(
@@ -134,41 +135,32 @@ class ListeDeCourseController extends Controller
     /**
      * @Route("/formulaire-recherche", options={"expose"=true}, name="formulaire_recherche_produit")
      */
-    public function formulaireRechercheAction(Request $request, User $user) {
+    public function formulaireRechercheAction(Request $request) {
+        $user = $this->getUser();
         $em = $this->getDoctrine()->getManager();
         $liste = $em->getRepository('AppBundle:ListeDeCourse')->findAll(
             array('user' => $user));
-        $qp = new QuantiteProduit($liste);
-        $form = $this->createForm(ProduitSearchType::class, $qp);
+
+        $form = $this->createForm(EntreeListeType::class, new EntreeListe($liste));
         $form->handleRequest($request);
 
-        if ($form->isValid()) {
-
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($liste);
-            $em->flush();
-            $flash = $this->get('braincrafted_bootstrap.flash');
-            $flash->info("Bien ajouté.");
-            $this->redirectToRoute('user_tableau_de_bord', array(
-                'slugUser' => $user->getSlugUser()));
-        }
         return $this->render('liste-de-course/form-recherche.html.twig', array(
             'form' => $form->createView()));
     }
 
     /**
-     * @Route("/rechercher/{caracteres}", options={"expose"=true}, name="rechercher_produit")
+     * @Route("/rechercher/{caracteres}", options={"expose"=true}, name="rechercher_entree_liste")
      */
     public function rechercherProduitAction(Request $request, $caracteres) {
         $em = $this->getDoctrine()->getManager();
 
         if ($caracteres != '') {
-            $produits = $em->getRepository('AppBundle:Produit')->rechercherProduit($caracteres);
+            $rayons = $em->getRepository('AppBundle:Rayon')->rechercherProduits($caracteres);
         } else {
-            $produits = $em->getRepository('AppBundle:Produit')->findAll();
+            $rayons = $em->getRepository('AppBundle:Rayon')->findAll();
         }
 
-        return $this->render('liste-de-course/resultat-recherche.html.twig', array(
-            'produits' => $produits));
+        return $this->render('liste-de-course/resultat-recherche.json.twig', array(
+            'rayons' => $rayons));
     }
 }

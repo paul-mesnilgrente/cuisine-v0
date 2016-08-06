@@ -31,13 +31,6 @@ class Rayon
     /**
      * @var Ingredient
      *
-     * @ORM\ManyToMany(targetEntity="Ingredient", mappedBy="rayons")
-     */
-    private $ingredients;
-
-    /**
-     * @var Ingredient
-     *
      * @ORM\ManyToMany(targetEntity="Produit", mappedBy="rayons")
      */
     private $produits;

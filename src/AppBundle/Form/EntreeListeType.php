@@ -12,8 +12,9 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use AppBundle\Form\DataTransformer\StringToProduitTransformer;
+use AppBundle\Form\DataTransformer\StringToRayonTransformer;
 
-class ProduitSearchType extends AbstractType
+class EntreeListeType extends AbstractType
 {
     private $manager;
 
@@ -36,7 +37,7 @@ class ProduitSearchType extends AbstractType
 
             ->add('unite', EntityType::class, array(
                 'class' => 'AppBundle:Unite',
-                'choice_label' => 'abrege',
+                'choice_label' => 'nom',
                 'multiple' => false,
                 'expanded' => false,
                 'required' => false))
@@ -45,6 +46,8 @@ class ProduitSearchType extends AbstractType
 
             $builder->get('produit')
                 ->addModelTransformer(new StringToProduitTransformer($this->manager));
+            $builder->get('produit')
+                ->addModelTransformer(new StringToRayonTransformer($this->manager));
     }
     
     /**
@@ -53,7 +56,7 @@ class ProduitSearchType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'AppBundle\Entity\QuantiteProduit'
+            'data_class' => 'AppBundle\Entity\EntreeListe'
         ));
     }
 }

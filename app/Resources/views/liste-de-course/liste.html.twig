@@ -5,39 +5,29 @@
     <p class="text-center"><small><a href="{{ path('faire_mes_courses', {'slugUser': app.user.slugUser}) }}">Je fais mes courses</a></small></p>
     <div class="row">
       <div class="col-md-6 col-sm-6 col-xs-6">
-        {% for index in 0..(rayons|length / 2) - 1 %}
-          <h2>{{ rayons[index].nom }}</h2>
-          <ul>
-          {% for quantiteIngredient in liste.ingredients %}
-            {% if rayons[index] in quantiteIngredient.ingredient.rayons %}
-              <li>{{ quantiteIngredient }}</li>
+        {% for rayon in rayons %}
+
+          {% set found = false %}
+
+          {% for entree in liste.entrees %}
+            {% set produit = entree.ingredient is null ? entree.produit : entree.ingredient %}
+            {% if rayon in produit.rayons %}
+              
+              {% if not found %}
+                <h2>{{ rayon.nom }}</h2>
+                <ul>
+                {% set found = true %}
+              {% endif %}
+            
+              <li>{{ produit.nom }}</li>
+
             {% endif %}
+
           {% endfor %}
-          {% for quantiteProduit in liste.produits %}
-            {% if rayons[index] in quantiteProduit.produit.rayons %}
-              <li>{{ quantiteProduit }}</li>
-            {% endif %}
-          {% endfor %}
-          </ul>
-          {% set index = index + 1 %}
-        {% endfor %}
-      </div>
-      <div class="col-md-6 col-sm-6 col-xs-6">
-        {% for index in (rayons|length / 2)..rayons|length - 1 %}
-          <h2>{{ rayons[index].nom }}</h2>
-          <ul>
-            {% for quantiteIngredient in liste.ingredients %}
-            {% if rayons[index] in quantiteIngredient.ingredient.rayons %}
-              <li>{{ quantiteIngredient }}</li>
-            {% endif %}
-          {% endfor %}
-          {% for quantiteProduit in liste.produits %}
-            {% if rayons[index] in quantiteProduit.produit.rayons %}
-              <li>{{ quantiteProduit }}</li>
-            {% endif %}
-          {% endfor %}
-          </ul>
-          {% set index = index + 1 %}
+
+          {% if found %}
+            </ul>
+          {% endif %}
         {% endfor %}
       </div>
     </div>
@@ -48,4 +38,3 @@
     </div>
   </div>
 </div>
-<script>var slugUser = '{{ app.user.slugUser }}'</script>

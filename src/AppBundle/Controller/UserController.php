@@ -8,9 +8,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
 use AppBundle\Entity\User;
-use AppBundle\Entity\QuantiteProduit;
+use AppBundle\Entity\EntreeListe;
 
-use AppBundle\Form\ProduitSearchType;
+use AppBundle\Form\EntreeListeType;
 
 /**
  * @Route("/")
@@ -27,18 +27,17 @@ class UserController extends Controller
         $em = $this->getDoctrine()->getManager();
         $liste = $em->getRepository('AppBundle:ListeDeCourse')->findOneByUser($user);
 
-        $qp = new QuantiteProduit($liste);
-        $form = $this->createForm(ProduitSearchType::class, $qp);
+        $entree = new EntreeListe($liste);
+        $form = $this->createForm(EntreeListeType::class, $entree);
         $form->handleRequest($request);
 
         if ($form->isValid()) {
 
-            $em->persist($qp);
+            $em->persist($entree);
             $em->flush();
             $flash = $this->get('braincrafted_bootstrap.flash');
             $flash->info("Bien ajouté.");
-            $this->redirectToRoute('user_tableau_de_bord', array(
-                'slugUser' => $user->getSlugUser()));
+            $this->redirectToRoute('user_tableau_de_bord');
         }
 
         return $this->render('user/tableau_de_bord.html.twig');
