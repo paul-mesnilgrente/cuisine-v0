@@ -6,6 +6,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Form\FormError;
 
 use AppBundle\Entity\User;
 use AppBundle\Entity\EntreeListe;
@@ -23,23 +24,6 @@ class UserController extends Controller
      */
     public function tableauDeBordAction(Request $request)
     {
-        $user = $this->getUser();
-        $em = $this->getDoctrine()->getManager();
-        $liste = $em->getRepository('AppBundle:ListeDeCourse')->findOneByUser($user);
-
-        $entree = new EntreeListe($liste);
-        $form = $this->createForm(EntreeListeType::class, $entree);
-        $form->handleRequest($request);
-
-        if ($form->isValid()) {
-
-            $em->persist($entree);
-            $em->flush();
-            $flash = $this->get('braincrafted_bootstrap.flash');
-            $flash->info("Bien ajouté.");
-            $this->redirectToRoute('user_tableau_de_bord');
-        }
-
         return $this->render('user/tableau_de_bord.html.twig');
     }
 

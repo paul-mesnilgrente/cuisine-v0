@@ -10,8 +10,7 @@
           {% set found = false %}
 
           {% for entree in liste.entrees %}
-            {% set produit = entree.ingredient is null ? entree.produit : entree.ingredient %}
-            {% if rayon in produit.rayons %}
+            {% if rayon == entree.rayon %}
               
               {% if not found %}
                 <h2>{{ rayon.nom }}</h2>
@@ -19,7 +18,7 @@
                 {% set found = true %}
               {% endif %}
             
-              <li>{{ produit.nom }}</li>
+              <li>{{ entree.produit.nom }}</li>
 
             {% endif %}
 
@@ -33,7 +32,7 @@
     </div>
     <div class="row">
       <div class="col-md-12">
-          <a class="btn btn-primary" id="ajouter-produit" href="#"><span class="glyphicon glyphicon-plus"></span></a>
+        <a class="btn btn-primary" id="ajouter-produit" href="#"><span class="glyphicon glyphicon-plus"></span></a>
       </div>
     </div>
   </div>

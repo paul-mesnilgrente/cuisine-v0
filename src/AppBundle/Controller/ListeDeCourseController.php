@@ -6,6 +6,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Form\FormError;
 
 use AppBundle\Entity\ListeDeCourse;
 use AppBundle\Form\ListeDeCourseType;
@@ -138,11 +139,48 @@ class ListeDeCourseController extends Controller
     public function formulaireRechercheAction(Request $request) {
         $user = $this->getUser();
         $em = $this->getDoctrine()->getManager();
-        $liste = $em->getRepository('AppBundle:ListeDeCourse')->findAll(
+        $liste = $em->getRepository('AppBundle:ListeDeCourse')->findOneByUser(
             array('user' => $user));
 
-        $form = $this->createForm(EntreeListeType::class, new EntreeListe($liste));
+        $entree = new EntreeListe($liste);
+        $form = $this->createForm(EntreeListeType::class, $entree);
         $form->handleRequest($request);
+
+        if ($form->isSubmitted()) {
+            $rayon = $em->getRepository('AppBundle:Rayon')
+                ->findOneByNom(explode(' : ', $entree->getRayonProduit())[0]);
+            $produit = $em->getRepository('AppBundle:Produit')
+                ->findOneByNom(explode(' : ', $entree->getRayonProduit())[1]);
+
+            if ($rayon === null) {
+                 $form->get('rayonProduit')->addError(new FormError('
+                    Le rayon indiqué n\'existe pas.'));
+            }
+            if ($produit === null) {
+                 $form->get('rayonProduit')->addError(new FormError('
+                    Le produit indiqué n\'existe pas.'));
+            }
+
+            if ($form->isValid()) {
+                $entree->setRayon($rayon);
+                $entree->setProduit($produit);
+
+                $em->persist($entree);
+                $em->flush();
+                $flash = $this->get('braincrafted_bootstrap.flash');
+                $flash->info("Bien ajouté.");
+                return $this->redirectToRoute('user_tableau_de_bord');
+            } else {
+                $flash = $this->get('braincrafted_bootstrap.flash');
+                $err = '<ul>';
+                foreach ($form->getErrors() as $error) {
+                    $err = $err.'<li>'.$error->getMessage().'</li>';
+                }
+                $err = $err.'</ul>';
+                $flash->error($err);
+                return $this->redirectToRoute('user_tableau_de_bord');
+            }
+        }
 
         return $this->render('liste-de-course/form-recherche.html.twig', array(
             'form' => $form->createView()));

@@ -38,7 +38,7 @@ $(document).ready(function() {
       cache: false,
       success: function(codeHTML, statut) {
         $("#ajouter-produit").before($(codeHTML).fadeIn());
-        $('#entree_search_produit').typeahead('destroy');
+        $('#entree_liste_rayonProduit').typeahead('destroy');
         getTypeAheadEntreeListeReady();
       }
     });
@@ -46,7 +46,7 @@ $(document).ready(function() {
   });
 
   function getTypeAheadEntreeListeReady() {
-    $('#entree_liste_produit').typeahead(null, {
+    $('#entree_liste_rayonProduit').typeahead(null, {
       name: 'entreeListe',
       display: 'value',
       limit: 20,

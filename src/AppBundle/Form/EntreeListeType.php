@@ -30,7 +30,7 @@ class EntreeListeType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('produit', TextType::class, array(
+            ->add('rayonProduit', TextType::class, array(
                 'invalid_message' => 'Aucun ingrédient correspondant'))
 
             ->add('quantite', IntegerType::class)
@@ -44,10 +44,10 @@ class EntreeListeType extends AbstractType
 
             ->add('valider', SubmitType::class);
 
-            $builder->get('produit')
+            /*$builder->get('produit')
                 ->addModelTransformer(new StringToProduitTransformer($this->manager));
             $builder->get('produit')
-                ->addModelTransformer(new StringToRayonTransformer($this->manager));
+                ->addModelTransformer(new StringToRayonTransformer($this->manager));*/
     }
     
     /**

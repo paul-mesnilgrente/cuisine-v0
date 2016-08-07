@@ -1,8 +1,8 @@
-{{ form_start(form) }}
-  {{ form_label(form.produit) }}
+{{ form_start(form, {'action': path('formulaire_recherche_produit') }) }}
+  {{ form_label(form.rayonProduit) }}
   <div>
-    {{ form_widget(form.produit) }}
+    {{ form_widget(form.rayonProduit, {attr: {'placeholder': 'Rayon : Produit'}}) }}
   </div>
-  {{ form_errors(form.produit) }}
+  {{ form_errors(form.rayonProduit) }}
 
 {{ form_rest(form) }}

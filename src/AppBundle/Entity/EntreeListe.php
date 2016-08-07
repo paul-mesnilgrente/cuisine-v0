@@ -34,6 +34,8 @@ class EntreeListe
      * @ORM\ManyToOne(targetEntity="Rayon")
      */
     private $rayon;
+
+    private $rayonProduit;
     
     /**
      * @var int
@@ -130,6 +132,18 @@ class EntreeListe
     public function setRayon(\AppBundle\Entity\Rayon $rayon = null)
     {
         $this->rayon = $rayon;
+
+        return $this;
+    }
+
+    public function getRayonProduit()
+    {
+        return $this->rayonProduit;
+    }
+
+    public function setRayonProduit($rayonProduit)
+    {
+        $this->rayonProduit = $rayonProduit;
 
         return $this;
     }
