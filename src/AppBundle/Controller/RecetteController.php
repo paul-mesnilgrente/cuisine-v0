@@ -54,6 +54,28 @@ class RecetteController extends Controller
     {
         return $this->formulaireRecetteAction($request, $recette, "Modifier");
     }
+    
+    /**
+     * @Route("/recette/supprimer/{slug}", name="supprimer_recette")
+     */
+    public function supprimerRecetteAction(Request $request, Recette $recette)
+    {
+        $form = $this->createFormBuilder()->getForm();
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid())
+        {
+            $em = $this->getDoctrine()->getManager();
+            $em->remove($recette);
+            $em->flush();
+            $flash = $this->get('braincrafted_bootstrap.flash');
+            $flash->info("La recette a bien été supprimée.");
+            return $this->redirect($this->generateUrl('homepage'));
+        }
+        return $this->render('recette/supprimer.html.twig', array(
+            'recette' => $recette,
+            'form' => $form->createView()));
+    }
 
     /**
      * @Route("/recette/{slug}", name="voir_recette")

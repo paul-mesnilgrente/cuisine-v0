@@ -99,7 +99,7 @@ class Recette
     /**
      * @var QuantiteIngredientRecette
      *
-     * @ORM\OneToMany(targetEntity="QuantiteIngredientRecette", mappedBy="recette", cascade={"persist"})
+     * @ORM\OneToMany(targetEntity="QuantiteIngredientRecette", mappedBy="recette", cascade={"persist","remove"})
      */
     private $ingredients;
 

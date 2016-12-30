@@ -85,6 +85,16 @@
           <p class="text-right"><small>Publié le {{ recette.date|localizeddate('medium') }}</small></p>
         </div>
       </div>
+      {% if is_granted('ROLE_USER') and recette.user.id == app.user.id %}
+        <div class="row">
+          <div class="col-md-12">
+            <div class="btn-group" role="group" aria-label="Administration de la recette">
+              <a href="{{ path('modifier_recette', {'slug': recette.slug }) }}" type="button" class="btn btn-primary">Modifier</a>
+              <a href="{{ path('supprimer_recette', {'slug': recette.slug }) }}" type="button" class="btn btn-danger">Supprimer</a>
+            </div>
+          </div>
+        </div>
+      {% endif %}
     </article>
   </div>
 </div>
