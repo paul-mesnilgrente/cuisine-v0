@@ -1,7 +1,7 @@
 {% trans_default_domain 'FOSUserBundle' %}
 
 <div class="row">
-  <div class="col-md-6">
+  <div class="col-md-6 col-md-offset-3 well">
     <h2 class="text-center">Vos informations</h2>
     <div class="alert alert-info">
       <p>
@@ -19,9 +19,9 @@
       </p>
     </div>
   </div>
-  <div class="col-md-6">
+  <div class="col-md-3 well">
     <h2 class="text-center">Actions</h2>
-    <div class="btn-group-vertical" role="group">
+    <div class="btn-group-vertical center-block" role="group">
       <a href="{{ path('fos_user_profile_edit') }}" title="Modifier mes informations" class="btn btn-primary">Editer mon profil</a>
       <a href="{{ path('fos_user_change_password') }}" title="Modifier mon mot de passe" class="btn btn-primary">Modifier mon mot de passe</a>
     </div>
