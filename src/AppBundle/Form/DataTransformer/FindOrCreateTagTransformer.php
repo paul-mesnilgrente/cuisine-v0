@@ -30,10 +30,10 @@ class FindOrCreateTagTransformer implements DataTransformerInterface
         }
 
         $result = '';
-        for ($i=0; $i < count($tags) - 1; $i++) { 
+        for ($i=0; $i < count($tags)-1; $i++) {
             $result = $result.$tags[$i]->getNom().', ';
         }
-        // $result = $result.$tags[count($tags) - 1]->getNom();
+        $result = $result.$tags[count($tags) - 1]->getNom();
 
         return $result;
     }
@@ -49,7 +49,7 @@ class FindOrCreateTagTransformer implements DataTransformerInterface
     {
         $repo = $this->manager->getRepository('AppBundle:TagRecette');
         $result = array();
-        foreach (explode(', ', $nomTags) as $nomTag) {
+        foreach (explode(',', $nomTags) as $nomTag) {
             $tag = $repo->findOneByNom($nomTag);
 
             if (null === $tag) {

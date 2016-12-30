@@ -8,6 +8,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
 use AppBundle\Entity\QuantiteIngredientRecette;
+use AppBundle\Entity\Etape;
 use AppBundle\Entity\Recette;
 use AppBundle\Form\RecetteType;
 
@@ -22,12 +23,14 @@ class RecetteController extends Controller
         $form = $this->createForm(RecetteType::class, $recette);
         $form->handleRequest($request);
 
-        if ($form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $em->persist($recette);
             $em->flush();
             $flash = $this->get('braincrafted_bootstrap.flash');
             $flash->info("La recette a bien été soumise à la base.");
+
+            return $this->redirectToRoute('voir_recette', array('slug' => $recette->getSlug()));
         }
         // replace this example code with whatever you need
         return $this->render('admin/recette/form.html.twig', array(
@@ -42,7 +45,7 @@ class RecetteController extends Controller
     {
         $recette = new Recette($this->getUser());
         $recette->addIngredient(new QuantiteIngredientRecette());
-        $recette->setEtapes(array(""));
+        $recette->addEtape(new Etape());
         
         return $this->formulaireRecetteAction($request, $recette, "Ajouter");
     }

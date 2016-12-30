@@ -10,6 +10,7 @@
           <tr>
             <th>Date</th>
             <th>Nom</th>
+            <th>Tags</th>
             <th>Exécution</th>
             <th>Auteur</th>
             {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
@@ -22,6 +23,7 @@
           <tr>
             <td>{{ recette.date|localizeddate('medium', 'none') }}</td>
             <td><a href="{{ path('voir_recette', {'slug': recette.slug}) }}">{{ recette.nom }}</a></td>
+            <td>{% for tag in recette.tags %}{{ tag.nom }}{% endfor %}</td>
             <td><a href="{{ path('executer_recette', {'slug': recette.slug}) }}">Go cooking !</a></td>
             <td>{{ recette.user.username }}</td>
             {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}

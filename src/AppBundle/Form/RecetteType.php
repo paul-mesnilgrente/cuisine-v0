@@ -13,6 +13,7 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Vich\UploaderBundle\Form\Type\VichImageType;
 use AppBundle\Form\TagSelectorType;
+use AppBundle\Form\EtapeType;
 
 class RecetteType extends AbstractType
 {
@@ -61,7 +62,7 @@ class RecetteType extends AbstractType
                 ))
 
             ->add('etapes', CollectionType::class, array(
-                'entry_type' => TextareaType::class,
+                'entry_type' => EtapeType::class,
                 'allow_add' => true,
                 'allow_delete' => true,
                 'prototype' => true,

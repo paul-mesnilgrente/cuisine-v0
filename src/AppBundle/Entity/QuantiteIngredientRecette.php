@@ -140,7 +140,7 @@ class QuantiteIngredientRecette
      *
      * @return QuantiteIngredientRecette
      */
-    public function setRecette(\AppBundle\Entity\Recette $recette = null)
+    public function setRecette(\AppBundle\Entity\Recette $recette)
     {
         $this->recette = $recette;
 

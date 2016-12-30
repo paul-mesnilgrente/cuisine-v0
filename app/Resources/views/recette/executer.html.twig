@@ -8,10 +8,8 @@
     <div class="row">
 
       <div class="col-md-offset-3 col-md-6">
-        <h1>Etape {{ etape + 1}}</h1>
-        <p>
-          {{ recette.etapes[etape] }}
-        </p>
+        <h1>Etape {{ etape + 1 }}</h1>
+        <p>{{ recette.etapes[etape].contenu }}</p>
       </div>
 
     </div>
@@ -42,7 +40,7 @@
 
     </ul>
   </div>
-  <a href="{{ path('homepage') }}">Retour à l'accueil</a>
+  <a class="btn btn-default" href="{{ path('homepage') }}">Retour à l'accueil</a>
   <hr>
   {% include 'recette/contenu.html.twig' %}
 {% endblock %}
