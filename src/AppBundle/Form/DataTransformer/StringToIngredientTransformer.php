@@ -11,10 +11,12 @@ use AppBundle\Entity\Ingredient;
 class StringToIngredientTransformer implements DataTransformerInterface
 {
     private $manager;
+    private $router;
 
-    public function __construct(ObjectManager $manager)
+    public function __construct(ObjectManager $manager, $router)
     {
         $this->manager = $manager;
+        $this->router = $router;
     }
 
     /**
@@ -49,8 +51,11 @@ class StringToIngredientTransformer implements DataTransformerInterface
             // causes a validation error
             // this message is not shown to the user
             // see the invalid_message option
-            throw new TransformationFailedException(
-                            "L'ingrédient avec le nom " .$nomIngredient."n'existe pas");
+            $route = $this->router->generate("ajouter_ingredient");
+            $lien = '<a href="'.$route.'">ici</a>';
+            $message = "L'ingrédient \"" .$nomIngredient."\" n'existe pas.";
+            $message += " Cliquer ".$lien." pour l'ajouter.";
+            throw new TransformationFailedException($message);
         }
 
         return $ingredient;

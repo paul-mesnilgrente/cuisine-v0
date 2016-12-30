@@ -16,9 +16,11 @@ use AppBundle\Form\DataTransformer\StringToIngredientTransformer;
 class QuantiteIngredientRecetteType extends AbstractType
 {
     private $manager;
+    private $router;
     
-    public function __construct(ObjectManager $manager) {
+    public function __construct(ObjectManager $manager, $router) {
         $this->manager = $manager;
+        $this->router = $router;
     }
 
     /**
@@ -27,11 +29,16 @@ class QuantiteIngredientRecetteType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $route = $this->router->generate("ajouter_ingredient");
+        $lien = '<a href="'.$route.'">ici</a>';
+        $message = "Cet ingrédient n'existe pas.";
+        $message = $message." Cliquer ".$lien." pour l'ajouter.";
+
         $builder
             ->add('quantite', IntegerType::class)
             
             ->add('ingredient', TextType::class, array(
-                'invalid_message' => 'Cet ingrédient n\'est pas dans votre liste'))
+                'invalid_message' => $message))
 
             ->add('unite', EntityType::class, array(
                 'class' => 'AppBundle:Unite',
@@ -41,7 +48,8 @@ class QuantiteIngredientRecetteType extends AbstractType
         ;
 
         $builder->get('ingredient')
-                ->addModelTransformer(new StringToIngredientTransformer($this->manager));
+                ->addModelTransformer(new StringToIngredientTransformer(
+                    $this->manager, $this->router));
     }
     
     /**

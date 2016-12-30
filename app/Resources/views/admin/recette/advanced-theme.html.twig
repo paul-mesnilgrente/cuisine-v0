@@ -12,8 +12,17 @@
 
 {% endblock %}
 
+{% block quantite_ingredient_recette_label %}{% endblock %}
 
-{% block quantite_ingredient_recette_label %}
+{% block field_errors %}
+    {% if errors|length > 0 %}
+      Erreurs :
+      <ul class="error_list">
+        {% for error in errors %}
+          <li>{{ error.messageTemplate|trans(error.messageParameters, 'validators')|raw }}</li>
+        {% endfor %}
+      </ul>
+  {% endif %}
 {% endblock %}
 
 {% block quantite_ingredient_recette_widget %}
