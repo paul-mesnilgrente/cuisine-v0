@@ -13,6 +13,8 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Doctrine\Common\Persistence\ObjectManager;
 use AppBundle\Form\DataTransformer\StringToIngredientTransformer;
 
+use Doctrine\ORM\EntityRepository;
+
 class QuantiteIngredientRecetteType extends AbstractType
 {
     private $manager;
@@ -44,7 +46,11 @@ class QuantiteIngredientRecetteType extends AbstractType
                 'class' => 'AppBundle:Unite',
                 'choice_label' => 'nom',
                 'multiple' => false,
-                'expanded' => false))
+                'expanded' => false,
+                'query_builder' => function (EntityRepository $er) {
+                    return $er->createQueryBuilder('u')
+                        ->orderBy('u.nom', 'ASC');
+                }))
         ;
 
         $builder->get('ingredient')
