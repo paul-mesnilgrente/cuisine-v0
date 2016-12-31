@@ -33,8 +33,9 @@ class UserController extends Controller
     public function maPageAction(Request $request, User $user)
     {
         $em = $this->getDoctrine()->getManager();
+        // $recettes = $em->getRepository('AppBundle:Recette')->getPubliques($user);
+        $recettes = $em->getRepository('AppBundle:Recette')->findBy(array(), array('nom' => 'asc'));
 
-        $recettes = $em->getRepository('AppBundle:Recette')->getPubliques($user);
         return $this->render('user/ma_page.html.twig', array(
             'recettes' => $recettes));
     }
