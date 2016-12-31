@@ -22,18 +22,10 @@
     {{ form_row(form.publique) }}
     <div class="row">
       <div class="col-md-6">
-        {{ form_row(form.ingredients) }}
+        {{ form_row(form.ingredients, {'attr': {'class': 'liste_ingredient'}}) }}
       </div>
       <div class="col-md-6">
-        {{ form_row(form.etapes) }}
-        {# <ul class="list-unstyled liste-etape">
-          {% for etape in form.etapes %}
-              <li>
-                  {{ form_widget(etape) }}
-                  {{ form_errors(etape) }}
-              </li>
-          {% endfor %}
-        </ul> #}
+        {{ form_row(form.etapes, {'attr': {'class': 'liste_etape'}}) }}
       </div>
     </div>
 

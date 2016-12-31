@@ -57,16 +57,15 @@ class RecetteType extends AbstractType
                 'allow_add' => true,
                 'allow_delete' => true,
                 'by_reference' => false,
-                'prototype' => true,
-                'attr' => array('class' => 'liste_ingredient')
+                'prototype' => true
                 ))
 
             ->add('etapes', CollectionType::class, array(
                 'entry_type' => EtapeType::class,
                 'allow_add' => true,
                 'allow_delete' => true,
-                'prototype' => true,
-                'attr' => array('class' => 'liste_etape')
+                'by_reference' => false,
+                'prototype' => true
                 ))
             
             ->add('categorieRecette', EntityType::class, array(

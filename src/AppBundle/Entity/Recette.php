@@ -157,6 +157,7 @@ class Recette
         $this->tempsDeCuisson = 0;
         $this->date = new \Datetime();
         $this->ingredients = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->etapes = new \Doctrine\Common\Collections\ArrayCollection();
         $this->tags = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
