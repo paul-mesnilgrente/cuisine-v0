@@ -1,43 +1,48 @@
-{% block etape_label %}{% endblock %}
+{# #################################
+        Étapes de la recette
+  ################################ #}
+
+{# ça evite d'afficher le label "Contenu" #}
 {% block textarea_label %}{% endblock %}
-{% block textarea_errors %}{% endblock %}
 
-{% block textarea_widget %}
-
-    <div class="row">
-      <div class="col-md-10">
-        {{ form_widget(form) }}
-      </div>
-      {% include '::admin/recette/boutons_de_control.html.twig' %}
+{# permet d'afficher les boutons + - et delete #}
+{% block etape_widget %}
+  <div class="row">
+    <div class="col-md-10">
+      {{ form_widget(form.contenu, {'label': false, 'attr': {'row': 3}}) }}
     </div>
-
+    {% include '::admin/recette/boutons_de_control.html.twig' %}
+  </div>
 {% endblock %}
 
+{# #################################
+      Ingrédients de la recette
+  ################################ #}
 {% block quantite_ingredient_recette_label %}{% endblock %}
 
-{% block field_errors %}
-    {% if errors|length > 0 %}
-      Erreurs :
-      <ul class="error_list">
-        {% for error in errors %}
-          <li>{{ error.messageTemplate|trans(error.messageParameters, 'validators')|raw }}</li>
-        {% endfor %}
-      </ul>
-  {% endif %}
+{% block quantite_ingredient_recette_widget %}
+  <div class="row">
+    <div class="col-md-10">
+      <div class="form-inline">
+        <div class="form-group{% if form.ingredient.vars.errors|length %} has-error{% endif %}">
+          {{ form_widget(form.ingredient, {'attr': {'class': 'ingredient_search', 'placeholder': 'Ingrédient'}}) }}
+        </div>
+        <div class="form-group">{{ form_widget(form.quantite, {'attr': {'class': 'quantite', 'placeholder': 'Quantité'}}) }}</div>
+        <div class="form-group">{{ form_widget(form.unite) }}</div>
+        <span class="help-block">{{ form_errors(form.ingredient) }}</span>
+      </div>
+    </div>
+    {% include '::admin/recette/boutons_de_control.html.twig' %}
+  </div>
 {% endblock %}
 
-{% block quantite_ingredient_recette_widget %}
-    <div class="row">
-      <div class="col-md-10">
-        <div class="form-inline">
-          <div class="form-group{% if form.ingredient.vars.errors|length %} has-error{% endif %}">
-            {{ form_widget(form.ingredient, {'attr': {'class': 'ingredient_search', 'placeholder': 'Ingrédient'}}) }}
-          </div>
-          <div class="form-group">{{ form_widget(form.quantite, {'attr': {'class': 'quantite', 'placeholder': 'Quantité'}}) }}</div>
-          <div class="form-group">{{ form_widget(form.unite) }}</div>
-          <span class="help-block">{{ form_errors(form.ingredient) }}</span>
-        </div>
-      </div>
-      {% include '::admin/recette/boutons_de_control.html.twig' %}
-    </div>
+{% block field_errors %}
+  {% if errors|length > 0 %}
+    Erreurs :
+    <ul class="error_list">
+      {% for error in errors %}
+        <li>{{ error.messageTemplate|trans(error.messageParameters, 'validators')|raw }}</li>
+      {% endfor %}
+    </ul>
+  {% endif %}
 {% endblock %}
