@@ -39,6 +39,7 @@ class LoadUniteData extends AbstractFixture implements FixtureInterface, Contain
         $this->addUnite($manager, 'gramme', 'grammes', 'g');
         $this->addUnite($manager, 'kilogramme', 'kilogrammes', 'kg');
         $this->addUnite($manager, 'pincée', 'pincées', 'pincée');
+        $this->addUnite($manager, 'cube', 'cubes', 'cube');
         $this->addUnite($manager, 'poignée', 'poignées', 'poignée');
         $this->addUnite($manager, 'cuillère à soupe', 'cuillères à soupe', 'c.a.s.');
         $this->addUnite($manager, 'cuillère à café', 'cuillères à café', 'c.a.c.');

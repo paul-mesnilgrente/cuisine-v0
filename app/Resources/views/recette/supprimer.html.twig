@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+  <div class="row">
+    <div class="col-md-6 col-md-offset-3 well">
+      <h1>Supprimer une recette</h1> <hr>
+
+      <div class="alert alert-danger" role="alert">
+        <p>
+          Êtes-vous bien sûr de vouloir supprimer cette recette "{{ recette.nom }}".<br>
+          Cette recette sera supprimée de la base de donnée.
+        </p>
+      </div>
+
+      {{ form_start(form) }}
+      <input type="submit" class="btn btn-danger" value="Supprimer">
+      {{ form_rest(form) }}
+    </div>
+  </div>
+{% endblock %}

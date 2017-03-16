@@ -45,8 +45,8 @@ class Builder implements ContainerAwareInterface
             $menu['Mes actions']->addChild('Paramètre', array('route' => 'fos_user_profile_show'));
             $menu['Mes actions']->addChild($translator->trans('layout.logout', array('%username%' => $user), 'FOSUserBundle'), array('route' => 'fos_user_security_logout'));
         } else {
-            $menu->addChild($translator->trans('layout.login', array(), 'FOSUserBundle'), array('route' => 'fos_user_security_login'));
-            $menu->addChild($translator->trans('layout.register', array(), 'FOSUserBundle'), array('route' => 'fos_user_registration_register'));
+            $menu->addChild($translator->trans('layout.login', array(), 'FOSUserBundle'), array('route' => 'homepage'));
+            $menu->addChild($translator->trans('layout.register', array(), 'FOSUserBundle'), array('route' => 'homepage'));
         }
         if ($this->container->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
             $menu->addChild('Admin')->setAttribute('dropdown', true);

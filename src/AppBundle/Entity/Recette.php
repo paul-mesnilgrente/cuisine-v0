@@ -99,21 +99,21 @@ class Recette
     /**
      * @var QuantiteIngredientRecette
      *
-     * @ORM\OneToMany(targetEntity="QuantiteIngredientRecette", mappedBy="recette", cascade={"persist"})
+     * @ORM\OneToMany(targetEntity="QuantiteIngredientRecette", mappedBy="recette", cascade={"persist","remove"})
      */
     private $ingredients;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="etapes", type="simple_array")
+     * @ORM\OneToMany(targetEntity="Etape", mappedBy="recette", cascade={"persist","remove"})
      */
     private $etapes;
 
     /**
      * @var TagRecette
      *
-     * @ORM\ManyToMany(targetEntity="TagRecette")
+     * @ORM\ManyToMany(targetEntity="TagRecette", cascade={"persist"})
      */
     private $tags;
 
@@ -146,6 +146,19 @@ class Recette
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * Constructor
+     */
+    public function __construct($user)
+    {
+        $this->user = $user;
+        $this->tempsDeCuisson = 0;
+        $this->date = new \Datetime();
+        $this->ingredients = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->etapes = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->tags = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -245,30 +258,6 @@ class Recette
     }
 
     /**
-     * Set etapes
-     *
-     * @param array $etapes
-     *
-     * @return Recette
-     */
-    public function setEtapes($etapes)
-    {
-        $this->etapes = $etapes;
-
-        return $this;
-    }
-
-    /**
-     * Get etapes
-     *
-     * @return array
-     */
-    public function getEtapes()
-    {
-        return $this->etapes;
-    }
-
-    /**
      * Set categorieRecette
      *
      * @param \AppBundle\Entity\CategorieRecette $categorieRecette
@@ -359,18 +348,6 @@ class Recette
     public function getTags()
     {
         return $this->tags;
-    }
-
-    /**
-     * Constructor
-     */
-    public function __construct($user)
-    {
-        $this->user = $user;
-        $this->tempsDeCuisson = 0;
-        $this->date = new \Datetime();
-        $this->ingredients = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->tags = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -567,5 +544,40 @@ class Recette
     public function getUpdatedAt()
     {
         return $this->updatedAt;
+    }
+
+    /**
+     * Add etape
+     *
+     * @param \AppBundle\Entity\Etape $etape
+     *
+     * @return Recette
+     */
+    public function addEtape(\AppBundle\Entity\Etape $etape)
+    {
+        $this->etapes[] = $etape;
+        $etape->setRecette($this);
+
+        return $this;
+    }
+
+    /**
+     * Remove etape
+     *
+     * @param \AppBundle\Entity\Etape $etape
+     */
+    public function removeEtape(\AppBundle\Entity\Etape $etape)
+    {
+        $this->etapes->removeElement($etape);
+    }
+
+    /**
+     * Get etapes
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getEtapes()
+    {
+        return $this->etapes;
     }
 }

@@ -25,6 +25,7 @@ class IngredientController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($ingredient);
             $em->flush();
+            
             $flash = $this->get('braincrafted_bootstrap.flash');
             $flash->info("L'ingrédient a bien été soumis à la base.");
         }
